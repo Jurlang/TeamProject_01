@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
@@ -17,7 +18,7 @@ public class ProjectLogin extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField tfId;
-	private JTextField tfPw;
+	private JPasswordField tfPw;
 	private PMainFrame mainFrame;
 	
 	
@@ -67,7 +68,7 @@ public class ProjectLogin extends JFrame {
 		JLabel lblNewLabel_1 = new JLabel("\uBE44\uBC00\uBC88\uD638");
 		panel2.add(lblNewLabel_1);
 		
-		tfPw = new JTextField();
+		tfPw = new JPasswordField();
 		panel2.add(tfPw);
 		tfPw.setColumns(20);
 		
@@ -100,6 +101,7 @@ public class ProjectLogin extends JFrame {
 			
 			if(log.trim().equals("로그인")) {
 				String id=tfId.getText();
+				@SuppressWarnings("deprecation")
 				String pw=tfPw.getText();
 				
 				DBConn dbConn=DBConn.getInstance();
@@ -109,13 +111,14 @@ public class ProjectLogin extends JFrame {
 				if(login==1) {
 					PMember m=dbConn.selectOne(id);
 					msg="환영합니다"+id+"("+m.getName()+")님";
+					JOptionPane.showMessageDialog(null,msg);
+					frame.dispose();
+					new In_game_main();
 				}else if(login==0) {
 					msg="비밀번호가 틀림";
 				}else {
 					msg=id+"는 없는 회원입니다.";
-				}
-				JOptionPane.showMessageDialog(null,msg);
-			}else {
+				}			}else {
 				frame.dispose();
 				mainFrame.setVisible(true);
 			}

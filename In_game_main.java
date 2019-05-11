@@ -1,6 +1,5 @@
 package TeamProject_01;
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -10,37 +9,18 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
 
 @SuppressWarnings("serial")
 public class In_game_main extends JFrame {
-
+	boolean chk = true;
 	private JPanel contentPane;
 	ImageIcon f1 = new ImageIcon("images/블랙체크.png");
 	ImageIcon s1 = new ImageIcon("images/빨간체크.png");
 	ImageIcon no_c = new ImageIcon("images/검은별.png");
 	ImageIcon yes_c = new ImageIcon("images/빨간별.png");
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					In_game_main frame = new In_game_main();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
 	public In_game_main() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 501, 787);
@@ -131,6 +111,16 @@ public class In_game_main extends JFrame {
 		moneyLa.setBounds(0, 0, 485, 43);
 		mainpanel.add(moneyLa);
 		
+		if(chk) {
+			fr1.setVisible(true);
+			fr2.setVisible(true);
+			fr3.setVisible(true);
+		}else {
+			fr1.setVisible(false);
+			fr2.setVisible(false);
+			fr3.setVisible(false);
+		}
+		
 		bgImgPanel.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
@@ -149,5 +139,6 @@ public class In_game_main extends JFrame {
 			}
 		});
 		
+		this.setVisible(true);
 	}
 }

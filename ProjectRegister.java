@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
@@ -21,7 +22,7 @@ public class ProjectRegister extends JFrame {
 	private JPanel contentPane;
 	private JTextField tfId;
 	//private JLabel lblNewLabel_1;
-	private JTextField tfPw;
+	private JPasswordField tfPw;
 	//private JLabel lblNewLabel_2;
 	private JTextField tfName;
 	private JTextField tfBir;
@@ -72,7 +73,7 @@ public class ProjectRegister extends JFrame {
 		pn.add(lblNewLabel_1);
 		
 		
-		tfPw = new JTextField();
+		tfPw = new JPasswordField();
 		pn.add(tfPw);
 		tfPw.setColumns(10);
 		
@@ -134,6 +135,7 @@ public class ProjectRegister extends JFrame {
 			String cmd = e.getActionCommand();
 			if(cmd.trim().equals("회원가입")) {
 				String id=tfId.getText();
+				@SuppressWarnings("deprecation")
 				String pw=tfPw.getText();
 				String name=tfName.getText();
 				int bir=Integer.parseInt(tfBir.getText());
@@ -142,7 +144,8 @@ public class ProjectRegister extends JFrame {
 				PMember m=new PMember(id,pw,name,bir,eml);
 				DBConn dbConn=DBConn.getInstance();
 				dbConn.insert(m);
-				init();	//init=초기화
+				tframe.dispose();
+				frame.setVisible(true);
 			}else if(cmd.trim().equals("취소")) {
 				init();
 			}else if(cmd.trim().equals("닫기")) {
