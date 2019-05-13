@@ -171,13 +171,23 @@ public class In_game_main extends JFrame {
 			fr2.setVisible(false);
 			fr3.setVisible(false);
 		}
-//------------------------------------------------------------------------------------------
+	
+
+		JPanel sangdanBar = new JPanel();
+		sangdanBar.setBounds(0, 0, 485, 43);
+		mainpanel.add(sangdanBar);
+		sangdanBar.setLayout(null);
+
+		JButton btnNewButton = new JButton("\uC800\uC7A5");
+		btnNewButton.setBounds(0, 0, 91, 43);
+		sangdanBar.add(btnNewButton);
+		// ------------------------------------------------------------------------------------------
 		JLabel moneyLa = new JLabel("0\uC6D0");
+		moneyLa.setBounds(92, 0, 392, 43);
+		sangdanBar.add(moneyLa);
 		moneyLa.setFont(new Font("±¼¸²", Font.BOLD, 19));
 		moneyLa.setHorizontalAlignment(SwingConstants.RIGHT);
-		moneyLa.setBounds(0, 0, 485, 43);
-		mainpanel.add(moneyLa);
-//------------------------------------------------------------------------------------------
+		// ------------------------------------------------------------------------------------------
 		m = new SharedMoney(moneyLa);
 		AutoMoney amth = new AutoMoney(autoMoney, m);
 		TabMoney tmth = new TabMoney(bgImgPanel, tabMoney, m, mainch, f1, s1);
