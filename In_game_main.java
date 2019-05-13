@@ -50,9 +50,9 @@ public class In_game_main extends JFrame {
 		menuPanel.add(shopPanel);
 		shopPanel.setLayout(null);
 
-		JButton itemshopBtn = new JButton("\uC544\uC774\uD15C");
+		JButton itemshopBtn = new JButton();
 		itemshopBtn.setBounds(1, 0, 151, 64);
-		itemshopBtn.setIcon(new ImageIcon("images/빨간별.png"));
+		itemshopBtn.setIcon(new ImageIcon("images/세트스.png"));
 		itemshopBtn.setHorizontalTextPosition(JButton.CENTER);
 		itemshopBtn.addActionListener(new ActionListener() {
 
@@ -65,6 +65,7 @@ public class In_game_main extends JFrame {
 
 		JButton frishopBtn = new JButton("\uB3D9\uB8CC");
 		frishopBtn.setBounds(167, 0, 151, 64);
+		frishopBtn.setIcon(new ImageIcon("images/용병.jpg"));
 		frishopBtn.addActionListener(new ActionListener() {
 
 			@Override
@@ -76,10 +77,12 @@ public class In_game_main extends JFrame {
 
 		JButton statisticsBtn = new JButton("\uD1B5\uACC4");
 		statisticsBtn.setBounds(333, 0, 151, 64);
+		statisticsBtn.setIcon(new ImageIcon("images/통계.jpg"));
 		shopPanel.add(statisticsBtn);
 
 		JButton levelupBtn = new JButton("\uB808\uBCA8\uC5C5 !!!!!! \uB6B1\uAE61\uB6B1\uAE61");
 		levelupBtn.setBounds(0, 53, 485, 48);
+		levelupBtn.setIcon(new ImageIcon("images/레벨업.jpg"));
 		menuPanel.add(levelupBtn);
 
 		JLabel mainchImg = new JLabel("\uBA54\uC778\uCF00\uB9AD\uD130\uC774\uBBF8\uC9C0");
@@ -96,7 +99,7 @@ public class In_game_main extends JFrame {
 		tabLa.setBounds(287, 10, 87, 15);
 		menuPanel.add(tabLa);
 
-		JLabel tabMoney = new JLabel("15\uC6D0");
+		JLabel tabMoney = new JLabel("1\uC6D0");
 		tabMoney.setHorizontalAlignment(SwingConstants.CENTER);
 		tabMoney.setBounds(287, 27, 87, 22);
 		menuPanel.add(tabMoney);

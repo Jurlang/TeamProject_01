@@ -52,6 +52,12 @@ class SharedMoney{
 		sum += money;
 		this.money.setText(sum + "¿ø");
 	}
+	
+	synchronized public void minus(int money) {
+		sum -= money;
+		this.money.setText(sum + "¿ø");
+	}
+
 }
 
 class AutoMoney extends Thread{
