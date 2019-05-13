@@ -1,12 +1,10 @@
 package TeamProject_01;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -17,19 +15,28 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 @SuppressWarnings("serial")
-public class Shop extends JPanel{
+public class Remake_Shop extends JFrame {
 
+	private JPanel contentPane;
 	private JLabel showNameLa;
 	private JPanel itemListPanel;
 
-	public Shop(String store, ImageIcon[] img, String[] name, String[] func) {
+	
+	static ImageIcon[] img = {new ImageIcon("images/검은별.png"), new ImageIcon("images/빨간별.png"), new ImageIcon("images/블랙체크.png")};
+	static String[] name = {"개새", "10새", "짭새"};
+	static String[] func = {"x 2", "x 3", "x 4"};
 
-		this.setBounds(0, 0, 485, 748);
-		this.setLayout(null);
-
+	public Remake_Shop(String store, ImageIcon[] img, String[] name, String[] func) {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 379, 516);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setLayout(new BorderLayout(0, 0));
+		contentPane.setSize(400, 419);
+		setContentPane(contentPane);
 		
 		JPanel inShopPanel = new JPanel();
-		inShopPanel.setBounds(55, 180, 353, 419);
+		inShopPanel.setBounds(55, 180, 400, 419);
 		inShopPanel.setLayout(null);
 
 		showNameLa = new JLabel(store);
@@ -44,29 +51,34 @@ public class Shop extends JPanel{
 		inShopPanel.add(itemListPanel);
 		ItemPanel[] item = new ItemPanel[3];
 		itemListPanel.setLayout(new GridLayout(item.length,1 , 0, 0));
-		this.add(inShopPanel);
+		getContentPane().add(inShopPanel);
 		
-		JLabel quitShopLa = new JLabel();
-		quitShopLa.setBounds(0, 0, 485, 748);
-		quitShopLa.addMouseListener(new QuitShopMouseListener(this));
-		
-		this.add(quitShopLa);
-		
+		JButton inShopBtn = new JButton("\uC644\uB8CC");
+		inShopBtn.setBounds(131, 419, 91, 40);
+		inShopBtn.addActionListener(new BtnActionListener(this));
+		inShopPanel.add(inShopBtn);
 		
 		for(int i=0;i<item.length;i++) {
 			item[i] = new ItemPanel(itemListPanel, img[i], name[i], func[i]);
 		}
-		
-		this.setVisible(false);
+		this.setVisible(true);
 	}
 }
-//inShopPanel.setBounds(55, 180, 353, 419);
-//showNameLa.setBounds(12, 10, 329, 41);
-//itemListPanel.setBounds(12, 50, 329, 359);
-//quitShopLa.setBounds(0, 0, 485, 748);
 
+class BtnActionListener implements ActionListener{
+	
+	Remake_Shop rs;
+	
+	BtnActionListener(Remake_Shop rs){
+		this.rs = rs;
+	}
 
-
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		rs.dispose();
+	}
+	
+}
 
 @SuppressWarnings("serial")
 class ItemPanel extends JPanel {
@@ -101,38 +113,12 @@ class ItemPanel extends JPanel {
 	}
 }
 
-class QuitShopMouseListener implements MouseListener{
-	Shop s;
-	QuitShopMouseListener(Shop s){
-		this.s = s;
-	}
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		s.setVisible(false);
-	}
-
-	@Override
-	public void mousePressed(MouseEvent e) {
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-	}
-	
-}
 
 class ShopTh extends Thread{
-	Shop s;
+	Remake_Shop s;
+	
 	JButton btn;
-	ShopTh(Shop s, JButton btn){
+	ShopTh(Remake_Shop s, JButton btn){
 		this.s = s;
 		this.btn = btn;
 	}
