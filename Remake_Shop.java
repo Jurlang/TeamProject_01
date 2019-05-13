@@ -20,13 +20,13 @@ public class Remake_Shop extends JFrame {
 	private JPanel contentPane;
 	private JLabel showNameLa;
 	private JPanel itemListPanel;
-
+	ItemPanel[] item;
 	
-	static ImageIcon[] img = {new ImageIcon("images/검은별.png"), new ImageIcon("images/빨간별.png"), new ImageIcon("images/블랙체크.png")};
-	static String[] name = {"개새", "10새", "짭새"};
-	static String[] func = {"x 2", "x 3", "x 4"};
+	In_game_main main;
 
-	public Remake_Shop(String store, ImageIcon[] img, String[] name, String[] func) {
+	public Remake_Shop(String store, In_game_main main) {
+		this.main = main;
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 379, 516);
 		contentPane = new JPanel();
@@ -34,7 +34,7 @@ public class Remake_Shop extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 		contentPane.setSize(400, 419);
 		setContentPane(contentPane);
-		
+
 		JPanel inShopPanel = new JPanel();
 		inShopPanel.setBounds(55, 180, 400, 419);
 		inShopPanel.setLayout(null);
@@ -49,27 +49,27 @@ public class Remake_Shop extends JFrame {
 		itemListPanel = new JPanel();
 		itemListPanel.setBounds(12, 50, 329, 359);
 		inShopPanel.add(itemListPanel);
-		ItemPanel[] item = new ItemPanel[3];
-		itemListPanel.setLayout(new GridLayout(item.length,1 , 0, 0));
+		item = new ItemPanel[3];
+		itemListPanel.setLayout(new GridLayout(item.length, 1, 0, 0));
 		getContentPane().add(inShopPanel);
-		
+
 		JButton inShopBtn = new JButton("\uC644\uB8CC");
 		inShopBtn.setBounds(131, 419, 91, 40);
 		inShopBtn.addActionListener(new BtnActionListener(this));
 		inShopPanel.add(inShopBtn);
-		
-		for(int i=0;i<item.length;i++) {
-			item[i] = new ItemPanel(itemListPanel, img[i], name[i], func[i]);
+
+		for (int i = 0; i < item.length; i++) {
+			item[i] = new ItemPanel(itemListPanel, main.img[i], main.name[i], main.func[i]);
 		}
 		this.setVisible(true);
 	}
 }
 
-class BtnActionListener implements ActionListener{
-	
+class BtnActionListener implements ActionListener {
+
 	Remake_Shop rs;
-	
-	BtnActionListener(Remake_Shop rs){
+
+	BtnActionListener(Remake_Shop rs) {
 		this.rs = rs;
 	}
 
@@ -77,13 +77,16 @@ class BtnActionListener implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		rs.dispose();
 	}
-	
+
 }
 
 @SuppressWarnings("serial")
 class ItemPanel extends JPanel {
 	ImageIcon img;
 	String name, func;
+	JButton buyBtn;
+	JLabel itemFunc;
+
 	ItemPanel(JPanel p, ImageIcon img, String name, String func) {
 		this.setBounds(0, 0, 329, 65);
 		p.add(this);
@@ -95,41 +98,156 @@ class ItemPanel extends JPanel {
 		itemImg.setOpaque(true);
 		this.add(itemImg);
 
-		JLabel itemName = new JLabel("   이름 : " +name);
+		JLabel itemName = new JLabel("   이름 : " + name);
 		itemName.setBackground(new Color(153, 0, 0));
 		itemName.setBounds(81, 11, 155, 20);
 		itemName.setOpaque(true);
 		this.add(itemName);
 
-		JLabel itemFunc = new JLabel("   성능 : " + func);
+		itemFunc = new JLabel("   성능 : " + func);
 		itemFunc.setBackground(new Color(0, 102, 102));
 		itemFunc.setBounds(81, 35, 155, 20);
 		itemFunc.setOpaque(true);
 		this.add(itemFunc);
 
-		JButton buyBtn = new JButton("\uAD6C\uC785");
+		buyBtn = new JButton("\uAD6C\uC785");
 		buyBtn.setBounds(240, 9, 77, 48);
+		buyBtn.setEnabled(false);
 		this.add(buyBtn);
 	}
 }
 
 
-class ShopTh extends Thread{
-	Remake_Shop s;
+//------------- 용병 샾 기본 Shop를 상속받음.
+@SuppressWarnings("serial")
+class FriendShop extends Remake_Shop {
+	FriendShop fs;
+	In_game_main main;
+	SharedMoney m;
 	
-	JButton btn;
-	ShopTh(Remake_Shop s, JButton btn){
-		this.s = s;
-		this.btn = btn;
+	public FriendShop(String store, In_game_main main, SharedMoney m) {
+		super(store, main);
+		this.main = main;
+		this.m = m;
+		this.fs = this;
+		for (int i = 0; i < item.length; i++) {
+			super.item[i].buyBtn.setText(main.fprice[i]);
+		}
+
+		for (int i = 0; i < item.length; i++) {
+			super.item[i].buyBtn.addActionListener(new BuyBtnListener(fs, i, main, m));
+			// 리스너 등록 -> 구입
+		}
+		FriendBuyBtn th = new FriendBuyBtn(main, this);
+		th.start();
+		// 쓰레드 나의 돈이 용병을 구입할수 있는지 확인하는 스레드
+	}
+
+}
+
+// 리스너 클래스
+class BuyBtnListener implements ActionListener {
+	int btnNum;
+	In_game_main main;
+	SharedMoney m;
+	FriendShop fs;
+	BuyBtnListener(FriendShop fs, int btnNum, In_game_main main, SharedMoney m) {
+		this.btnNum = btnNum;
+		this.main = main;
+		this.m = m;
+		this.fs = fs;
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		main.chk[btnNum] = true;
+		String bm = fs.item[btnNum].buyBtn.getText();
+		int bch = Integer.parseInt(bm.substring(0, bm.indexOf("원")));
+		// 버튼에 적혀있는 돈을 받아옴.
+		m.minus(bch);
+		// 버튼에 있는 돈만큼 내가 가진돈에서 뺀다.
+		bm = ((int) (bch * 1.5)) + "원";
+		// 버튼 구매에 필요한 돈을 더 높인다.
+		main.fprice[btnNum] = bm;
+		// 버튼 구매 필요한 돈 배열에 값을 저장
+		fs.item[btnNum].buyBtn.setText(bm);
+		// 버튼에 값을 새로 바꿔준다.
+		
+		String am = main.autoMoney.getText();
+		int ach = Integer.parseInt(am.substring(0, am.indexOf("원")));
+		// 내가 오토당 버는 돈을 얻어온다.
+		String plus_am = fs.item[btnNum].itemFunc.getText();
+		int pam = Integer.parseInt(plus_am.substring(plus_am.indexOf("당") + 2, plus_am.indexOf("원")));
+		// 아이템의 성능에 적혀있는 +하는 돈
+		main.autoMoney.setText((ach + pam) + "원");
+		// 오토당 돈의 성능 업그레이드
+		
+		if(btnNum == 0)
+			main.func[btnNum] = "초당 "+(pam+1)+"원";
+		else if(btnNum == 1)
+			main.func[btnNum] = "초당 "+(pam+10)+"원";
+		else if(btnNum == 2)
+			main.func[btnNum] = "초당 "+(pam+100)+"원";
+		// 사기전 친구들 가게에 있는 용병 친구들 업그레이드 성능 높여줌
+		
+		fs.item[btnNum].itemFunc.setText("성능 : " + main.func[btnNum]);
+		// 높여준 성능 적어주기.
+
+	}
+
+}
+
+class FriendBuyBtn extends Thread {
+
+	In_game_main main;
+	FriendShop fs;
+
+	FriendBuyBtn(In_game_main main, FriendShop fs) {
+		this.main = main;
+		this.fs = fs;
+	}
+
+	@Override
+	public void run() {
+		while (true) {
+			String mymoney = main.moneyLa.getText();
+			int m = Integer.parseInt(mymoney.substring(0, mymoney.indexOf("원")));
+			String[] bm = new String[3];
+			int[] btnmoney = new int[3];
+			for (int i = 0; i < 3; i++) {
+				bm[i] = fs.item[i].buyBtn.getText();
+				btnmoney[i] = Integer.parseInt(bm[i].substring(0, bm[i].indexOf("원")));
+			}
+			for (int i = 0; i < 3; i++) {
+				if (m >= btnmoney[i])
+					fs.item[i].buyBtn.setEnabled(true);
+				else
+					fs.item[i].buyBtn.setEnabled(false);
+			}
+		}
+	}
+}
+
+class LevelBuyBtn extends Thread{
+	In_game_main main;
+	
+	LevelBuyBtn(In_game_main main){
+		this.main = main;
 	}
 	
 	@Override
 	public void run() {
-		btn.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				s.setVisible(true);
-			}
-		});
+		while (true) {
+			String mymoney = main.moneyLa.getText();
+			int n = Integer.parseInt(mymoney.substring(0, mymoney.indexOf("원")));
+			
+			String levelupMoney = main.levelupBtn.getText();
+			int o = Integer.parseInt(levelupMoney.substring(0, levelupMoney.indexOf("원")));
+			
+			if(n >= o)
+				main.levelupBtn.setEnabled(true);
+			else
+				main.levelupBtn.setEnabled(false);
+		}
 	}
 }

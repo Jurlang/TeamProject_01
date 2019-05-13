@@ -12,10 +12,12 @@ import javax.swing.border.EmptyBorder;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 @SuppressWarnings("serial")
 public class In_game_main extends JFrame {
-	boolean chk = true;
+	boolean[] chk = { false, false, false };
 	private JPanel contentPane;
 	ImageIcon f1 = new ImageIcon("images/블랙체크.png");
 	ImageIcon s1 = new ImageIcon("images/빨간체크.png");
@@ -25,7 +27,13 @@ public class In_game_main extends JFrame {
 	ImageIcon[] img = { new ImageIcon("images/검은별.png"), new ImageIcon("images/빨간별.png"),
 			new ImageIcon("images/블랙체크.png") };
 	String[] name = { "개새", "10새", "짭새" };
-	String[] func = { "x 2", "x 3", "x 4" };
+	String[] func = { "초당 1원", "초당 10원", "초당 100원" };
+	String[] fprice = { "1000원", "2000원", "3000원" };
+	JLabel autoMoney;
+	JLabel tabMoney;
+	JLabel moneyLa;
+	JLabel lvLa;
+	JButton levelupBtn;
 
 	public In_game_main() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -54,25 +62,13 @@ public class In_game_main extends JFrame {
 		itemshopBtn.setBounds(1, 0, 151, 64);
 		itemshopBtn.setIcon(new ImageIcon("images/세트스.png"));
 		itemshopBtn.setHorizontalTextPosition(JButton.CENTER);
-		itemshopBtn.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				new Remake_Shop("아이템 스토어", img, name, func);
-			}
-		});
+		itemshopBtn.addActionListener(new ItemShopBtnAL(this));
 		shopPanel.add(itemshopBtn);
 
 		JButton frishopBtn = new JButton("\uB3D9\uB8CC");
 		frishopBtn.setBounds(167, 0, 151, 64);
 		frishopBtn.setIcon(new ImageIcon("images/용병.jpg"));
-		frishopBtn.addActionListener(new ActionListener() {
 
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				new Remake_Shop("용병 스토어", img, name, func);
-			}
-		});
 		shopPanel.add(frishopBtn);
 
 		JButton statisticsBtn = new JButton("\uD1B5\uACC4");
@@ -80,9 +76,12 @@ public class In_game_main extends JFrame {
 		statisticsBtn.setIcon(new ImageIcon("images/통계.jpg"));
 		shopPanel.add(statisticsBtn);
 
-		JButton levelupBtn = new JButton("\uB808\uBCA8\uC5C5 !!!!!! \uB6B1\uAE61\uB6B1\uAE61");
+		levelupBtn = new JButton("\uB808\uBCA8\uC5C5 !!!!!! \uB6B1\uAE61\uB6B1\uAE61");
 		levelupBtn.setBounds(0, 53, 485, 48);
-		levelupBtn.setIcon(new ImageIcon("images/레벨업.jpg"));
+		
+		//levelupBtn.setIcon(new ImageIcon("images/레벨업.jpg"));
+		levelupBtn.setText("150원");
+		levelupBtn.setEnabled(false);
 		menuPanel.add(levelupBtn);
 
 		JLabel mainchImg = new JLabel("\uBA54\uC778\uCF00\uB9AD\uD130\uC774\uBBF8\uC9C0");
@@ -99,12 +98,12 @@ public class In_game_main extends JFrame {
 		tabLa.setBounds(287, 10, 87, 15);
 		menuPanel.add(tabLa);
 
-		JLabel tabMoney = new JLabel("1\uC6D0");
+		tabMoney = new JLabel("1\uC6D0");
 		tabMoney.setHorizontalAlignment(SwingConstants.CENTER);
 		tabMoney.setBounds(287, 27, 87, 22);
 		menuPanel.add(tabMoney);
 
-		JLabel autoMoney = new JLabel("1\uC6D0");
+		autoMoney = new JLabel("0\uC6D0");
 		autoMoney.setHorizontalAlignment(SwingConstants.CENTER);
 		autoMoney.setBounds(386, 27, 87, 22);
 		menuPanel.add(autoMoney);
@@ -145,33 +144,22 @@ public class In_game_main extends JFrame {
 
 //------------------------------------------------------------------------------------------		
 		JLabel fr3 = new JLabel();
-		fr3.setBounds(335, 27, 103, 147);
-		Moving th3 = new Moving(fr3, f1, s1);
+		fr3.setBounds(335, 56, 103, 123);
+		Moving th3 = new Moving(fr3, f1, s1, this, 2);
 		th3.start();
 		mainpanel.add(fr3);
 
 		JLabel fr2 = new JLabel();
-		fr2.setBounds(189, 27, 103, 147);
-		Moving th2 = new Moving(fr2, f1, s1);
+		fr2.setBounds(189, 51, 103, 123);
+		Moving th2 = new Moving(fr2, f1, s1, this, 1);
 		th2.start();
 		mainpanel.add(fr2);
 
 		JLabel fr1 = new JLabel();
-		Moving th1 = new Moving(fr1, f1, s1);
+		Moving th1 = new Moving(fr1, f1, s1, this, 0);
 		th1.start();
-		fr1.setBounds(52, 27, 103, 147);
+		fr1.setBounds(52, 51, 103, 123);
 		mainpanel.add(fr1);
-
-		if (chk) {
-			fr1.setVisible(true);
-			fr2.setVisible(true);
-			fr3.setVisible(true);
-		} else {
-			fr1.setVisible(false);
-			fr2.setVisible(false);
-			fr3.setVisible(false);
-		}
-	
 
 		JPanel sangdanBar = new JPanel();
 		sangdanBar.setBounds(0, 0, 485, 43);
@@ -182,7 +170,7 @@ public class In_game_main extends JFrame {
 		btnNewButton.setBounds(0, 0, 91, 43);
 		sangdanBar.add(btnNewButton);
 		// ------------------------------------------------------------------------------------------
-		JLabel moneyLa = new JLabel("0\uC6D0");
+		moneyLa = new JLabel("0\uC6D0");
 		moneyLa.setBounds(92, 0, 392, 43);
 		sangdanBar.add(moneyLa);
 		moneyLa.setFont(new Font("굴림", Font.BOLD, 19));
@@ -192,10 +180,36 @@ public class In_game_main extends JFrame {
 		AutoMoney amth = new AutoMoney(autoMoney, m);
 		TabMoney tmth = new TabMoney(bgImgPanel, tabMoney, m, mainch, f1, s1);
 
-		JLabel lvLa = new JLabel("Lv .1");
+		lvLa = new JLabel("Lv .1");
 		lvLa.setHorizontalAlignment(SwingConstants.CENTER);
 		lvLa.setBounds(156, 21, 87, 22);
 		menuPanel.add(lvLa);
+
+		AL l = new AL(this, "용병 스토어", m);
+		frishopBtn.addActionListener(l);
+
+		LevelBuyBtn lbth = new LevelBuyBtn(this);
+		lbth.start();
+		levelupBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				String levelupMoney = levelupBtn.getText();
+				int o = Integer.parseInt(levelupMoney.substring(0, levelupMoney.indexOf("원")));
+				m.minus(o);
+				o = (int)(o+150);
+				levelupBtn.setText(o + "원");
+				
+				String s = lvLa.getText();
+				int n = Integer.parseInt(s.substring(s.indexOf(".") + 1));
+				n++;
+				lvLa.setText("Lv ." + n);
+				String w = tabMoney.getText();
+				int x = Integer.parseInt(w.substring(0, w.indexOf("원")));
+				x++;
+				tabMoney.setText(x + "원");
+			}
+		});
 
 		amth.start();
 		tmth.start();
@@ -203,4 +217,35 @@ public class In_game_main extends JFrame {
 
 		this.setVisible(true);
 	}
+}
+
+class AL implements ActionListener {
+	In_game_main main;
+	String store;
+	SharedMoney m;
+
+	AL(In_game_main main, String store, SharedMoney m) {
+		this.main = main;
+		this.store = store;
+		this.m = m;
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		new FriendShop("용병 스토어", main, m);
+	}
+}
+
+class ItemShopBtnAL implements ActionListener {
+	In_game_main main;
+
+	ItemShopBtnAL(In_game_main main) {
+		this.main = main;
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		new Remake_Shop("아이템 스토어", main);
+	}
+
 }
