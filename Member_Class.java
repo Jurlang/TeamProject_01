@@ -2,15 +2,15 @@ package TeamProject_01;
 //아이디(20자리), 비번(20자리), 이름(20자리), 생년월일(6자리), 이메일(50자리)
 
 //프로젝트 회원가입 !
-public class PMember {
+public class Member_Class {
 	private String id;
 	private String pw;
 	private String name;
 	private int bir;
 	private String eml;
 	
-	public PMember() {}
-	public PMember(String id, String pw, String name, int bir, String eml) {
+	public Member_Class() {}
+	public Member_Class(String id, String pw, String name, int bir, String eml) {
 		super();
 		this.id = id;
 		this.pw = pw;

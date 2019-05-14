@@ -35,8 +35,8 @@ public class DBConn {
 	}
 
 	// select 만들긔
-	public ArrayList<PMember> selectAll() {
-		ArrayList<PMember> list = new ArrayList<PMember>();
+	public ArrayList<Member_Class> selectAll() {
+		ArrayList<Member_Class> list = new ArrayList<Member_Class>();
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -47,7 +47,7 @@ public class DBConn {
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
-				PMember m = new PMember();
+				Member_Class m = new Member_Class();
 				m.setId(rs.getString("id"));
 				m.setPw(rs.getString("pw"));
 				m.setName(rs.getString("name"));
@@ -66,8 +66,8 @@ public class DBConn {
 	// 고로 insert를 넣어주면 됨!
 
 	// 아이디를 검색해서 회원정보를 볼 수 있는 소스코드!
-	public PMember selectOne(String id) {
-		PMember m = null;
+	public Member_Class selectOne(String id) {
+		Member_Class m = null;
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -80,7 +80,7 @@ public class DBConn {
 			rs = ps.executeQuery();
 
 			if (rs.next()) {
-				m = new PMember();
+				m = new Member_Class();
 				m.setId(rs.getString("id"));
 				m.setPw(rs.getString("pw"));
 				m.setName(rs.getString("name"));
@@ -96,7 +96,7 @@ public class DBConn {
 		return m;
 	}
 
-	public void insert(PMember m) {
+	public void insert(Member_Class m) {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		String sql = "insert into member(id,pw,name,age,tel) values(?,?,?,?,?)";
@@ -122,7 +122,7 @@ public class DBConn {
 		}
 	}
 
-	public void update(PMember m) {
+	public void update(Member_Class m) {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		String sql = "update member set pw=?, name=?, bir=?, eml=? where id=?";

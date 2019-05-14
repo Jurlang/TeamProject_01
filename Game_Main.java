@@ -14,7 +14,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 @SuppressWarnings("serial")
-public class In_game_main extends JFrame {
+public class Game_Main extends JFrame {
 	boolean[] chk = { false, false, false };
 	private JPanel contentPane;
 	ImageIcon f1 = new ImageIcon("images/블랙체크.png");
@@ -33,7 +33,7 @@ public class In_game_main extends JFrame {
 	JLabel lvLa;
 	JButton levelupBtn;
 
-	public In_game_main() {
+	public Game_Main() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 501, 787);
 		contentPane = new JPanel();
@@ -218,11 +218,11 @@ public class In_game_main extends JFrame {
 }
 
 class AL implements ActionListener {
-	In_game_main main;
+	Game_Main main;
 	String store;
 	SharedMoney m;
 
-	AL(In_game_main main, String store, SharedMoney m) {
+	AL(Game_Main main, String store, SharedMoney m) {
 		this.main = main;
 		this.store = store;
 		this.m = m;
@@ -235,15 +235,15 @@ class AL implements ActionListener {
 }
 
 class ItemShopBtnAL implements ActionListener {
-	In_game_main main;
+	Game_Main main;
 
-	ItemShopBtnAL(In_game_main main) {
+	ItemShopBtnAL(Game_Main main) {
 		this.main = main;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		new Remake_Shop("아이템 스토어", main);
+		new Game_Shop("아이템 스토어", main);
 	}
 
 }

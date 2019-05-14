@@ -17,7 +17,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 @SuppressWarnings("serial")
-public class ProjectRegister extends JFrame {
+public class Register_Frame extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField tfId;
@@ -27,7 +27,7 @@ public class ProjectRegister extends JFrame {
 	private JTextField tfName;
 	private JTextField tfBir;
 	private JTextField tfEml;
-	private PMainFrame frame;
+	private Main_Frame frame;
 
 	/**
 	 * Launch the application.
@@ -48,7 +48,7 @@ public class ProjectRegister extends JFrame {
 	/**										  칸이 너무 길어보여서 일단 10개로....
 	 * Create the frame.
 	 */
-	public ProjectRegister(PMainFrame frame) {
+	public Register_Frame(Main_Frame frame) {
 		this.frame = frame;
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -122,9 +122,9 @@ public class ProjectRegister extends JFrame {
 	}
 	
 	class MyListener implements ActionListener{
-		PMainFrame mframe;
-		ProjectRegister tframe;
-		MyListener(PMainFrame mframe, ProjectRegister tframe){
+		Main_Frame mframe;
+		Register_Frame tframe;
+		MyListener(Main_Frame mframe, Register_Frame tframe){
 			this.mframe=mframe;
 			this.tframe = tframe;
 		}
@@ -141,7 +141,7 @@ public class ProjectRegister extends JFrame {
 				int bir=Integer.parseInt(tfBir.getText());
 				String eml=tfEml.getText();
 				
-				PMember m=new PMember(id,pw,name,bir,eml);
+				Member_Class m=new Member_Class(id,pw,name,bir,eml);
 				DBConn dbConn=DBConn.getInstance();
 				dbConn.insert(m);
 				tframe.dispose();

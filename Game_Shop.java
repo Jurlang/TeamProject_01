@@ -15,16 +15,16 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 @SuppressWarnings("serial")
-public class Remake_Shop extends JFrame {
+public class Game_Shop extends JFrame {
 
 	private JPanel contentPane;
 	private JLabel showNameLa;
 	private JPanel itemListPanel;
 	ItemPanel[] item;
 	
-	In_game_main main;
+	Game_Main main;
 
-	public Remake_Shop(String store, In_game_main main) {
+	public Game_Shop(String store, Game_Main main) {
 		this.main = main;
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -67,9 +67,9 @@ public class Remake_Shop extends JFrame {
 
 class BtnActionListener implements ActionListener {
 
-	Remake_Shop rs;
+	Game_Shop rs;
 
-	BtnActionListener(Remake_Shop rs) {
+	BtnActionListener(Game_Shop rs) {
 		this.rs = rs;
 	}
 
@@ -120,12 +120,12 @@ class ItemPanel extends JPanel {
 
 //------------- 용병 샾 기본 Shop를 상속받음.
 @SuppressWarnings("serial")
-class FriendShop extends Remake_Shop {
+class FriendShop extends Game_Shop {
 	FriendShop fs;
-	In_game_main main;
+	Game_Main main;
 	SharedMoney m;
 	
-	public FriendShop(String store, In_game_main main, SharedMoney m) {
+	public FriendShop(String store, Game_Main main, SharedMoney m) {
 		super(store, main);
 		this.main = main;
 		this.m = m;
@@ -148,10 +148,10 @@ class FriendShop extends Remake_Shop {
 // 리스너 클래스
 class BuyBtnListener implements ActionListener {
 	int btnNum;
-	In_game_main main;
+	Game_Main main;
 	SharedMoney m;
 	FriendShop fs;
-	BuyBtnListener(FriendShop fs, int btnNum, In_game_main main, SharedMoney m) {
+	BuyBtnListener(FriendShop fs, int btnNum, Game_Main main, SharedMoney m) {
 		this.btnNum = btnNum;
 		this.main = main;
 		this.m = m;
@@ -199,10 +199,10 @@ class BuyBtnListener implements ActionListener {
 
 class FriendBuyBtn extends Thread {
 
-	In_game_main main;
+	Game_Main main;
 	FriendShop fs;
 
-	FriendBuyBtn(In_game_main main, FriendShop fs) {
+	FriendBuyBtn(Game_Main main, FriendShop fs) {
 		this.main = main;
 		this.fs = fs;
 	}
@@ -229,9 +229,9 @@ class FriendBuyBtn extends Thread {
 }
 
 class LevelBuyBtn extends Thread{
-	In_game_main main;
+	Game_Main main;
 	
-	LevelBuyBtn(In_game_main main){
+	LevelBuyBtn(Game_Main main){
 		this.main = main;
 	}
 	

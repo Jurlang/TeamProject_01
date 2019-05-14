@@ -10,7 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 @SuppressWarnings("serial")
-public class PMainFrame extends JFrame {
+public class Main_Frame extends JFrame {
 
 	private JPanel contentPane;
 
@@ -21,7 +21,7 @@ public class PMainFrame extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					PMainFrame frame = new PMainFrame();
+					Main_Frame frame = new Main_Frame();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -33,7 +33,7 @@ public class PMainFrame extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public PMainFrame() {
+	public Main_Frame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);	// x좌표, y좌표, 너비, 높이
 		contentPane = new JPanel();
@@ -69,8 +69,8 @@ public class PMainFrame extends JFrame {
 	
 	class MainListener implements ActionListener{
 
-		PMainFrame frame=null;
-		MainListener(PMainFrame frame){
+		Main_Frame frame=null;
+		MainListener(Main_Frame frame){
 			this.frame=frame;
 		}
 		
@@ -82,12 +82,12 @@ public class PMainFrame extends JFrame {
 			switch(cmd) {
 			case "회원가입":
 				frame.setVisible(false);
-				new ProjectRegister(this.frame);
+				new Register_Frame(this.frame);
 				break;
 			
 			case "로그인":
 				frame.setVisible(false);
-				new ProjectLogin(this.frame);
+				new Login_Frame(this.frame);
 				break;
 				
 			case "Quit":

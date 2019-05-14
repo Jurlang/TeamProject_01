@@ -12,9 +12,9 @@ class Moving extends Thread {
 	JLabel la = null;
 	ImageIcon f = null;
 	ImageIcon s = null;
-	In_game_main main;
+	Game_Main main;
 	int num;
-	Moving(JLabel la, ImageIcon f, ImageIcon s, In_game_main main, int num) {
+	Moving(JLabel la, ImageIcon f, ImageIcon s, Game_Main main, int num) {
 		this.la = la;
 		this.f = f;
 		this.s = s;

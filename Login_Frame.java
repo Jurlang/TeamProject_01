@@ -14,12 +14,12 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 @SuppressWarnings("serial")
-public class ProjectLogin extends JFrame {
+public class Login_Frame extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField tfId;
 	private JPasswordField tfPw;
-	private PMainFrame mainFrame;
+	private Main_Frame mainFrame;
 	
 	
 	/**
@@ -41,7 +41,7 @@ public class ProjectLogin extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ProjectLogin(PMainFrame mainFrame) {
+	public Login_Frame(Main_Frame mainFrame) {
 		this.mainFrame=mainFrame;
 		
 		
@@ -90,8 +90,8 @@ public class ProjectLogin extends JFrame {
 	}
 	
 	class MyListener implements ActionListener{
-		ProjectLogin frame;
-		MyListener(ProjectLogin frame){
+		Login_Frame frame;
+		MyListener(Login_Frame frame){
 			this.frame=frame;
 		}
 		@Override
@@ -109,11 +109,11 @@ public class ProjectLogin extends JFrame {
 				String msg="";
 				
 				if(login==1) {
-					PMember m=dbConn.selectOne(id);
+					Member_Class m=dbConn.selectOne(id);
 					msg="환영합니다"+id+"("+m.getName()+")님";
 					JOptionPane.showMessageDialog(null,msg);
 					frame.dispose();
-					new In_game_main();
+					new Game_Main();
 				}else if(login==0) {
 					msg="비밀번호가 틀림";
 				}else {
