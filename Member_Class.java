@@ -6,11 +6,11 @@ public class Member_Class {
 	private String id;
 	private String pw;
 	private String name;
-	private int bir;
+	private String bir;
 	private String eml;
 	
 	public Member_Class() {}
-	public Member_Class(String id, String pw, String name, int bir, String eml) {
+	public Member_Class(String id, String pw, String name, String bir, String eml) {
 		super();
 		this.id = id;
 		this.pw = pw;
@@ -37,10 +37,10 @@ public class Member_Class {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public int getBir() {
+	public String getBir() {
 		return bir;
 	}
-	public void setBir(int bir) {
+	public void setBir(String bir) {
 		this.bir = bir;
 	}
 	public String getEml() {

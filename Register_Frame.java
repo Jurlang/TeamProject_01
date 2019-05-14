@@ -138,7 +138,7 @@ public class Register_Frame extends JFrame {
 				@SuppressWarnings("deprecation")
 				String pw=tfPw.getText();
 				String name=tfName.getText();
-				int bir=Integer.parseInt(tfBir.getText());
+				String bir=tfBir.getText();
 				String eml=tfEml.getText();
 				
 				Member_Class m=new Member_Class(id,pw,name,bir,eml);

@@ -1,4 +1,5 @@
 package TeamProject_01;
+
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -20,8 +21,7 @@ public class Login_Frame extends JFrame {
 	private JTextField tfId;
 	private JPasswordField tfPw;
 	private Main_Frame mainFrame;
-	
-	
+
 	/**
 	 * Launch the application.
 	 */
@@ -42,89 +42,91 @@ public class Login_Frame extends JFrame {
 	 * Create the frame.
 	 */
 	public Login_Frame(Main_Frame mainFrame) {
-		this.mainFrame=mainFrame;
-		
-		
+		this.mainFrame = mainFrame;
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-		
+
 		JPanel panel1 = new JPanel();
 		contentPane.add(panel1);
-		
+
 		JLabel lblNewLabel = new JLabel("\uC544\uC774\uB514");
 		panel1.add(lblNewLabel);
-		
+
 		tfId = new JTextField();
 		panel1.add(tfId);
 		tfId.setColumns(20);
-		
+
 		JPanel panel2 = new JPanel();
 		contentPane.add(panel2);
-		
+
 		JLabel lblNewLabel_1 = new JLabel("\uBE44\uBC00\uBC88\uD638");
 		panel2.add(lblNewLabel_1);
-		
+
 		tfPw = new JPasswordField();
 		panel2.add(tfPw);
 		tfPw.setColumns(20);
-		
+
 		JPanel panel3 = new JPanel();
 		contentPane.add(panel3);
-		
+
 		JButton btnLogin = new JButton("\uB85C\uADF8\uC778");
 		panel3.add(btnLogin);
-		
+
 		JButton btnCancel = new JButton("\uB098\uAC00\uAE30");
 		panel3.add(btnCancel);
-		
+
 		setVisible(true);
-		
-		MyListener l=new MyListener(this);
+
+		MyListener l = new MyListener(this);
 		btnLogin.addActionListener(l);
 		btnCancel.addActionListener(l);
-		
+
 	}
-	
-	class MyListener implements ActionListener{
+
+	class MyListener implements ActionListener {
 		Login_Frame frame;
-		MyListener(Login_Frame frame){
-			this.frame=frame;
+
+		MyListener(Login_Frame frame) {
+			this.frame = frame;
 		}
+
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			String log=e.getActionCommand();
-			
-			if(log.trim().equals("로그인")) {
-				String id=tfId.getText();
+			String log = e.getActionCommand();
+
+			if (log.trim().equals("로그인")) {
+				String id = tfId.getText();
 				@SuppressWarnings("deprecation")
-				String pw=tfPw.getText();
-				
-				DBConn dbConn=DBConn.getInstance();
-				int login=dbConn.confirm(id, pw);
-				String msg="";
-				
-				if(login==1) {
-					Member_Class m=dbConn.selectOne(id);
-					msg="환영합니다"+id+"("+m.getName()+")님";
-					JOptionPane.showMessageDialog(null,msg);
+				String pw = tfPw.getText();
+
+				DBConn dbConn = DBConn.getInstance();
+				int login = dbConn.confirm(id, pw);
+				String msg = "";
+
+				if (login == -1) {
+					msg = id + "는 없는 회원입니다.";
+				} else if (login == 0) {
+					msg = "비밀번호가 틀림";
+				} else {
+					Member_Class m = dbConn.selectOne(id);
+					msg = "환영합니다" + id + "(" + m.getName() + ")님";
 					frame.dispose();
-					new Game_Main();
-				}else if(login==0) {
-					msg="비밀번호가 틀림";
-				}else {
-					msg=id+"는 없는 회원입니다.";
-				}			}else {
+					new Game_Main(login);
+				}
+				JOptionPane.showMessageDialog(null, msg);
+
+			} else {
 				frame.dispose();
 				mainFrame.setVisible(true);
 			}
 		}
-		
+
 	}
-	
 
 }

@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet; // 일단 로그인이 되고, 회원가입이 되는 것 까지만!!
+import java.sql.Statement;
 import java.util.ArrayList;
 
 //객체를 싱글톤으로 만들어줘야 된다잉?!
@@ -51,7 +52,7 @@ public class DBConn {
 				m.setId(rs.getString("id"));
 				m.setPw(rs.getString("pw"));
 				m.setName(rs.getString("name"));
-				m.setBir(rs.getInt("bir"));
+				m.setBir(rs.getString("bir"));
 				m.setEml(rs.getString("eml"));
 				list.add(m);
 			}
@@ -84,7 +85,7 @@ public class DBConn {
 				m.setId(rs.getString("id"));
 				m.setPw(rs.getString("pw"));
 				m.setName(rs.getString("name"));
-				m.setBir(rs.getInt("age"));
+				m.setBir(rs.getString("age"));
 				m.setEml(rs.getString("tel"));
 			}
 		} catch (Exception e) {
@@ -96,31 +97,39 @@ public class DBConn {
 		return m;
 	}
 
-	public void insert(Member_Class m) {
-		Connection conn = null;
-		PreparedStatement ps = null;
-		String sql = "insert into member(id,pw,name,age,tel) values(?,?,?,?,?)";
-
-		try {
-			conn = getConnection();
-			ps = conn.prepareStatement(sql);
-			ps.setString(1, m.getId());
-			ps.setString(2, m.getPw());
-			ps.setString(3, m.getName());
-			ps.setInt(4, m.getBir());
-			ps.setString(5, m.getEml());
-
-			int n = ps.executeUpdate();
-			if (n == 1)
-				System.out.println("입력성공");// 이거 문구는 바꿀거면 바꾸자
-			else
-				System.out.println("입력실패");
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			dbClose(conn, ps);
-		}
-	}
+	public void insert(Member_Class m) {   //회원가입
+	      Connection conn = null;
+	      Statement stmt = null;
+	      PreparedStatement ps = null;
+	      ResultSet rs = null;
+	      String sql = "insert into userinfo(userno, id,pw,name,birth,mail) values(?,?,?,?,to_date(?),?)";
+	      String countsql = "select count(*) from userinfo";
+	      try {
+	         
+	         conn = getConnection();
+	         stmt = conn.createStatement();
+	         rs = stmt.executeQuery(countsql);
+	         rs.next();
+	         int resultcount = rs.getInt("count(*)");
+	         System.out.println(resultcount);
+	         ps = conn.prepareStatement(sql);
+	         ps.setInt(1, resultcount);
+	         ps.setString(2, m.getId());
+	         ps.setString(3, m.getPw());
+	         ps.setString(4, m.getName());
+	         ps.setString(5, m.getBir());
+	         ps.setString(6, m.getEml());
+	         int n = ps.executeUpdate();
+	         if (n == 1)
+	            System.out.println("입력성공");// 이거 문구는 바꿀거면 바꾸자
+	         else
+	            System.out.println("입력실패");
+	      } catch (Exception e) {
+	         e.printStackTrace();
+	      } finally {
+	         dbClose(conn, ps, rs, stmt);
+	      }
+	   }
 
 	public void update(Member_Class m) {
 		Connection conn = null;
@@ -132,7 +141,7 @@ public class DBConn {
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, m.getPw());
 			ps.setString(2, m.getName());
-			ps.setInt(3, m.getBir());
+			ps.setString(3, m.getBir());
 			ps.setString(4, m.getEml());
 			ps.setString(5, m.getId());
 
@@ -154,16 +163,17 @@ public class DBConn {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String sql = "select pw from member where id=?";
+		String sql = "select userno, pw from member where id=?";
 		try {
 			conn = getConnection();
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, id);
 			rs = ps.executeQuery();
 			if (rs.next()) {
-				String dbPw = rs.getString(1);
+				int un = rs.getInt(1);
+				String dbPw = rs.getString(2);
 				if (dbPw.equals(pw))
-					n = 1;
+					n = un;
 				else
 					n = 0;
 			}
@@ -194,6 +204,19 @@ public class DBConn {
 				ps.close();
 			if (conn != null)
 				conn.close();
+		} catch (Exception e) {
+		}
+	}
+	private void dbClose(Connection conn, PreparedStatement ps, ResultSet rs, Statement stmt) {
+		try {
+			if (ps != null)
+				ps.close();
+			if (conn != null)
+				conn.close();
+			if (rs!=null)
+				rs.close();
+			if(stmt != null)
+				stmt.close();
 		} catch (Exception e) {
 		}
 	}

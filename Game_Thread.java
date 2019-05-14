@@ -52,7 +52,7 @@ class Moving extends Thread {
 
 class SharedMoney {
 	JLabel money;
-	private int sum = 10000;
+	private int sum = 100000;
 
 	SharedMoney(JLabel money) {
 		this.money = money;
