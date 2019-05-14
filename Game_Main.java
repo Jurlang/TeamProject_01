@@ -22,35 +22,71 @@ public class Game_Main extends JFrame {
 	ImageIcon no_c = new ImageIcon("images/검은별.png");
 	ImageIcon yes_c = new ImageIcon("images/빨간별.png");
 	private SharedMoney m = null;
+
+	ImageIcon[] fimg = { new ImageIcon("images/검은별.png"), new ImageIcon("images/빨간별.png"),
+			new ImageIcon("images/블랙체크.png") };
+	ImageIcon[] iimg = { new ImageIcon("images/검은별.png"), new ImageIcon("images/빨간별.png"),
+			new ImageIcon("images/블랙체크.png"), new ImageIcon("images/빨간별.png") };
+
+	String[] fname = new String[3];
+	String[] ffunc = new String[3];
+	int[] fprice = { 1000, 2000, 3000 };
+	int[] flevel = new int[3];
+
+	String[] iname = new String[4];
+	String[] ifunc = new String[4];
+	String[] iprice = { "10000원", "20000원", "30000원", "40000원" };
 	
-	ImageIcon[] fimg = { new ImageIcon("images/검은별.png"),
-						 new ImageIcon("images/빨간별.png"),
-						 new ImageIcon("images/블랙체크.png") };
-	ImageIcon[] iimg = { new ImageIcon("images/검은별.png"),
-						 new ImageIcon("images/빨간별.png"),
-						 new ImageIcon("images/블랙체크.png") };
-	
-	String[] fname = { "개새", "10새", "짭새" };
-	String[] ffunc = { "초당 1원", "초당 10원", "초당 100원" };
-	String[] fprice = { "1000원", "2000원", "3000원" };
-	int[] flevel = {1,1,1};
-	
-	String[] iname = {"시바", "ㅈ", "꿀"};
-	String[] ifunc = {"x2", "x3", "x4"};
-	String[] iprice = { "10000원", "20000원", "30000원" };
-	
+	int automoney;
+	int curmoney;
+	int allmoney;
+	int tabmoney;
 	int uppertabmoney = 1;
 	
+	int level;
+	int myitem;
+
 	JLabel autoMoney;
 	JLabel tabMoney;
 	JLabel moneyLa;
 	JLabel lvLa;
 	JButton levelupBtn;
-	
+
 	int userNum;
 
-	public Game_Main(int un) {
+	public Game_Main(int un, Login_info_Class userinfo) {
 		this.userNum = un;
+
+		fname = userinfo.friendname;
+		flevel = userinfo.friendlevel;
+		System.out.println(flevel[0]);
+		ffunc[0] = "초당 " + (1 * (flevel[0]+1)) + "원";
+		ffunc[1] = "초당 " + (10 * (flevel[1]+1)) + "원";
+		ffunc[2] = "초당 " + (100 * (flevel[2]+1)) + "원";
+		for (int i = 0; i < 3; i++) {
+			for (int j = 1; j < flevel[j]; j++) {
+				fprice[i] *= 1.5;
+			}
+		}
+		
+		iname = userinfo.itemname;
+		ifunc[0] = "x" + userinfo.itemfunc[0];
+		ifunc[1] = "x" + userinfo.itemfunc[1];
+		ifunc[2] = "x" + userinfo.itemfunc[2];
+		ifunc[3] = "x" + userinfo.itemfunc[3];
+		
+		curmoney = userinfo.curmoney;
+		
+		level = userinfo.mylevel;
+		myitem = userinfo.myitem;
+		if(myitem == 1) uppertabmoney = 2;
+		else if(myitem == 2) uppertabmoney = 6;
+		else if(myitem == 3) uppertabmoney = 24;
+		else if(myitem == 4) uppertabmoney = 120;
+		
+		tabmoney = level * uppertabmoney;
+		automoney = (1*flevel[0]) + (10*flevel[1]) + (100*flevel[2]);
+		
 		System.out.println(un);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 501, 787);
@@ -91,11 +127,11 @@ public class Game_Main extends JFrame {
 		statisticsBtn.setIcon(new ImageIcon("images/통계.jpg"));
 		shopPanel.add(statisticsBtn);
 
-		levelupBtn = new JButton("\uB808\uBCA8\uC5C5 !!!!!! \uB6B1\uAE61\uB6B1\uAE61");
+		levelupBtn = new JButton();
 		levelupBtn.setBounds(0, 53, 485, 48);
-		
-		//levelupBtn.setIcon(new ImageIcon("images/레벨업.jpg"));
-		levelupBtn.setText("150원");
+
+		// levelupBtn.setIcon(new ImageIcon("images/레벨업.jpg"));
+		levelupBtn.setText((level * 150)+"원");
 		levelupBtn.setEnabled(false);
 		menuPanel.add(levelupBtn);
 
@@ -113,12 +149,12 @@ public class Game_Main extends JFrame {
 		tabLa.setBounds(287, 10, 87, 15);
 		menuPanel.add(tabLa);
 
-		tabMoney = new JLabel("1\uC6D0");
+		tabMoney = new JLabel(tabmoney + "\uC6D0");
 		tabMoney.setHorizontalAlignment(SwingConstants.CENTER);
 		tabMoney.setBounds(287, 27, 87, 22);
 		menuPanel.add(tabMoney);
 
-		autoMoney = new JLabel("0\uC6D0");
+		autoMoney = new JLabel(automoney + "\uC6D0");
 		autoMoney.setHorizontalAlignment(SwingConstants.CENTER);
 		autoMoney.setBounds(386, 27, 87, 22);
 		menuPanel.add(autoMoney);
@@ -191,11 +227,11 @@ public class Game_Main extends JFrame {
 		moneyLa.setFont(new Font("굴림", Font.BOLD, 19));
 		moneyLa.setHorizontalAlignment(SwingConstants.RIGHT);
 		// ------------------------------------------------------------------------------------------
-		m = new SharedMoney(moneyLa);
+		m = new SharedMoney(moneyLa, this);
 		AutoMoney amth = new AutoMoney(autoMoney, m);
 		TabMoney tmth = new TabMoney(bgImgPanel, tabMoney, m, mainch, f1, s1);
 
-		lvLa = new JLabel("Lv .1");
+		lvLa = new JLabel("Lv ." + level);
 		lvLa.setHorizontalAlignment(SwingConstants.CENTER);
 		lvLa.setBounds(156, 21, 87, 22);
 		menuPanel.add(lvLa);
@@ -238,7 +274,7 @@ class ItemShopBtnAL implements ActionListener {
 	Game_Main main;
 	String store;
 	SharedMoney m;
-	
+
 	ItemShopBtnAL(Game_Main main, String store, SharedMoney m) {
 		this.main = main;
 		this.store = store;
@@ -252,10 +288,11 @@ class ItemShopBtnAL implements ActionListener {
 
 }
 
-class LevelUpBtnAL implements ActionListener{
+class LevelUpBtnAL implements ActionListener {
 	Game_Main main;
 	SharedMoney m;
-	LevelUpBtnAL(Game_Main main, SharedMoney m){
+
+	LevelUpBtnAL(Game_Main main, SharedMoney m) {
 		this.main = main;
 		this.m = m;
 	}
@@ -265,16 +302,16 @@ class LevelUpBtnAL implements ActionListener{
 		String levelupMoney = main.levelupBtn.getText();
 		int o = Integer.parseInt(levelupMoney.substring(0, levelupMoney.indexOf("원")));
 		m.minus(o);
-		o = (int)(o+150);
+		o = (int) (o + 150);
 		main.levelupBtn.setText(o + "원");
-		
+
 		String s = main.lvLa.getText();
 		int n = Integer.parseInt(s.substring(s.indexOf(".") + 1));
 		n++;
 		main.lvLa.setText("Lv ." + n);
 		String w = main.tabMoney.getText();
 		int x = Integer.parseInt(w.substring(0, w.indexOf("원")));
-		x = x+main.uppertabmoney;
+		x = x + main.uppertabmoney;
 		main.tabMoney.setText(x + "원");
 	}
 }

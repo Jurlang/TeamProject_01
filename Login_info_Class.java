@@ -3,12 +3,12 @@ package TeamProject_01;
 import java.util.Arrays;
 
 public class Login_info_Class {
-	String[] itemname;
-	int[] itemfunc;
+	String[] itemname= new String[4];
+	int[] itemfunc = new int[4];
 	
-	String[] friendname;
+	String[] friendname = new String[3];
 	
-	int[] friendlevel;
+	int[] friendlevel = new int[3];
 
 	int curmoney;
 	int automoney;
@@ -17,10 +17,6 @@ public class Login_info_Class {
 	int mylevel;
 	int myitem;
 	public Login_info_Class() {
-		this.itemname = new String[4];
-		this.itemfunc = new int[4];
-		this.friendname = new String[3];
-		this.friendlevel = new int[3];
 	}
 	
 	public Login_info_Class(String[] itemname, int[] itemfunc, String[] friendname, int[] friendlevel, int curmoney,

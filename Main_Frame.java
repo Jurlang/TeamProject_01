@@ -8,7 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
+//¾È¹Ù²åÁö·Õ >_<
 @SuppressWarnings("serial")
 public class Main_Frame extends JFrame {
 

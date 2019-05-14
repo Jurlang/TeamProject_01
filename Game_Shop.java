@@ -49,7 +49,7 @@ public class Game_Shop extends JFrame {
 		itemListPanel = new JPanel();
 		itemListPanel.setBounds(12, 50, 329, 359);
 		inShopPanel.add(itemListPanel);
-		item = new ItemPanel[3];
+		item = new ItemPanel[4];
 		itemListPanel.setLayout(new GridLayout(item.length, 1, 0, 0));
 		getContentPane().add(inShopPanel);
 
@@ -128,14 +128,14 @@ class FriendShop extends Game_Shop {
 		this.m = m;
 		this.fs = this;
 
-		for (int i = 0; i < item.length; i++) {
+		for (int i = 0; i < 3; i++) {
 			item[i] = new ItemPanel(super.itemListPanel, main.fimg[i], main.fname[i], main.ffunc[i]);
 		}
-		for (int i = 0; i < item.length; i++) {
-			super.item[i].buyBtn.setText(main.fprice[i]);
+		for (int i = 0; i < 3; i++) {
+			super.item[i].buyBtn.setText(main.fprice[i]+"원");
 		}
 
-		for (int i = 0; i < item.length; i++) {
+		for (int i = 0; i < 3; i++) {
 			super.item[i].buyBtn.addActionListener(new FBuyBtnListener(fs, i, main, m));
 			// 리스너 등록 -> 구입
 		}
@@ -170,11 +170,11 @@ class FBuyBtnListener implements ActionListener {
 		// 버튼에 적혀있는 돈을 받아옴.
 		m.minus(bch);
 		// 버튼에 있는 돈만큼 내가 가진돈에서 뺀다.
-		bm = ((int) (bch * 1.5)) + "원";
+		bch = (int)(bch * 1.5);
 		// 버튼 구매에 필요한 돈을 더 높인다.
-		main.fprice[btnNum] = bm;
+		main.fprice[btnNum] = bch;
 		// 버튼 구매 필요한 돈 배열에 값을 저장
-		fs.item[btnNum].buyBtn.setText(bm);
+		fs.item[btnNum].buyBtn.setText(bch+"원");
 		// 버튼에 값을 새로 바꿔준다.
 
 		String am = main.autoMoney.getText();
@@ -273,7 +273,12 @@ class ItemShop extends Game_Shop {
 		}
 
 		for (int i = 0; i < item.length; i++) {
-			super.item[i].buyBtn.setText(main.iprice[i]);
+			if(i <= main.myitem-1) {
+				super.item[i].buyBtn.setText("구입완료");
+			}
+			else {
+				super.item[i].buyBtn.setText(main.iprice[i]);
+			}
 		}
 
 		for (int i = 0; i < item.length; i++) {
@@ -304,25 +309,17 @@ class IBuyBtnListener implements ActionListener {
 
 		int bch = Integer.parseInt(bm.substring(0, bm.indexOf("원")));
 		System.out.println(bch);
-		// 버튼에 적혀있는 돈을 받아옴.
 		m.minus(bch);
-		// 버튼에 있는 돈만큼 내가 가진돈에서 뺀다.
 		bm = "구입완료";
-		// 버튼 구매에 필요한 돈을 더 높인다.
 		main.iprice[btnNum] = bm;
-		// 버튼 구매 필요한 돈 배열에 값을 저장
 		is.item[btnNum].buyBtn.setText(bm);
-		// 버튼에 값을 새로 바꿔준다.
 
 		String am = main.tabMoney.getText();
 		int ach = Integer.parseInt(am.substring(0, am.indexOf("원")));
-		// 내가 오토당 버는 돈을 얻어온다.
 		String plus_am = is.item[btnNum].itemFunc.getText();
 		int pam = Integer.parseInt(plus_am.substring(plus_am.indexOf("x") + 1));
-		// 아이템의 성능에 적혀있는 +하는 돈
 		main.uppertabmoney *= pam;
 		main.tabMoney.setText((ach * pam) + "원");
-		// 오토당 돈의 성능 업그레이드
 	}
 
 }
@@ -342,14 +339,14 @@ class ItemBuyBtn extends Thread {
 		while (true) {
 			String mymoney = main.moneyLa.getText();
 			int m = Integer.parseInt(mymoney.substring(0, mymoney.indexOf("원")));
-			String[] bm = new String[3];
-			int[] btnmoney = new int[3];
-			for (int i = 0; i < 3; i++) {
+			String[] bm = new String[4];
+			int[] btnmoney = new int[4];
+			for (int i = 0; i < is.item.length; i++) {
 				bm[i] = is.item[i].buyBtn.getText();
 				if (!(bm[i].equals("구입완료")))
 					btnmoney[i] = Integer.parseInt(bm[i].substring(0, bm[i].indexOf("원")));
 			}
-			for (int i = 0; i < 3; i++) {
+			for (int i = 0; i < is.item.length; i++) {
 				if (!(bm[i].equals("구입완료"))) {
 					if (m >= btnmoney[i])
 						is.item[i].buyBtn.setEnabled(true);

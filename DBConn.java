@@ -105,10 +105,16 @@ public class DBConn {
 		ResultSet rs = null;
 		String sql = "insert into userinfo(userno, id,pw,name,birth,mail) values(?,?,?,?,to_date(?),?)";
 		String countsql = "select count(*) from userinfo";
+		String usercharinfo_init_sql = "insert into usercharinfo values (?, 0, 1)";
+		String myfriend_init_01_sql = "insert into myfriend values ( ?, 1, 1 )";
+		String myfriend_init_02_sql = "insert into myfriend values ( ?, 2, 1 )";
+		String myfriend_init_03_sql = "insert into myfriend values ( ?, 3, 1 )";
+		String money_init_sql = "insert into money values ( ?, 0, 0, 0, 1)";
 		try {
 
 			conn = getConnection();
 			stmt = conn.createStatement();
+			
 			rs = stmt.executeQuery(countsql);
 			rs.next();
 			int resultcount = rs.getInt("count(*)");
@@ -125,6 +131,28 @@ public class DBConn {
 				System.out.println("입력성공");// 이거 문구는 바꿀거면 바꾸자
 			else
 				System.out.println("입력실패");
+			dbClose(ps);
+			ps = conn.prepareStatement(usercharinfo_init_sql);
+			ps.setInt(1, resultcount);
+			ps.executeUpdate();
+			dbClose(ps);
+			ps = conn.prepareStatement(myfriend_init_01_sql);
+			ps.setInt(1, resultcount);
+			ps.executeUpdate();
+			dbClose(ps);
+			ps = conn.prepareStatement(myfriend_init_02_sql);
+			ps.setInt(1, resultcount);
+			ps.executeUpdate();
+			dbClose(ps);
+			ps = conn.prepareStatement(myfriend_init_03_sql);
+			ps.setInt(1, resultcount);
+			ps.executeUpdate();
+			dbClose(ps);
+			ps = conn.prepareStatement(money_init_sql);
+			ps.setInt(1, resultcount);
+			ps.executeUpdate();
+			dbClose(ps);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -186,18 +214,19 @@ public class DBConn {
 		return n;
 	}
 
-	public void info_load(int userno, Login_info_Class l) {
+	public Login_info_Class info_load(int userno) {
+		Login_info_Class a = null;
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		Statement stmt = null;
 		String itemSql = "select name, mul from item";
 		String friendNameSql = "select name from friend";
-		String friendLvSql = "select lv from myfriend";
-		String elseinfoSql = "select m.curmoney, m.automoney, m.tabmoney, u.lv, u.itemno  from    money m, usercharinfo u where m.userno = 0  and u.userno = ?";
+		String friendLvSql = "select lv from myfriend where userno = ?";
+		String elseinfoSql = "select m.curmoney, m.automoney, m.tabmoney, u.lv, u.itemno  from    money m, usercharinfo u where m.userno = ?  and u.userno = ?";
 		
 		String[] itemname = new String[4];
-		int[] itemfunc = new int[4];;
+		int[] itemfunc = new int[4];
 		
 		String[] friendname = new String[4];
 		
@@ -217,8 +246,9 @@ public class DBConn {
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(itemSql);
 			while (rs.next()) {
-				System.out.println(i);
 				if (i != 0) {
+					System.out.println(rs.getString("name"));
+
 					itemname[i-1] = rs.getString("name");
 					itemfunc[i-1] = rs.getInt("mul");
 				}
@@ -237,16 +267,18 @@ public class DBConn {
 			dbClose(rs, stmt);
 
 			i = 0;
-			stmt = conn.createStatement();
-			rs = stmt.executeQuery(friendLvSql);
+			ps = conn.prepareStatement(friendLvSql);
+			ps.setInt(1, userno);
+			rs = ps.executeQuery();
 			while (rs.next()) {
 				friendlevel[i] = rs.getInt(1);
 				i++;
 			}
-			dbClose(rs, stmt);
+			dbClose(rs, ps);
 
 			ps = conn.prepareStatement(elseinfoSql);
 			ps.setInt(1, userno);
+			ps.setInt(2, userno);
 			rs = ps.executeQuery();
 			rs.next();
 			curmoney = rs.getInt(1);
@@ -255,13 +287,18 @@ public class DBConn {
 			mylevel = rs.getInt(4);
 			myitem = rs.getInt(5);
 			dbClose(conn, ps, rs);
-
+			
+			a = new Login_info_Class(itemname,itemfunc,friendname,friendlevel,curmoney,automoney,tabmoney,mylevel,myitem);
+			return a;
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			dbClose(conn, ps, rs);
 		}
+		
+		return a; 
 	}
 
 	private void dbClose(ResultSet ps, Statement rs) {
@@ -275,6 +312,7 @@ public class DBConn {
 		}
 	}
 
+	@SuppressWarnings("unused")
 	private void dbClose(PreparedStatement ps, ResultSet rs) {
 		try {
 			if (rs != null)
@@ -285,7 +323,14 @@ public class DBConn {
 
 		}
 	}
+	private void dbClose(PreparedStatement stmt) {
+		try {
+			if (stmt != null)
+				stmt.close();
+		} catch (Exception e) {
 
+		}
+	}
 	private void dbClose(Connection conn, PreparedStatement ps, ResultSet rs) {
 		try {
 			if (rs != null)

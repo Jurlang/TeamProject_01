@@ -52,10 +52,12 @@ class Moving extends Thread {
 
 class SharedMoney {
 	JLabel money;
-	private int sum = 100000;
+	private int sum;
 
-	SharedMoney(JLabel money) {
+	SharedMoney(JLabel money, Game_Main main) {
 		this.money = money;
+		sum = main.curmoney;
+		
 	}
 
 	synchronized public void add(int money) {

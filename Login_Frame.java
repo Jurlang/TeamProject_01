@@ -117,10 +117,9 @@ public class Login_Frame extends JFrame {
 					Member_Class m = dbConn.selectOne(id);
 					msg = "환영합니다" + id + "(" + m.getName() + ")님";
 					frame.dispose();
-					Login_info_Class l = new Login_info_Class();
-					dbConn.info_load(login, l);
+					Login_info_Class l = dbConn.info_load(login);
 					System.out.println(l.toString());
-					//new Game_Main(login);
+					new Game_Main(login, l);
 				}
 				JOptionPane.showMessageDialog(null, msg);
 
