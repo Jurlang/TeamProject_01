@@ -33,6 +33,7 @@ public class Game_Main extends JFrame {
 	String[] fname = { "개새", "10새", "짭새" };
 	String[] ffunc = { "초당 1원", "초당 10원", "초당 100원" };
 	String[] fprice = { "1000원", "2000원", "3000원" };
+	int[] flevel = {1,1,1};
 	
 	String[] iname = {"시바", "ㅈ", "꿀"};
 	String[] ifunc = {"x2", "x3", "x4"};

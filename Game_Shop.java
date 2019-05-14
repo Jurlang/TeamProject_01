@@ -163,6 +163,8 @@ class FBuyBtnListener implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		main.chk[btnNum] = true;
+		main.flevel[btnNum] += 1;
+		
 		String bm = fs.item[btnNum].buyBtn.getText();
 		int bch = Integer.parseInt(bm.substring(0, bm.indexOf("원")));
 		// 버튼에 적혀있는 돈을 받아옴.
@@ -184,7 +186,7 @@ class FBuyBtnListener implements ActionListener {
 		main.autoMoney.setText((ach + pam) + "원");
 		// 오토당 돈의 성능 업그레이드
 
-		if (btnNum == 0)
+		if (btnNum == 0) 
 			main.ffunc[btnNum] = "초당 " + (pam + 1) + "원";
 		else if (btnNum == 1)
 			main.ffunc[btnNum] = "초당 " + (pam + 10) + "원";

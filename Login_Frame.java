@@ -109,15 +109,18 @@ public class Login_Frame extends JFrame {
 				int login = dbConn.confirm(id, pw);
 				String msg = "";
 
-				if (login == -1) {
+				if (login == -2) {
 					msg = id + "는 없는 회원입니다.";
-				} else if (login == 0) {
+				} else if (login == -1) {
 					msg = "비밀번호가 틀림";
 				} else {
 					Member_Class m = dbConn.selectOne(id);
 					msg = "환영합니다" + id + "(" + m.getName() + ")님";
 					frame.dispose();
-					new Game_Main(login);
+					Login_info_Class l = new Login_info_Class();
+					dbConn.info_load(login, l);
+					System.out.println(l.toString());
+					//new Game_Main(login);
 				}
 				JOptionPane.showMessageDialog(null, msg);
 
