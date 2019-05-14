@@ -24,9 +24,12 @@ public class Game_Main extends JFrame {
 	private SharedMoney m = null;
 	ImageIcon[] img = { new ImageIcon("images/검은별.png"), new ImageIcon("images/빨간별.png"),
 			new ImageIcon("images/블랙체크.png") };
-	String[] name = { "개새", "10새", "짭새" };
-	String[] func = { "초당 1원", "초당 10원", "초당 100원" };
+	String[] fname = { "개새", "10새", "짭새" };
+	String[] iname = {"시바", "ㅈ", "꿀"};
+	String[] ffunc = { "초당 1원", "초당 10원", "초당 100원" };
+	String[] ifunc = {"x2", "x3", "x4"};
 	String[] fprice = { "1000원", "2000원", "3000원" };
+	String[] iprice = { "10000원", "20000원", "30000원" };
 	JLabel autoMoney;
 	JLabel tabMoney;
 	JLabel moneyLa;
@@ -60,7 +63,7 @@ public class Game_Main extends JFrame {
 		itemshopBtn.setBounds(1, 0, 151, 64);
 		itemshopBtn.setIcon(new ImageIcon("images/세트스.png"));
 		itemshopBtn.setHorizontalTextPosition(JButton.CENTER);
-		itemshopBtn.addActionListener(new ItemShopBtnAL(this));
+		itemshopBtn.addActionListener(new ItemShopBtnAL(this, "아이템스토어", m));
 		shopPanel.add(itemshopBtn);
 
 		JButton frishopBtn = new JButton("\uB3D9\uB8CC");
@@ -236,14 +239,18 @@ class AL implements ActionListener {
 
 class ItemShopBtnAL implements ActionListener {
 	Game_Main main;
-
-	ItemShopBtnAL(Game_Main main) {
+	String store;
+	SharedMoney m;
+	
+	ItemShopBtnAL(Game_Main main, String store, SharedMoney m) {
 		this.main = main;
+		this.store = store;
+		this.m = m;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		new Game_Shop("아이템 스토어", main);
+		new ItemShop("아이템 스토어", main, m);
 	}
 
 }
