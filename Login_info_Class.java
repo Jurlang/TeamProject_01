@@ -11,6 +11,8 @@ public class Login_info_Class {
 	int[] friendlevel = new int[3];
 
 	int curmoney;
+	int allmoney;
+	
 	int automoney;
 	int tabmoney;
 	
@@ -19,7 +21,7 @@ public class Login_info_Class {
 	public Login_info_Class() {
 	}
 	
-	public Login_info_Class(String[] itemname, int[] itemfunc, String[] friendname, int[] friendlevel, int curmoney,
+	public Login_info_Class(String[] itemname, int[] itemfunc, String[] friendname, int[] friendlevel, int curmoney, int allmoney,
 			int automoney, int tabmoney, int mylevel, int myitem) {
 		super();
 		this.itemname = itemname;
@@ -27,6 +29,7 @@ public class Login_info_Class {
 		this.friendname = friendname;
 		this.friendlevel = friendlevel;
 		this.curmoney = curmoney;
+		this.allmoney = allmoney;
 		this.automoney = automoney;
 		this.tabmoney = tabmoney;
 		this.mylevel = mylevel;

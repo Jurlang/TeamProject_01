@@ -118,9 +118,7 @@ public class Login_Frame extends JFrame {
 					msg = "환영합니다" + id + "(" + m.getName() + ")님";
 					frame.dispose();
 					Login_info_Class l = dbConn.info_load(login);
-					System.out.println(l.toString());
-					new Game_Main(login, l);
-				}
+					new Game_Main(login, l, m.getName());				}
 				JOptionPane.showMessageDialog(null, msg);
 
 			} else {

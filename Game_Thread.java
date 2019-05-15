@@ -14,17 +14,18 @@ class Moving extends Thread {
 	ImageIcon s = null;
 	Game_Main main;
 	int num;
-	Moving(JLabel la, ImageIcon f, ImageIcon s, Game_Main main, int num) {
+	FriendTrueOrFalse x;
+	Moving(JLabel la, ImageIcon f, ImageIcon s, Game_Main main,FriendTrueOrFalse x, int num) {
 		this.la = la;
 		this.f = f;
 		this.s = s;
 		this.main = main;
+		this.x = x;
 		this.num = num;
 	}
-
 	public void run() {
 		while (true) {
-			if (main.chk[num]) {
+			if (x.chk_true(num)) {
 				la.setVisible(true);
 				try {
 					sleep(500);
@@ -43,7 +44,6 @@ class Moving extends Thread {
 			else {
 				la.setVisible(false);
 			}
-
 		}
 	}
 
@@ -53,21 +53,28 @@ class Moving extends Thread {
 class SharedMoney {
 	JLabel money;
 	private int sum;
-
+	Game_Main main;
 	SharedMoney(JLabel money, Game_Main main) {
 		this.money = money;
 		sum = main.curmoney;
-		
+		this.main = main;
 	}
 
 	synchronized public void add(int money) {
+		main.allmoney += money;
 		sum += money;
+		main.curmoney = sum;
 		this.money.setText(sum + "¿ø");
 	}
 
 	synchronized public void minus(int money) {
 		sum -= money;
+		main.curmoney = sum;
 		this.money.setText(sum + "¿ø");
+	}
+	public int getSum()
+	{
+		return sum;
 	}
 
 }
@@ -77,12 +84,23 @@ class AutoMoney extends Thread {
 	String am;
 	SharedMoney cur_m;
 	int amoney;
+	boolean stop = true;
 
 	AutoMoney(JLabel autoMoneyLa, SharedMoney cur_m) {
 		this.autoMoneyLa = autoMoneyLa;
 		this.cur_m = cur_m;
 	}
-
+	public int getCurMoney()
+	{
+		
+		return cur_m.getSum();
+	}
+	
+	public int getAutoMoney()
+	{
+		
+		return amoney;
+	}
 	@Override
 	public void run() {
 		while (true) {
@@ -120,6 +138,7 @@ class TabMoney extends Thread {
 		this.s = s;
 	}
 
+	
 	@Override
 	public void run() {
 		tabPanel.addMouseListener(new MouseAdapter() {

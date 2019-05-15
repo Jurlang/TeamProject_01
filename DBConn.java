@@ -106,9 +106,9 @@ public class DBConn {
 		String sql = "insert into userinfo(userno, id,pw,name,birth,mail) values(?,?,?,?,to_date(?),?)";
 		String countsql = "select count(*) from userinfo";
 		String usercharinfo_init_sql = "insert into usercharinfo values (?, 0, 1)";
-		String myfriend_init_01_sql = "insert into myfriend values ( ?, 1, 1 )";
-		String myfriend_init_02_sql = "insert into myfriend values ( ?, 2, 1 )";
-		String myfriend_init_03_sql = "insert into myfriend values ( ?, 3, 1 )";
+		String myfriend_init_01_sql = "insert into myfriend values ( ?, 1, 0 )";
+		String myfriend_init_02_sql = "insert into myfriend values ( ?, 2, 0 )";
+		String myfriend_init_03_sql = "insert into myfriend values ( ?, 3, 0 )";
 		String money_init_sql = "insert into money values ( ?, 0, 0, 0, 1)";
 		try {
 
@@ -118,7 +118,6 @@ public class DBConn {
 			rs = stmt.executeQuery(countsql);
 			rs.next();
 			int resultcount = rs.getInt("count(*)");
-			System.out.println(resultcount);
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, resultcount);
 			ps.setString(2, m.getId());
@@ -160,33 +159,6 @@ public class DBConn {
 		}
 	}
 
-	public void update(Member_Class m) {
-		Connection conn = null;
-		PreparedStatement ps = null;
-		String sql = "update member set pw=?, name=?, bir=?, eml=? where id=?";
-
-		try {
-			conn = getConnection();
-			ps = conn.prepareStatement(sql);
-			ps.setString(1, m.getPw());
-			ps.setString(2, m.getName());
-			ps.setString(3, m.getBir());
-			ps.setString(4, m.getEml());
-			ps.setString(5, m.getId());
-
-			int n = ps.executeUpdate();
-			if (n == 1)
-				System.out.println("수정성공");
-			else
-				System.out.println("수정실패");
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			dbClose(conn, ps);
-		}
-
-	}
-
 	public int confirm(String id, String pw) { // 로그인 소스(?) confirm=확인하다
 		int n = -2;
 		Connection conn = null;
@@ -223,7 +195,7 @@ public class DBConn {
 		String itemSql = "select name, mul from item";
 		String friendNameSql = "select name from friend";
 		String friendLvSql = "select lv from myfriend where userno = ?";
-		String elseinfoSql = "select m.curmoney, m.automoney, m.tabmoney, u.lv, u.itemno  from    money m, usercharinfo u where m.userno = ?  and u.userno = ?";
+		String elseinfoSql = "select m.curmoney, m.allmoney,  m.automoney, m.tabmoney, u.lv, u.itemno  from    money m, usercharinfo u where m.userno = ?  and u.userno = ?";
 		
 		String[] itemname = new String[4];
 		int[] itemfunc = new int[4];
@@ -233,6 +205,7 @@ public class DBConn {
 		int[] friendlevel = new int[3];
 
 		int curmoney;
+		int allmoney;
 		int automoney;
 		int tabmoney;
 		
@@ -247,8 +220,6 @@ public class DBConn {
 			rs = stmt.executeQuery(itemSql);
 			while (rs.next()) {
 				if (i != 0) {
-					System.out.println(rs.getString("name"));
-
 					itemname[i-1] = rs.getString("name");
 					itemfunc[i-1] = rs.getInt("mul");
 				}
@@ -282,13 +253,14 @@ public class DBConn {
 			rs = ps.executeQuery();
 			rs.next();
 			curmoney = rs.getInt(1);
-			automoney = rs.getInt(2);
-			tabmoney = rs.getInt(3);
-			mylevel = rs.getInt(4);
-			myitem = rs.getInt(5);
+			allmoney = rs.getInt(2);
+			automoney = rs.getInt(3);
+			tabmoney = rs.getInt(4);
+			mylevel = rs.getInt(5);
+			myitem = rs.getInt(6);
 			dbClose(conn, ps, rs);
 			
-			a = new Login_info_Class(itemname,itemfunc,friendname,friendlevel,curmoney,automoney,tabmoney,mylevel,myitem);
+			a = new Login_info_Class(itemname,itemfunc,friendname,friendlevel,curmoney,allmoney,automoney,tabmoney,mylevel,myitem);
 			return a;
 			
 		} catch (SQLException e) {
@@ -301,6 +273,65 @@ public class DBConn {
 		return a; 
 	}
 
+	public void info_save(Update_info_Class info)
+	{
+		Connection conn = null;
+		PreparedStatement ps = null;
+		conn = getConnection();
+
+		int curmoney = info.curmoney;
+		int tabmoney = info.tabmoney;
+		int allmoney = info.allmoney;
+		int automoney  = info.automoney;
+		int mylevel = info.mylevel;
+		int myitem = info.myitem;
+		int[] myfriendlevel = info.myfriendlevel;
+		int userno = info.userno;
+		
+
+		String money_sql = "update money set curMoney=?, allmoney = ?, autoMoney =?, tabMoney =? where userNo=?";
+		String myfriend_sql = "update myFriend set lv =? where userNo=? and fno = ?";
+		String userCharInfo_sql = "update userCharInfo set itemNo =?, lv = ? where userNo=?";
+		
+	
+		try {
+			conn = getConnection();
+			ps = conn.prepareStatement(money_sql);
+			ps.setInt(1, curmoney);
+			ps.setInt(2, allmoney);
+			ps.setInt(3, automoney);
+			ps.setInt(4, tabmoney);
+			ps.setInt(5, userno);
+			int n = ps.executeUpdate();
+			dbClose(conn, ps);
+			for(int i=0;i<3;i++) {
+				conn = getConnection();
+				ps = conn.prepareStatement(myfriend_sql);
+				ps.setInt(1, myfriendlevel[i]);
+				ps.setInt(2, userno);
+				ps.setInt(3, i+1);
+				n = ps.executeUpdate();
+				dbClose(conn, ps);
+			}
+			conn = getConnection();
+			ps = conn.prepareStatement(userCharInfo_sql);
+			ps.setInt(1, myitem);
+			ps.setInt(2, mylevel);
+			ps.setInt(3, userno);
+
+			n = ps.executeUpdate();
+						
+			if (n == 1)
+				System.out.println("수정성공");
+			else
+				System.out.println("수정실패");
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			dbClose(conn, ps);
+		}	
+	}
+	
 	private void dbClose(ResultSet ps, Statement rs) {
 		try {
 			if (rs != null)

@@ -5,11 +5,13 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
@@ -26,9 +28,8 @@ public class Game_Shop extends JFrame {
 
 	public Game_Shop(String store, Game_Main main) {
 		this.main = main;
-
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 379, 516);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		setBounds(100, 100, 438, 516);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -42,19 +43,19 @@ public class Game_Shop extends JFrame {
 		showNameLa = new JLabel(store);
 		showNameLa.setBackground(new Color(0, 153, 153));
 		showNameLa.setHorizontalAlignment(SwingConstants.CENTER);
-		showNameLa.setBounds(12, 10, 329, 41);
+		showNameLa.setBounds(12, 10, 400, 41);
 		showNameLa.setOpaque(true);
 		inShopPanel.add(showNameLa);
 
 		itemListPanel = new JPanel();
-		itemListPanel.setBounds(12, 50, 329, 359);
+		itemListPanel.setBounds(12, 50, 400, 359);
 		inShopPanel.add(itemListPanel);
 		item = new ItemPanel[4];
 		itemListPanel.setLayout(new GridLayout(item.length, 1, 0, 0));
 		getContentPane().add(inShopPanel);
 
 		JButton inShopBtn = new JButton("\uC644\uB8CC");
-		inShopBtn.setBounds(131, 419, 91, 40);
+		inShopBtn.setBounds(181, 419, 91, 40);
 		inShopBtn.addActionListener(new BtnActionListener(this));
 		inShopPanel.add(inShopBtn);
 
@@ -65,7 +66,6 @@ public class Game_Shop extends JFrame {
 class BtnActionListener implements ActionListener {
 
 	Game_Shop rs;
-
 	BtnActionListener(Game_Shop rs) {
 		this.rs = rs;
 	}
@@ -108,7 +108,7 @@ class ItemPanel extends JPanel {
 		this.add(itemFunc);
 
 		buyBtn = new JButton("\uAD6C\uC785");
-		buyBtn.setBounds(240, 9, 77, 48);
+		buyBtn.setBounds(240, 9, 100, 48);
 		buyBtn.setEnabled(false);
 		this.add(buyBtn);
 	}
@@ -132,7 +132,7 @@ class FriendShop extends Game_Shop {
 			item[i] = new ItemPanel(super.itemListPanel, main.fimg[i], main.fname[i], main.ffunc[i]);
 		}
 		for (int i = 0; i < 3; i++) {
-			super.item[i].buyBtn.setText(main.fprice[i]+"원");
+			super.item[i].buyBtn.setText(main.fprice[i] + "원");
 		}
 
 		for (int i = 0; i < 3; i++) {
@@ -141,7 +141,6 @@ class FriendShop extends Game_Shop {
 		}
 		FriendBuyBtn th = new FriendBuyBtn(main, this);
 		th.start();
-		// 쓰레드 나의 돈이 용병을 구입할수 있는지 확인하는 스레드
 	}
 
 }
@@ -164,34 +163,46 @@ class FBuyBtnListener implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		main.chk[btnNum] = true;
 		main.flevel[btnNum] += 1;
-		
+
 		String bm = fs.item[btnNum].buyBtn.getText();
 		int bch = Integer.parseInt(bm.substring(0, bm.indexOf("원")));
 		// 버튼에 적혀있는 돈을 받아옴.
 		m.minus(bch);
 		// 버튼에 있는 돈만큼 내가 가진돈에서 뺀다.
-		bch = (int)(bch * 1.5);
+		bch = (int) (bch * 1.5);
 		// 버튼 구매에 필요한 돈을 더 높인다.
 		main.fprice[btnNum] = bch;
 		// 버튼 구매 필요한 돈 배열에 값을 저장
-		fs.item[btnNum].buyBtn.setText(bch+"원");
+		fs.item[btnNum].buyBtn.setText(bch + "원");
 		// 버튼에 값을 새로 바꿔준다.
 
-		String am = main.autoMoney.getText();
-		int ach = Integer.parseInt(am.substring(0, am.indexOf("원")));
+//		String am = main.autoMoney.getText();
+//		int ach = Integer.parseInt(am.substring(0, am.indexOf("원")));
 		// 내가 오토당 버는 돈을 얻어온다.
 		String plus_am = fs.item[btnNum].itemFunc.getText();
 		int pam = Integer.parseInt(plus_am.substring(plus_am.indexOf("당") + 2, plus_am.indexOf("원")));
 		// 아이템의 성능에 적혀있는 +하는 돈
-		main.autoMoney.setText((ach + pam) + "원");
 		// 오토당 돈의 성능 업그레이드
 
-		if (btnNum == 0) 
+		if (btnNum == 0) {
+			String am = main.autoMoney.getText();
+			int ach = Integer.parseInt(am.substring(0, am.indexOf("원")));
+			main.automoney = ach+1;
+			main.autoMoney.setText((ach + 1) + "원");
 			main.ffunc[btnNum] = "초당 " + (pam + 1) + "원";
-		else if (btnNum == 1)
+		} else if (btnNum == 1) {
+			String am = main.autoMoney.getText();
+			int ach = Integer.parseInt(am.substring(0, am.indexOf("원")));
+			main.automoney = ach+10;
+			main.autoMoney.setText((ach + 10) + "원");
 			main.ffunc[btnNum] = "초당 " + (pam + 10) + "원";
-		else if (btnNum == 2)
+		} else if (btnNum == 2) {
+			String am = main.autoMoney.getText();
+			int ach = Integer.parseInt(am.substring(0, am.indexOf("원")));
+			main.automoney = ach+100;
+			main.autoMoney.setText((ach + 100) + "원");
 			main.ffunc[btnNum] = "초당 " + (pam + 100) + "원";
+		}
 		// 사기전 친구들 가게에 있는 용병 친구들 업그레이드 성능 높여줌
 
 		fs.item[btnNum].itemFunc.setText("성능 : " + main.ffunc[btnNum]);
@@ -273,13 +284,13 @@ class ItemShop extends Game_Shop {
 		}
 
 		for (int i = 0; i < item.length; i++) {
-			if(i <= main.myitem-1) {
+			if (i <= main.myitem-1) {
 				super.item[i].buyBtn.setText("구입완료");
-			}
-			else {
+			} else {
 				super.item[i].buyBtn.setText(main.iprice[i]);
 			}
 		}
+		
 
 		for (int i = 0; i < item.length; i++) {
 			super.item[i].buyBtn.addActionListener(new IBuyBtnListener(is, i, main, m));
@@ -308,7 +319,6 @@ class IBuyBtnListener implements ActionListener {
 		String bm = is.item[btnNum].buyBtn.getText();
 
 		int bch = Integer.parseInt(bm.substring(0, bm.indexOf("원")));
-		System.out.println(bch);
 		m.minus(bch);
 		bm = "구입완료";
 		main.iprice[btnNum] = bm;
@@ -320,6 +330,7 @@ class IBuyBtnListener implements ActionListener {
 		int pam = Integer.parseInt(plus_am.substring(plus_am.indexOf("x") + 1));
 		main.uppertabmoney *= pam;
 		main.tabMoney.setText((ach * pam) + "원");
+		main.myitem++;
 	}
 
 }
@@ -341,19 +352,30 @@ class ItemBuyBtn extends Thread {
 			int m = Integer.parseInt(mymoney.substring(0, mymoney.indexOf("원")));
 			String[] bm = new String[4];
 			int[] btnmoney = new int[4];
+			
+			for (int i = 0; i < is.item.length; i++) {
+				if (main.myitem == i) {
+					for (int j = i + 1; j < 4; j++) {
+						is.item[j].buyBtn.setText("구입불가");
+					}
+					break;
+				}
+			}
+			if(main.myitem < 4)is.item[main.myitem].buyBtn.setText(main.iprice[main.myitem]);
 			for (int i = 0; i < is.item.length; i++) {
 				bm[i] = is.item[i].buyBtn.getText();
-				if (!(bm[i].equals("구입완료")))
+				if (!(bm[i].equals("구입완료")) && !(bm[i].equals("구입불가"))) {
 					btnmoney[i] = Integer.parseInt(bm[i].substring(0, bm[i].indexOf("원")));
+				}
 			}
+			
 			for (int i = 0; i < is.item.length; i++) {
-				if (!(bm[i].equals("구입완료"))) {
+				if (!(bm[i].equals("구입완료")) && !(bm[i].equals("구입불가"))) {
 					if (m >= btnmoney[i])
 						is.item[i].buyBtn.setEnabled(true);
 					else
 						is.item[i].buyBtn.setEnabled(false);
-				}
-				else {
+				} else {
 					is.item[i].buyBtn.setEnabled(false);
 				}
 			}

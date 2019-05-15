@@ -4,14 +4,18 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+
 
 @SuppressWarnings("serial")
 public class Game_Main extends JFrame {
@@ -52,19 +56,25 @@ public class Game_Main extends JFrame {
 	JLabel lvLa;
 	JButton levelupBtn;
 
+	String user_name;
 	int userNum;
 
-	public Game_Main(int un, Login_info_Class userinfo) {
+	public Game_Main(int un, Login_info_Class userinfo, String user_name) {
+		
+		this.user_name = user_name;
 		this.userNum = un;
-
+		
 		fname = userinfo.friendname;
 		flevel = userinfo.friendlevel;
-		System.out.println(flevel[0]);
+		for(int i=0;i<3;i++) {
+			if(flevel[i] !=0)
+				chk[i] = true;
+		}
 		ffunc[0] = "초당 " + (1 * (flevel[0]+1)) + "원";
 		ffunc[1] = "초당 " + (10 * (flevel[1]+1)) + "원";
 		ffunc[2] = "초당 " + (100 * (flevel[2]+1)) + "원";
 		for (int i = 0; i < 3; i++) {
-			for (int j = 1; j < flevel[j]; j++) {
+			for (int j = 0; j < flevel[i]; j++) {
 				fprice[i] *= 1.5;
 			}
 		}
@@ -76,6 +86,7 @@ public class Game_Main extends JFrame {
 		ifunc[3] = "x" + userinfo.itemfunc[3];
 		
 		curmoney = userinfo.curmoney;
+		allmoney = userinfo.allmoney;
 		
 		level = userinfo.mylevel;
 		myitem = userinfo.myitem;
@@ -87,8 +98,8 @@ public class Game_Main extends JFrame {
 		tabmoney = level * uppertabmoney;
 		automoney = (1*flevel[0]) + (10*flevel[1]) + (100*flevel[2]);
 		
-		System.out.println(un);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.addWindowListener(new CloseBtnWL(this));
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 501, 787);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -193,21 +204,25 @@ public class Game_Main extends JFrame {
 		mainch.setIcon(no_c);
 		mainpanel.add(mainch);
 
-//------------------------------------------------------------------------------------------		
+//------------------------------------------------------------------------------------------
+		FriendTrueOrFalse ftf0 = new FriendTrueOrFalse(this, 0);
+		FriendTrueOrFalse ftf1 = new FriendTrueOrFalse(this, 1);
+		FriendTrueOrFalse ftf2 = new FriendTrueOrFalse(this, 2);
+
 		JLabel fr3 = new JLabel();
 		fr3.setBounds(335, 56, 103, 123);
-		Moving th3 = new Moving(fr3, f1, s1, this, 2);
+		Moving th3 = new Moving(fr3, f1, s1, this, ftf2, 2);
 		th3.start();
 		mainpanel.add(fr3);
 
 		JLabel fr2 = new JLabel();
 		fr2.setBounds(189, 51, 103, 123);
-		Moving th2 = new Moving(fr2, f1, s1, this, 1);
+		Moving th2 = new Moving(fr2, f1, s1, this, ftf1, 1);
 		th2.start();
 		mainpanel.add(fr2);
 
 		JLabel fr1 = new JLabel();
-		Moving th1 = new Moving(fr1, f1, s1, this, 0);
+		Moving th1 = new Moving(fr1, f1, s1, this, ftf0, 0);
 		th1.start();
 		fr1.setBounds(52, 51, 103, 123);
 		mainpanel.add(fr1);
@@ -243,10 +258,14 @@ public class Game_Main extends JFrame {
 		LevelUpBtnAL ll = new LevelUpBtnAL(this, m);
 		levelupBtn.addActionListener(ll);
 		LevelBuyBtn lbth = new LevelBuyBtn(this);
+		statisticsBtnAL lll = new statisticsBtnAL(this, user_name);
+		statisticsBtn.addActionListener(lll);
+				
 		lbth.start();
-
 		amth.start();
 		tmth.start();
+		
+		btnNewButton.addActionListener(new DBUpdate(this, amth, tmth));
 //------------------------------------------------------------------------------------------
 
 		this.setVisible(true);
@@ -304,14 +323,103 @@ class LevelUpBtnAL implements ActionListener {
 		m.minus(o);
 		o = (int) (o + 150);
 		main.levelupBtn.setText(o + "원");
-
+		
+		main.level++;
 		String s = main.lvLa.getText();
 		int n = Integer.parseInt(s.substring(s.indexOf(".") + 1));
 		n++;
+		main.tabmoney = n;
 		main.lvLa.setText("Lv ." + n);
 		String w = main.tabMoney.getText();
 		int x = Integer.parseInt(w.substring(0, w.indexOf("원")));
 		x = x + main.uppertabmoney;
 		main.tabMoney.setText(x + "원");
 	}
+}
+
+class DBUpdate implements ActionListener {
+	
+	Game_Main main;
+	AutoMoney amth;
+	TabMoney tmth;
+	DBUpdate(Game_Main main,AutoMoney amth, TabMoney tmth)
+	{	
+		this.main = main;
+		this.tmth = tmth;
+		this.amth = amth;
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		Update_info_Class a = new Update_info_Class(main.userNum,0,0,0,0, main.level,main.myitem,main.flevel);
+		amth.stop = false;
+		a.curmoney = amth.getCurMoney();
+		a.allmoney = main.allmoney;
+		a.automoney = amth.getAutoMoney();
+		a.tabmoney = tmth.tmoney;
+		DBConn dbConn = DBConn.getInstance();
+		dbConn.info_save(a);
+		amth.stop = true;
+
+	}
+
+}
+
+class statisticsBtnAL implements ActionListener{
+	Game_Main main;
+	String name;
+	statisticsBtnAL(Game_Main main, String name){
+		this.main = main;
+		this.name = name;
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		new Statistics_Frame(main, name, main.allmoney, main.curmoney, main.level, main.tabmoney, main.automoney, main.flevel, main.myitem);
+	}
+	
+}
+
+class CloseBtnWL implements WindowListener{
+	Game_Main main;
+	CloseBtnWL(Game_Main main){
+		this.main = main;
+	}
+
+	@Override
+	public void windowOpened(WindowEvent e) {
+	}
+
+	@Override
+	public void windowClosing(WindowEvent e) {
+		if(JOptionPane.showConfirmDialog(main, 
+				"진짜 닫으시겠습니까? 닫으면 저장이 안되고 모든 창이 다 꺼집니다.", "진짜 꺼요  ????",
+				JOptionPane.YES_NO_OPTION,
+				JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+			System.exit(0);
+		}
+		else {
+			
+		}
+	}
+
+	@Override
+	public void windowClosed(WindowEvent e) {
+	}
+
+	@Override
+	public void windowIconified(WindowEvent e) {
+	}
+
+	@Override
+	public void windowDeiconified(WindowEvent e) {
+	}
+
+	@Override
+	public void windowActivated(WindowEvent e) {
+	}
+
+	@Override
+	public void windowDeactivated(WindowEvent e) {
+	}
+	
 }
