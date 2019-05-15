@@ -5,13 +5,11 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
@@ -66,6 +64,7 @@ public class Game_Shop extends JFrame {
 class BtnActionListener implements ActionListener {
 
 	Game_Shop rs;
+
 	BtnActionListener(Game_Shop rs) {
 		this.rs = rs;
 	}
@@ -187,19 +186,19 @@ class FBuyBtnListener implements ActionListener {
 		if (btnNum == 0) {
 			String am = main.autoMoney.getText();
 			int ach = Integer.parseInt(am.substring(0, am.indexOf("원")));
-			main.automoney = ach+1;
+			main.automoney = ach + 1;
 			main.autoMoney.setText((ach + 1) + "원");
 			main.ffunc[btnNum] = "초당 " + (pam + 1) + "원";
 		} else if (btnNum == 1) {
 			String am = main.autoMoney.getText();
 			int ach = Integer.parseInt(am.substring(0, am.indexOf("원")));
-			main.automoney = ach+10;
+			main.automoney = ach + 10;
 			main.autoMoney.setText((ach + 10) + "원");
 			main.ffunc[btnNum] = "초당 " + (pam + 10) + "원";
 		} else if (btnNum == 2) {
 			String am = main.autoMoney.getText();
 			int ach = Integer.parseInt(am.substring(0, am.indexOf("원")));
-			main.automoney = ach+100;
+			main.automoney = ach + 100;
 			main.autoMoney.setText((ach + 100) + "원");
 			main.ffunc[btnNum] = "초당 " + (pam + 100) + "원";
 		}
@@ -284,13 +283,12 @@ class ItemShop extends Game_Shop {
 		}
 
 		for (int i = 0; i < item.length; i++) {
-			if (i <= main.myitem-1) {
+			if (i <= main.myitem - 1) {
 				super.item[i].buyBtn.setText("구입완료");
 			} else {
 				super.item[i].buyBtn.setText(main.iprice[i]);
 			}
 		}
-		
 
 		for (int i = 0; i < item.length; i++) {
 			super.item[i].buyBtn.addActionListener(new IBuyBtnListener(is, i, main, m));
@@ -352,7 +350,7 @@ class ItemBuyBtn extends Thread {
 			int m = Integer.parseInt(mymoney.substring(0, mymoney.indexOf("원")));
 			String[] bm = new String[4];
 			int[] btnmoney = new int[4];
-			
+
 			for (int i = 0; i < is.item.length; i++) {
 				if (main.myitem == i) {
 					for (int j = i + 1; j < 4; j++) {
@@ -361,14 +359,15 @@ class ItemBuyBtn extends Thread {
 					break;
 				}
 			}
-			if(main.myitem < 4)is.item[main.myitem].buyBtn.setText(main.iprice[main.myitem]);
+			if (main.myitem < 4)
+				is.item[main.myitem].buyBtn.setText(main.iprice[main.myitem]);
 			for (int i = 0; i < is.item.length; i++) {
 				bm[i] = is.item[i].buyBtn.getText();
 				if (!(bm[i].equals("구입완료")) && !(bm[i].equals("구입불가"))) {
 					btnmoney[i] = Integer.parseInt(bm[i].substring(0, bm[i].indexOf("원")));
 				}
 			}
-			
+
 			for (int i = 0; i < is.item.length; i++) {
 				if (!(bm[i].equals("구입완료")) && !(bm[i].equals("구입불가"))) {
 					if (m >= btnmoney[i])

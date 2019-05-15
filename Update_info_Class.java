@@ -3,7 +3,7 @@ package TeamProject_01;
 import java.util.Arrays;
 
 public class Update_info_Class {
-	
+
 	int userno;
 	int curmoney;
 	int tabmoney;
@@ -17,7 +17,8 @@ public class Update_info_Class {
 		super();
 	}
 
-	public Update_info_Class(int userno, int curmoney, int allmoney, int tabmoney, int automoney, int mylevel, int myitem, int[] myfriendlevel) {
+	public Update_info_Class(int userno, int curmoney, int allmoney, int tabmoney, int automoney, int mylevel,
+			int myitem, int[] myfriendlevel) {
 		super();
 		this.userno = userno;
 		this.curmoney = curmoney;
@@ -35,7 +36,5 @@ public class Update_info_Class {
 				+ ", automoney=" + automoney + ", mylevel=" + mylevel + ", myitem=" + myitem + ", myfriendlevel="
 				+ Arrays.toString(myfriendlevel) + "]";
 	}
-
-	
 
 }

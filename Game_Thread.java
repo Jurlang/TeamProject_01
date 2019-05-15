@@ -15,7 +15,8 @@ class Moving extends Thread {
 	Game_Main main;
 	int num;
 	FriendTrueOrFalse x;
-	Moving(JLabel la, ImageIcon f, ImageIcon s, Game_Main main,FriendTrueOrFalse x, int num) {
+
+	Moving(JLabel la, ImageIcon f, ImageIcon s, Game_Main main, FriendTrueOrFalse x, int num) {
 		this.la = la;
 		this.f = f;
 		this.s = s;
@@ -23,6 +24,7 @@ class Moving extends Thread {
 		this.x = x;
 		this.num = num;
 	}
+
 	public void run() {
 		while (true) {
 			if (x.chk_true(num)) {
@@ -40,8 +42,7 @@ class Moving extends Thread {
 					// TODO Auto-generated catch block
 					return;
 				}
-			}
-			else {
+			} else {
 				la.setVisible(false);
 			}
 		}
@@ -54,6 +55,7 @@ class SharedMoney {
 	JLabel money;
 	private int sum;
 	Game_Main main;
+
 	SharedMoney(JLabel money, Game_Main main) {
 		this.money = money;
 		sum = main.curmoney;
@@ -72,8 +74,8 @@ class SharedMoney {
 		main.curmoney = sum;
 		this.money.setText(sum + "¿ø");
 	}
-	public int getSum()
-	{
+
+	public int getSum() {
 		return sum;
 	}
 
@@ -90,17 +92,17 @@ class AutoMoney extends Thread {
 		this.autoMoneyLa = autoMoneyLa;
 		this.cur_m = cur_m;
 	}
-	public int getCurMoney()
-	{
-		
+
+	public int getCurMoney() {
+
 		return cur_m.getSum();
 	}
-	
-	public int getAutoMoney()
-	{
-		
+
+	public int getAutoMoney() {
+
 		return amoney;
 	}
+
 	@Override
 	public void run() {
 		while (true) {
@@ -138,7 +140,6 @@ class TabMoney extends Thread {
 		this.s = s;
 	}
 
-	
 	@Override
 	public void run() {
 		tabPanel.addMouseListener(new MouseAdapter() {

@@ -16,7 +16,6 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-
 @SuppressWarnings("serial")
 public class Game_Main extends JFrame {
 	boolean[] chk = { false, false, false };
@@ -40,13 +39,13 @@ public class Game_Main extends JFrame {
 	String[] iname = new String[4];
 	String[] ifunc = new String[4];
 	String[] iprice = { "10000원", "20000원", "30000원", "40000원" };
-	
+
 	int automoney;
 	int curmoney;
 	int allmoney;
 	int tabmoney;
 	int uppertabmoney = 1;
-	
+
 	int level;
 	int myitem;
 
@@ -60,44 +59,48 @@ public class Game_Main extends JFrame {
 	int userNum;
 
 	public Game_Main(int un, Login_info_Class userinfo, String user_name) {
-		
+
 		this.user_name = user_name;
 		this.userNum = un;
-		
+
 		fname = userinfo.friendname;
 		flevel = userinfo.friendlevel;
-		for(int i=0;i<3;i++) {
-			if(flevel[i] !=0)
+		for (int i = 0; i < 3; i++) {
+			if (flevel[i] != 0)
 				chk[i] = true;
 		}
-		ffunc[0] = "초당 " + (1 * (flevel[0]+1)) + "원";
-		ffunc[1] = "초당 " + (10 * (flevel[1]+1)) + "원";
-		ffunc[2] = "초당 " + (100 * (flevel[2]+1)) + "원";
+		ffunc[0] = "초당 " + (1 * (flevel[0] + 1)) + "원";
+		ffunc[1] = "초당 " + (10 * (flevel[1] + 1)) + "원";
+		ffunc[2] = "초당 " + (100 * (flevel[2] + 1)) + "원";
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < flevel[i]; j++) {
 				fprice[i] *= 1.5;
 			}
 		}
-		
+
 		iname = userinfo.itemname;
 		ifunc[0] = "x" + userinfo.itemfunc[0];
 		ifunc[1] = "x" + userinfo.itemfunc[1];
 		ifunc[2] = "x" + userinfo.itemfunc[2];
 		ifunc[3] = "x" + userinfo.itemfunc[3];
-		
+
 		curmoney = userinfo.curmoney;
 		allmoney = userinfo.allmoney;
-		
+
 		level = userinfo.mylevel;
 		myitem = userinfo.myitem;
-		if(myitem == 1) uppertabmoney = 2;
-		else if(myitem == 2) uppertabmoney = 6;
-		else if(myitem == 3) uppertabmoney = 24;
-		else if(myitem == 4) uppertabmoney = 120;
-		
+		if (myitem == 1)
+			uppertabmoney = 2;
+		else if (myitem == 2)
+			uppertabmoney = 6;
+		else if (myitem == 3)
+			uppertabmoney = 24;
+		else if (myitem == 4)
+			uppertabmoney = 120;
+
 		tabmoney = level * uppertabmoney;
-		automoney = (1*flevel[0]) + (10*flevel[1]) + (100*flevel[2]);
-		
+		automoney = (1 * flevel[0]) + (10 * flevel[1]) + (100 * flevel[2]);
+
 		this.addWindowListener(new CloseBtnWL(this));
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 501, 787);
@@ -142,7 +145,7 @@ public class Game_Main extends JFrame {
 		levelupBtn.setBounds(0, 53, 485, 48);
 
 		// levelupBtn.setIcon(new ImageIcon("images/레벨업.jpg"));
-		levelupBtn.setText((level * 150)+"원");
+		levelupBtn.setText((level * 150) + "원");
 		levelupBtn.setEnabled(false);
 		menuPanel.add(levelupBtn);
 
@@ -260,11 +263,11 @@ public class Game_Main extends JFrame {
 		LevelBuyBtn lbth = new LevelBuyBtn(this);
 		statisticsBtnAL lll = new statisticsBtnAL(this, user_name);
 		statisticsBtn.addActionListener(lll);
-				
+
 		lbth.start();
 		amth.start();
 		tmth.start();
-		
+
 		btnNewButton.addActionListener(new DBUpdate(this, amth, tmth));
 //------------------------------------------------------------------------------------------
 
@@ -323,7 +326,7 @@ class LevelUpBtnAL implements ActionListener {
 		m.minus(o);
 		o = (int) (o + 150);
 		main.levelupBtn.setText(o + "원");
-		
+
 		main.level++;
 		String s = main.lvLa.getText();
 		int n = Integer.parseInt(s.substring(s.indexOf(".") + 1));
@@ -338,20 +341,20 @@ class LevelUpBtnAL implements ActionListener {
 }
 
 class DBUpdate implements ActionListener {
-	
+
 	Game_Main main;
 	AutoMoney amth;
 	TabMoney tmth;
-	DBUpdate(Game_Main main,AutoMoney amth, TabMoney tmth)
-	{	
+
+	DBUpdate(Game_Main main, AutoMoney amth, TabMoney tmth) {
 		this.main = main;
 		this.tmth = tmth;
 		this.amth = amth;
 	}
-	
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		Update_info_Class a = new Update_info_Class(main.userNum,0,0,0,0, main.level,main.myitem,main.flevel);
+		Update_info_Class a = new Update_info_Class(main.userNum, 0, 0, 0, 0, main.level, main.myitem, main.flevel);
 		amth.stop = false;
 		a.curmoney = amth.getCurMoney();
 		a.allmoney = main.allmoney;
@@ -365,23 +368,27 @@ class DBUpdate implements ActionListener {
 
 }
 
-class statisticsBtnAL implements ActionListener{
+class statisticsBtnAL implements ActionListener {
 	Game_Main main;
 	String name;
-	statisticsBtnAL(Game_Main main, String name){
+
+	statisticsBtnAL(Game_Main main, String name) {
 		this.main = main;
 		this.name = name;
 	}
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		new Statistics_Frame(main, name, main.allmoney, main.curmoney, main.level, main.tabmoney, main.automoney, main.flevel, main.myitem);
+		new Statistics_Frame(main, name, main.allmoney, main.curmoney, main.level, main.tabmoney, main.automoney,
+				main.flevel, main.myitem);
 	}
-	
+
 }
 
-class CloseBtnWL implements WindowListener{
+class CloseBtnWL implements WindowListener {
 	Game_Main main;
-	CloseBtnWL(Game_Main main){
+
+	CloseBtnWL(Game_Main main) {
 		this.main = main;
 	}
 
@@ -391,14 +398,11 @@ class CloseBtnWL implements WindowListener{
 
 	@Override
 	public void windowClosing(WindowEvent e) {
-		if(JOptionPane.showConfirmDialog(main, 
-				"진짜 닫으시겠습니까? 닫으면 저장이 안되고 모든 창이 다 꺼집니다.", "진짜 꺼요  ????",
-				JOptionPane.YES_NO_OPTION,
-				JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+		if (JOptionPane.showConfirmDialog(main, "진짜 닫으시겠습니까? 닫으면 저장이 안되고 모든 창이 다 꺼집니다.", "진짜 꺼요  ????",
+				JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
 			System.exit(0);
-		}
-		else {
-			
+		} else {
+
 		}
 	}
 
@@ -421,5 +425,5 @@ class CloseBtnWL implements WindowListener{
 	@Override
 	public void windowDeactivated(WindowEvent e) {
 	}
-	
+
 }
