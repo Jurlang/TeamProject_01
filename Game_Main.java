@@ -15,21 +15,24 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
 
 @SuppressWarnings("serial")
 public class Game_Main extends JFrame {
 	boolean[] chk = { false, false, false };
 	private JPanel contentPane;
-	ImageIcon f1 = new ImageIcon("images/블랙체크.png");
-	ImageIcon s1 = new ImageIcon("images/빨간체크.png");
-	ImageIcon no_c = new ImageIcon("images/검은별.png");
-	ImageIcon yes_c = new ImageIcon("images/빨간별.png");
+	ImageIcon f[] = {new ImageIcon("images/f1-1.png"),new ImageIcon("images/f2-1.png"),new ImageIcon("images/f3-1.png")};
+	ImageIcon s[] = {new ImageIcon("images/f1-2.png"),new ImageIcon("images/f2-2.png"),new ImageIcon("images/f3-2.png")};
+	ImageIcon[] no_c = {new ImageIcon("images/1-1.png"), new ImageIcon("images/2-1.png"), new ImageIcon("images/3-1.png"), new ImageIcon("images/4-1.png")};
+	ImageIcon[] yes_c = {new ImageIcon("images/1-2.png"), new ImageIcon("images/2-2.png"), new ImageIcon("images/3-2.png"), new ImageIcon("images/4-2.png")};
 	private SharedMoney m = null;
 
-	ImageIcon[] fimg = { new ImageIcon("images/검은별.png"), new ImageIcon("images/빨간별.png"),
-			new ImageIcon("images/블랙체크.png") };
-	ImageIcon[] iimg = { new ImageIcon("images/검은별.png"), new ImageIcon("images/빨간별.png"),
-			new ImageIcon("images/블랙체크.png"), new ImageIcon("images/빨간별.png") };
+	ImageIcon[] fimg = { new ImageIcon("images/상점개새민증.png"), new ImageIcon("images/상점십새민증.png"),
+			new ImageIcon("images/상점짭새민증.png") };
+	ImageIcon[] iimg = { new ImageIcon("images/상점스냅.png"), new ImageIcon("images/상점썬글.png"),
+			new ImageIcon("images/상점다이아.png"), new ImageIcon("images/상점즈금통.png") };
 
 	String[] fname = new String[3];
 	String[] ffunc = new String[3];
@@ -54,7 +57,7 @@ public class Game_Main extends JFrame {
 	JLabel moneyLa;
 	JLabel lvLa;
 	JButton levelupBtn;
-
+	JLabel mainch;
 	String user_name;
 	int userNum;
 
@@ -108,13 +111,16 @@ public class Game_Main extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-
+		EtchedBorder eborder=new EtchedBorder(EtchedBorder.RAISED);//평면에 끌로 판듯이 외곽선 효과를 내는 것이고 양각의 효과를 준다.
+		TitledBorder oneTb = new TitledBorder(new LineBorder(Color.black), "");
 		JPanel bgImgPanel = new JPanel();
+		bgImgPanel.setBackground(Color.WHITE);
 		bgImgPanel.setBounds(0, 0, 485, 748);
 		contentPane.add(bgImgPanel);
 		bgImgPanel.setLayout(null);
 
 		JPanel menuPanel = new JPanel();
+		menuPanel.setBackground(Color.WHITE);
 		menuPanel.setBounds(0, 574, 485, 170);
 		bgImgPanel.add(menuPanel);
 		menuPanel.setLayout(null);
@@ -142,7 +148,7 @@ public class Game_Main extends JFrame {
 		shopPanel.add(statisticsBtn);
 
 		levelupBtn = new JButton();
-		levelupBtn.setBounds(0, 53, 485, 48);
+		levelupBtn.setBounds(0, 62, 485, 39);
 
 		// levelupBtn.setIcon(new ImageIcon("images/레벨업.jpg"));
 		levelupBtn.setText((level * 150) + "원");
@@ -150,6 +156,8 @@ public class Game_Main extends JFrame {
 		menuPanel.add(levelupBtn);
 
 		JLabel mainchImg = new JLabel("\uBA54\uC778\uCF00\uB9AD\uD130\uC774\uBBF8\uC9C0");
+		mainchImg.setBorder(eborder);
+		mainchImg.setIcon(new ImageIcon("C:\\Users\\JMH\\Desktop\\JAVA\\TeamProject\\images\\\uBBF8\uC0C8\uBBFC\uC99D\uC0AC\uC9C4.png"));
 		mainchImg.setBounds(20, 2, 70, 50);
 		menuPanel.add(mainchImg);
 
@@ -175,36 +183,49 @@ public class Game_Main extends JFrame {
 
 //------------------------------------------------------------------------------------------
 		JPanel infopanel = new JPanel();
+		infopanel.setBorder(new LineBorder(Color.black));
+		infopanel.setBackground(Color.WHITE);
 		infopanel.setBounds(0, 490, 485, 81);
 		bgImgPanel.add(infopanel);
 		infopanel.setLayout(null);
 
-		JLabel FriendImg1 = new JLabel("\uB3D9\uB8CC1");
-		FriendImg1.setBounds(1, 0, 161, 81);
+		JLabel FriendImg1 = new JLabel(new ImageIcon("images/메인개새민증.png"));
+		FriendImg1.setBorder(new LineBorder(Color.black));
+		FriendImg1.setBounds(1, 1, 161, 79);
 		FriendImg1.setHorizontalAlignment(SwingConstants.CENTER);
 		FriendImg1.setBackground(Color.GRAY);
 		infopanel.add(FriendImg1);
 
-		JLabel FriendImg2 = new JLabel("\uB3D9\uB8CC2");
-		FriendImg2.setBounds(162, 0, 161, 81);
+		JLabel FriendImg2 = new JLabel(new ImageIcon("images/메인십새민증.png"));
+		FriendImg2.setBorder(new LineBorder(Color.black));
+		FriendImg2.setBounds(162, 1, 161, 79);
 		FriendImg2.setHorizontalAlignment(SwingConstants.CENTER);
 		FriendImg2.setBackground(Color.GRAY);
 		infopanel.add(FriendImg2);
 
-		JLabel FriendImg3 = new JLabel("\uB3D9\uB8CC3");
-		FriendImg3.setBounds(323, 0, 161, 81);
+		JLabel FriendImg3 = new JLabel(new ImageIcon("images/메인짭새민증.png"));
+		FriendImg3.setBorder(new LineBorder(Color.black));
+		FriendImg3.setBounds(323, 1, 161, 79);
 		FriendImg3.setHorizontalAlignment(SwingConstants.CENTER);
 		FriendImg3.setBackground(Color.GRAY);
 		infopanel.add(FriendImg3);
 //------------------------------------------------------------------------------------------
 		JPanel mainpanel = new JPanel();
-		mainpanel.setBounds(0, 0, 485, 490);
+		mainpanel.setBackground(Color.WHITE);
+		mainpanel.setBounds(0, 0, 485, 484);
 		bgImgPanel.add(mainpanel);
 		mainpanel.setLayout(null);
 
-		JLabel mainch = new JLabel("");
-		mainch.setBounds(160, 251, 143, 166);
-		mainch.setIcon(no_c);
+		mainch = new JLabel("");
+		mainch.setBounds(136, 251, 214, 229);
+		if (myitem == 0)
+			mainch.setIcon(no_c[0]);
+		else if (myitem == 1)
+			mainch.setIcon(no_c[1]);
+		else if (myitem == 2)
+			mainch.setIcon(no_c[2]);
+		else if (myitem == 3)
+			mainch.setIcon(no_c[3]);
 		mainpanel.add(mainch);
 
 //------------------------------------------------------------------------------------------
@@ -214,23 +235,24 @@ public class Game_Main extends JFrame {
 
 		JLabel fr3 = new JLabel();
 		fr3.setBounds(335, 56, 103, 123);
-		Moving th3 = new Moving(fr3, f1, s1, this, ftf2, 2);
+		Moving th3 = new Moving(fr3, f[2], s[2], this, ftf2, 2);
 		th3.start();
 		mainpanel.add(fr3);
 
 		JLabel fr2 = new JLabel();
 		fr2.setBounds(189, 51, 103, 123);
-		Moving th2 = new Moving(fr2, f1, s1, this, ftf1, 1);
+		Moving th2 = new Moving(fr2, f[1], s[1], this, ftf1, 1);
 		th2.start();
 		mainpanel.add(fr2);
 
 		JLabel fr1 = new JLabel();
-		Moving th1 = new Moving(fr1, f1, s1, this, ftf0, 0);
+		Moving th1 = new Moving(fr1, f[0], s[0], this, ftf0, 0);
 		th1.start();
 		fr1.setBounds(52, 51, 103, 123);
 		mainpanel.add(fr1);
 
 		JPanel sangdanBar = new JPanel();
+		sangdanBar.setBackground(Color.WHITE);
 		sangdanBar.setBounds(0, 0, 485, 43);
 		mainpanel.add(sangdanBar);
 		sangdanBar.setLayout(null);
@@ -247,7 +269,7 @@ public class Game_Main extends JFrame {
 		// ------------------------------------------------------------------------------------------
 		m = new SharedMoney(moneyLa, this);
 		AutoMoney amth = new AutoMoney(autoMoney, m);
-		TabMoney tmth = new TabMoney(bgImgPanel, tabMoney, m, mainch, f1, s1);
+		TabMoney tmth = new TabMoney(bgImgPanel, tabMoney, m, mainch, no_c[0], yes_c[0], this);
 
 		lvLa = new JLabel("Lv ." + level);
 		lvLa.setHorizontalAlignment(SwingConstants.CENTER);
@@ -263,11 +285,15 @@ public class Game_Main extends JFrame {
 		LevelBuyBtn lbth = new LevelBuyBtn(this);
 		statisticsBtnAL lll = new statisticsBtnAL(this, user_name);
 		statisticsBtn.addActionListener(lll);
+		MainchChangesyn syn = new MainchChangesyn(this);
+
 
 		lbth.start();
 		amth.start();
 		tmth.start();
-
+		MainChChange mccth = new MainChChange(this, tmth, syn);
+		mccth.start();
+		
 		btnNewButton.addActionListener(new DBUpdate(this, amth, tmth));
 //------------------------------------------------------------------------------------------
 

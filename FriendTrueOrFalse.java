@@ -17,3 +17,17 @@ public class FriendTrueOrFalse {
 		return false;
 	}
 }
+
+class MainchChangesyn{
+	Game_Main main;
+	int num;
+
+	public MainchChangesyn(Game_Main main) {
+		this.main = main;
+		this.num = main.myitem;
+	}
+
+	synchronized int itemnum(int num) {
+		return num;
+	}
+}

@@ -89,21 +89,15 @@ class ItemPanel extends JPanel {
 		this.setLayout(null);
 
 		JLabel itemImg = new JLabel(img);
-		itemImg.setBackground(new Color(51, 51, 51));
 		itemImg.setBounds(12, 9, 57, 46);
-		itemImg.setOpaque(true);
 		this.add(itemImg);
 
 		JLabel itemName = new JLabel("   이름 : " + name);
-		itemName.setBackground(new Color(153, 0, 0));
 		itemName.setBounds(81, 11, 155, 20);
-		itemName.setOpaque(true);
 		this.add(itemName);
 
 		itemFunc = new JLabel("   성능 : " + func);
-		itemFunc.setBackground(new Color(0, 102, 102));
 		itemFunc.setBounds(81, 35, 155, 20);
-		itemFunc.setOpaque(true);
 		this.add(itemFunc);
 
 		buyBtn = new JButton("\uAD6C\uC785");

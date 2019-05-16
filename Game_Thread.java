@@ -128,8 +128,10 @@ class TabMoney extends Thread {
 	ImageIcon f, s;
 	String tm;
 	JLabel tabMoneyLa;
+	Game_Main main;
 
-	TabMoney(JPanel tabPanel, JLabel tabMoneyLa, SharedMoney cur_m, JLabel mainch, ImageIcon f, ImageIcon s) {
+	TabMoney(JPanel tabPanel, JLabel tabMoneyLa, SharedMoney cur_m, JLabel mainch, ImageIcon f, ImageIcon s,
+			Game_Main main) {
 		this.tabPanel = tabPanel;
 		this.tabMoneyLa = tabMoneyLa;
 		this.tm = tabMoneyLa.getText();
@@ -138,6 +140,7 @@ class TabMoney extends Thread {
 		this.mainch = mainch;
 		this.f = f;
 		this.s = s;
+		this.main = main;
 	}
 
 	@Override
@@ -145,6 +148,13 @@ class TabMoney extends Thread {
 		tabPanel.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
+				if (main.myitem == 1) {
+					f = main.no_c[1];
+				} else if (main.myitem == 2) {
+					f = main.no_c[2];
+				} else if (main.myitem == 3) {
+					f = main.no_c[3];
+				}
 				tm = tabMoneyLa.getText();
 				tmoney = Integer.parseInt(tm.substring(0, tm.indexOf("¿ø")));
 				mainch.setIcon(f);
@@ -153,8 +163,45 @@ class TabMoney extends Thread {
 
 			@Override
 			public void mousePressed(MouseEvent e) {
+				if (main.myitem == 1) {
+					s = main.yes_c[1];
+				} else if (main.myitem == 2) {
+					s = main.yes_c[2];
+				} else if (main.myitem == 3) {
+					s = main.yes_c[3];
+				}
 				mainch.setIcon(s);
 			}
 		});
+	}
+}
+
+class MainChChange extends Thread {
+	Game_Main main;
+	TabMoney th;
+	MainchChangesyn y;
+	int x;
+
+	MainChChange(Game_Main main, TabMoney th, MainchChangesyn y) {
+		this.th = th;
+		this.main = main;
+		this.y = y;
+	}
+
+	@Override
+	public void run() {
+		while (true) {
+			if (x != y.itemnum(main.myitem)) {
+				if (y.itemnum(main.myitem) == 0)
+					main.mainch.setIcon(main.no_c[0]);
+				else if (y.itemnum(main.myitem) == 1)
+					main.mainch.setIcon(main.no_c[1]);
+				else if (y.itemnum(main.myitem) == 2)
+					main.mainch.setIcon(main.no_c[2]);
+				else if (y.itemnum(main.myitem) == 3)
+					main.mainch.setIcon(main.no_c[3]);
+				x = y.itemnum(main.myitem);
+			}
+		}
 	}
 }
