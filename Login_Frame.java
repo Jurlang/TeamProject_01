@@ -1,7 +1,8 @@
 package TeamProject_01;
 
+import java.awt.Color;
 import java.awt.EventQueue;
-import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -15,8 +16,6 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
-import java.awt.Color;
-import java.awt.Font;
 
 @SuppressWarnings("serial")
 public class Login_Frame extends JFrame {

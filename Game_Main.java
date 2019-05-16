@@ -17,7 +17,6 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
-import javax.swing.border.TitledBorder;
 
 @SuppressWarnings("serial")
 public class Game_Main extends JFrame {
@@ -113,7 +112,6 @@ public class Game_Main extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		EtchedBorder eborder=new EtchedBorder(EtchedBorder.RAISED);//평면에 끌로 판듯이 외곽선 효과를 내는 것이고 양각의 효과를 준다.
-		TitledBorder oneTb = new TitledBorder(new LineBorder(Color.black), "");
 		JPanel bgImgPanel = new JPanel();
 		bgImgPanel.setBackground(Color.WHITE);
 		bgImgPanel.setBounds(0, 0, 485, 748);
