@@ -200,6 +200,8 @@ class MainChChange extends Thread {
 					main.mainch.setIcon(main.no_c[2]);
 				else if (y.itemnum(main.myitem) == 3)
 					main.mainch.setIcon(main.no_c[3]);
+				else if (y.itemnum(main.myitem)==4)
+					main.itemimg.setIcon(new ImageIcon("images/¡Ó±›≈Î.png"));
 				x = y.itemnum(main.myitem);
 			}
 		}

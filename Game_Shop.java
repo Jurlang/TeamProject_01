@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+import java.awt.Font;
 
 @SuppressWarnings("serial")
 public class Game_Shop extends JFrame {
@@ -39,7 +40,8 @@ public class Game_Shop extends JFrame {
 		inShopPanel.setLayout(null);
 
 		showNameLa = new JLabel(store);
-		showNameLa.setBackground(new Color(0, 153, 153));
+		showNameLa.setFont(new Font("HY견고딕", Font.PLAIN, 20));
+		showNameLa.setBackground(new Color(255, 204, 0));
 		showNameLa.setHorizontalAlignment(SwingConstants.CENTER);
 		showNameLa.setBounds(12, 10, 400, 41);
 		showNameLa.setOpaque(true);
@@ -52,8 +54,10 @@ public class Game_Shop extends JFrame {
 		itemListPanel.setLayout(new GridLayout(item.length, 1, 0, 0));
 		getContentPane().add(inShopPanel);
 
-		JButton inShopBtn = new JButton("\uC644\uB8CC");
-		inShopBtn.setBounds(181, 419, 91, 40);
+		JButton inShopBtn = new JButton("\uC644\uB8CC", new ImageIcon("images/메인버튼.jpg"));
+		inShopBtn.setVerticalTextPosition(SwingConstants.CENTER);
+		inShopBtn.setHorizontalTextPosition(SwingConstants.CENTER);
+		inShopBtn.setBounds(154, 419, 91, 40);
 		inShopBtn.addActionListener(new BtnActionListener(this));
 		inShopPanel.add(inShopBtn);
 
@@ -93,21 +97,25 @@ class ItemPanel extends JPanel {
 		this.add(itemImg);
 
 		JLabel itemName = new JLabel("   이름 : " + name);
+		itemName.setFont(new Font("HY견고딕", Font.PLAIN, 14));
 		itemName.setBounds(81, 11, 155, 20);
 		this.add(itemName);
 
 		itemFunc = new JLabel("   성능 : " + func);
+		itemFunc.setFont(new Font("HY견고딕", Font.PLAIN, 14));
 		itemFunc.setBounds(81, 35, 155, 20);
 		this.add(itemFunc);
 
-		buyBtn = new JButton("\uAD6C\uC785");
+		buyBtn = new JButton("\uAD6C\uC785", new ImageIcon("images/메인버튼.jpg"));
+		buyBtn.setFont(new Font("HY견고딕", Font.PLAIN, 14));
+		buyBtn.setVerticalTextPosition(SwingConstants.CENTER);
+		buyBtn.setHorizontalTextPosition(SwingConstants.CENTER);
 		buyBtn.setBounds(240, 9, 100, 48);
 		buyBtn.setEnabled(false);
 		this.add(buyBtn);
 	}
 }
 
-//------------- 용병 샾 기본 Shop를 상속받음.
 @SuppressWarnings("serial")
 class FriendShop extends Game_Shop {
 	FriendShop fs;

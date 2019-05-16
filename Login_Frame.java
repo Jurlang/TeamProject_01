@@ -5,6 +5,7 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -12,7 +13,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+import java.awt.Color;
+import java.awt.Font;
 
 @SuppressWarnings("serial")
 public class Login_Frame extends JFrame {
@@ -47,38 +51,69 @@ public class Login_Frame extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
+		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		contentPane.setLayout(null);
 
 		JPanel panel1 = new JPanel();
+		panel1.setBackground(Color.WHITE);
+		panel1.setBounds(78, 134, 277, 31);
 		contentPane.add(panel1);
+		panel1.setLayout(null);
 
 		JLabel lblNewLabel = new JLabel("\uC544\uC774\uB514");
+		lblNewLabel.setFont(new Font("HY°ß°íµñ", Font.PLAIN, 14));
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setBounds(12, 10, 60, 15);
 		panel1.add(lblNewLabel);
 
 		tfId = new JTextField();
+		tfId.setBounds(86, 0, 191, 31);
 		panel1.add(tfId);
-		tfId.setColumns(20);
+		tfId.setColumns(17);
 
 		JPanel panel2 = new JPanel();
+		panel2.setBackground(Color.WHITE);
+		panel2.setBounds(78, 170, 277, 31);
 		contentPane.add(panel2);
+		panel2.setLayout(null);
 
 		JLabel lblNewLabel_1 = new JLabel("\uBE44\uBC00\uBC88\uD638");
+		lblNewLabel_1.setFont(new Font("HY°ß°íµñ", Font.PLAIN, 14));
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1.setBackground(Color.WHITE);
+		lblNewLabel_1.setBounds(12, 10, 60, 15);
 		panel2.add(lblNewLabel_1);
 
 		tfPw = new JPasswordField();
+		tfPw.setBounds(86, 0, 191, 31);
 		panel2.add(tfPw);
-		tfPw.setColumns(20);
+		tfPw.setColumns(10);
 
 		JPanel panel3 = new JPanel();
+		panel3.setBackground(Color.WHITE);
+		panel3.setBounds(78, 218, 277, 33);
 		contentPane.add(panel3);
+		panel3.setLayout(null);
 
-		JButton btnLogin = new JButton("\uB85C\uADF8\uC778");
+		JButton btnLogin = new JButton("\uB85C\uADF8\uC778", new ImageIcon("images/¸ÞÀÎ¹öÆ°.jpg"));
+		btnLogin.setFont(new Font("HY°ß°íµñ", Font.PLAIN, 14));
+		btnLogin.setVerticalTextPosition(SwingConstants.CENTER);
+		btnLogin.setHorizontalTextPosition(SwingConstants.CENTER);
+		btnLogin.setBounds(38, 0, 88, 33);
 		panel3.add(btnLogin);
 
-		JButton btnCancel = new JButton("\uB098\uAC00\uAE30");
+		JButton btnCancel = new JButton("\uB098\uAC00\uAE30", new ImageIcon("images/¸ÞÀÎ¹öÆ°.jpg"));
+		btnCancel.setFont(new Font("HY°ß°íµñ", Font.PLAIN, 14));
+		btnCancel.setVerticalTextPosition(SwingConstants.CENTER);
+		btnCancel.setHorizontalTextPosition(SwingConstants.CENTER);
+		btnCancel.setBounds(157, 0, 88, 33);
 		panel3.add(btnCancel);
+		
+		JLabel misaeFontLogo = new JLabel(new ImageIcon("images/µ·¹Ì»õ±Û¾¾_¼öÁ¤.png"));
+		misaeFontLogo.setBounds(32, 24, 374, 94);
+		contentPane.add(misaeFontLogo);
 
 		setVisible(true);
 

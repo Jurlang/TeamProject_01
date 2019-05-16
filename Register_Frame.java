@@ -1,20 +1,20 @@
 package TeamProject_01;
 
+import java.awt.Color;
 import java.awt.EventQueue;
-
-//import ProjectRegister.MyListener;
-
-import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 @SuppressWarnings("serial")
@@ -54,17 +54,22 @@ public class Register_Frame extends JFrame {
 		this.frame = frame;
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 300, 300);
+		setBounds(100, 100, 300, 489);
 		contentPane = new JPanel();
+		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new FlowLayout());
 		setContentPane(contentPane);
+		contentPane.setLayout(null);
 
 		JPanel pn = new JPanel();
+		pn.setBackground(Color.WHITE);
+		pn.setBounds(23, 156, 237, 198);
 		contentPane.add(pn);
-		pn.setLayout(new GridLayout(5, 2, 5, 5)); // (행,열, 행너비, 열높이)
+		pn.setLayout(new GridLayout(5, 2, 5, 15)); // (행,열, 행너비, 열높이)
 
 		JLabel lblNewLabel = new JLabel("\uC544  \uC774  \uB514");
+		lblNewLabel.setFont(new Font("HY견고딕", Font.PLAIN, 14));
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		pn.add(lblNewLabel);
 
 		tfId = new JTextField();
@@ -72,6 +77,8 @@ public class Register_Frame extends JFrame {
 		tfId.setColumns(10);
 
 		JLabel lblNewLabel_1 = new JLabel("\uBE44\uBC00\uBC88\uD638");
+		lblNewLabel_1.setFont(new Font("HY견고딕", Font.PLAIN, 14));
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 		pn.add(lblNewLabel_1);
 
 		tfPw = new JPasswordField();
@@ -79,6 +86,8 @@ public class Register_Frame extends JFrame {
 		tfPw.setColumns(10);
 
 		JLabel lblNewLabel_2 = new JLabel("\uC774       \uB984");
+		lblNewLabel_2.setFont(new Font("HY견고딕", Font.PLAIN, 14));
+		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
 		pn.add(lblNewLabel_2);
 
 		tfName = new JTextField();
@@ -86,6 +95,8 @@ public class Register_Frame extends JFrame {
 		tfName.setColumns(10);
 
 		JLabel lblNewLabel_3 = new JLabel("생년월일");
+		lblNewLabel_3.setFont(new Font("HY견고딕", Font.PLAIN, 14));
+		lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
 		pn.add(lblNewLabel_3);
 
 		tfBir = new JTextField();
@@ -93,6 +104,8 @@ public class Register_Frame extends JFrame {
 		tfBir.setColumns(10);
 
 		JLabel lblNewLabel_4 = new JLabel("이  메  일");
+		lblNewLabel_4.setFont(new Font("HY견고딕", Font.PLAIN, 14));
+		lblNewLabel_4.setHorizontalAlignment(SwingConstants.CENTER);
 		pn.add(lblNewLabel_4);
 
 		tfEml = new JTextField();
@@ -100,16 +113,35 @@ public class Register_Frame extends JFrame {
 		tfEml.setColumns(10);
 
 		JPanel ps = new JPanel();
+		ps.setBackground(Color.WHITE);
+		ps.setBounds(12, 395, 260, 33);
 		contentPane.add(ps);
+		ps.setLayout(null);
 
-		JButton btnAdd = new JButton("\uD68C\uC6D0\uAC00\uC785");
+		JButton btnAdd = new JButton("\uD68C\uC6D0\uAC00\uC785", new ImageIcon("images/메인버튼.jpg"));
+		btnAdd.setBounds(12, 5, 100, 25);
+		btnAdd.setFont(new Font("HY견고딕", Font.PLAIN, 14));
+		btnAdd.setVerticalTextPosition(SwingConstants.CENTER);
+		btnAdd.setHorizontalTextPosition(SwingConstants.CENTER);
 		ps.add(btnAdd);
 
-		JButton btnCancel = new JButton("\uCDE8\uC18C");
+		JButton btnCancel = new JButton("\uCDE8\uC18C", new ImageIcon("images/메인버튼.jpg"));
+		btnCancel.setBounds(114, 5, 70, 25);
+		btnCancel.setFont(new Font("HY견고딕", Font.PLAIN, 14));
+		btnCancel.setVerticalTextPosition(SwingConstants.CENTER);
+		btnCancel.setHorizontalTextPosition(SwingConstants.CENTER);
 		ps.add(btnCancel);
 
-		JButton btnClose = new JButton("\uB2EB\uAE30");
+		JButton btnClose = new JButton("\uB2EB\uAE30", new ImageIcon("images/메인버튼.jpg"));
+		btnClose.setBounds(187, 5, 70, 25);
+		btnClose.setFont(new Font("HY견고딕", Font.PLAIN, 14));
+		btnClose.setHorizontalTextPosition(SwingConstants.CENTER);
+		btnClose.setVerticalTextPosition(SwingConstants.CENTER);
 		ps.add(btnClose);
+		
+		JLabel misaeLogo = new JLabel(new ImageIcon("images/돈미새로고.png"));
+		misaeLogo.setBounds(74, 10, 132, 136);
+		contentPane.add(misaeLogo);
 
 		setVisible(true);
 

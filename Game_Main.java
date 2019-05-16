@@ -56,6 +56,7 @@ public class Game_Main extends JFrame {
 	JLabel tabMoney;
 	JLabel moneyLa;
 	JLabel lvLa;
+	JLabel itemimg;
 	JButton levelupBtn;
 	JLabel mainch;
 	String user_name;
@@ -130,24 +131,34 @@ public class Game_Main extends JFrame {
 		menuPanel.add(shopPanel);
 		shopPanel.setLayout(null);
 
-		JButton itemshopBtn = new JButton();
+		JButton itemshopBtn = new JButton("아이템");
+		itemshopBtn.setFont(new Font("HY견고딕", Font.PLAIN, 16));
 		itemshopBtn.setBounds(1, 0, 151, 64);
-		itemshopBtn.setIcon(new ImageIcon("images/세트스.png"));
-		itemshopBtn.setHorizontalTextPosition(JButton.CENTER);
+		itemshopBtn.setIcon(new ImageIcon("images/상점과통계버튼.jpg"));
+		itemshopBtn.setHorizontalTextPosition(SwingConstants.CENTER);
+		itemshopBtn.setVerticalTextPosition(SwingConstants.CENTER);
 		shopPanel.add(itemshopBtn);
 
 		JButton frishopBtn = new JButton("\uB3D9\uB8CC");
+		frishopBtn.setFont(new Font("HY견고딕", Font.PLAIN, 16));
 		frishopBtn.setBounds(167, 0, 151, 64);
-		frishopBtn.setIcon(new ImageIcon("images/용병.jpg"));
-
+		frishopBtn.setIcon(new ImageIcon("images/상점과통계버튼.jpg"));
+		frishopBtn.setHorizontalTextPosition(SwingConstants.CENTER);
+		frishopBtn.setVerticalTextPosition(SwingConstants.CENTER);
 		shopPanel.add(frishopBtn);
 
 		JButton statisticsBtn = new JButton("\uD1B5\uACC4");
+		statisticsBtn.setFont(new Font("HY견고딕", Font.PLAIN, 16));
 		statisticsBtn.setBounds(333, 0, 151, 64);
-		statisticsBtn.setIcon(new ImageIcon("images/통계.jpg"));
+		statisticsBtn.setIcon(new ImageIcon("images/상점과통계버튼.jpg"));
+		statisticsBtn.setHorizontalTextPosition(SwingConstants.CENTER);
+		statisticsBtn.setVerticalTextPosition(SwingConstants.CENTER);
 		shopPanel.add(statisticsBtn);
 
-		levelupBtn = new JButton();
+		levelupBtn = new JButton(new ImageIcon("images/레벨업버튼.jpg"));
+		levelupBtn.setFont(new Font("HY견고딕", Font.PLAIN, 16));
+		levelupBtn.setVerticalTextPosition(SwingConstants.CENTER);
+		levelupBtn.setHorizontalTextPosition(SwingConstants.CENTER);
 		levelupBtn.setBounds(0, 62, 485, 39);
 
 		// levelupBtn.setIcon(new ImageIcon("images/레벨업.jpg"));
@@ -162,21 +173,25 @@ public class Game_Main extends JFrame {
 		menuPanel.add(mainchImg);
 
 		JLabel autoLa = new JLabel("\uCD08\uB2F9");
+		autoLa.setFont(new Font("HY견고딕", Font.PLAIN, 12));
 		autoLa.setHorizontalAlignment(SwingConstants.CENTER);
 		autoLa.setBounds(386, 10, 87, 15);
 		menuPanel.add(autoLa);
 
 		JLabel tabLa = new JLabel("\uD0ED\uB2F9");
+		tabLa.setFont(new Font("HY견고딕", Font.PLAIN, 12));
 		tabLa.setHorizontalAlignment(SwingConstants.CENTER);
 		tabLa.setBounds(287, 10, 87, 15);
 		menuPanel.add(tabLa);
 
 		tabMoney = new JLabel(tabmoney + "\uC6D0");
+		tabMoney.setFont(new Font("HY견고딕", Font.PLAIN, 12));
 		tabMoney.setHorizontalAlignment(SwingConstants.CENTER);
 		tabMoney.setBounds(287, 27, 87, 22);
 		menuPanel.add(tabMoney);
 
 		autoMoney = new JLabel(automoney + "\uC6D0");
+		autoMoney.setFont(new Font("HY견고딕", Font.PLAIN, 12));
 		autoMoney.setHorizontalAlignment(SwingConstants.CENTER);
 		autoMoney.setBounds(386, 27, 87, 22);
 		menuPanel.add(autoMoney);
@@ -257,7 +272,10 @@ public class Game_Main extends JFrame {
 		mainpanel.add(sangdanBar);
 		sangdanBar.setLayout(null);
 
-		JButton btnNewButton = new JButton("\uC800\uC7A5");
+		JButton btnNewButton = new JButton("\uC800\uC7A5", new ImageIcon("images/메인버튼.jpg"));
+		btnNewButton.setFont(new Font("HY견고딕", Font.PLAIN, 16));
+		btnNewButton.setVerticalTextPosition(SwingConstants.CENTER);
+		btnNewButton.setHorizontalTextPosition(SwingConstants.CENTER);
 		btnNewButton.setBounds(0, 0, 91, 43);
 		sangdanBar.add(btnNewButton);
 		// ------------------------------------------------------------------------------------------
@@ -270,8 +288,13 @@ public class Game_Main extends JFrame {
 		m = new SharedMoney(moneyLa, this);
 		AutoMoney amth = new AutoMoney(autoMoney, m);
 		TabMoney tmth = new TabMoney(bgImgPanel, tabMoney, m, mainch, no_c[0], yes_c[0], this);
+		
+		itemimg = new JLabel("");
+		itemimg.setBounds(362, 339, 111, 135);
+		mainpanel.add(itemimg);
 
 		lvLa = new JLabel("Lv ." + level);
+		lvLa.setFont(new Font("HY견고딕", Font.PLAIN, 12));
 		lvLa.setHorizontalAlignment(SwingConstants.CENTER);
 		lvLa.setBounds(156, 21, 87, 22);
 		menuPanel.add(lvLa);

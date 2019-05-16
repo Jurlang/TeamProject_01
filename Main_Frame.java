@@ -1,14 +1,19 @@
 package TeamProject_01;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+import java.awt.Font;
+import javax.swing.JLabel;
 
 //안바꿨지롱 >_<
 @SuppressWarnings("serial")
@@ -37,27 +42,42 @@ public class Main_Frame extends JFrame {
 	 */
 	public Main_Frame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300); // x좌표, y좌표, 너비, 높이
+		setBounds(100, 100, 450, 600); // x좌표, y좌표, 너비, 높이
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
+		contentPane.setLayout(null);
 
 		JPanel lp = new JPanel();
+		lp.setBounds(0, 0, 434, 561);
+		lp.setBackground(Color.WHITE);
 		contentPane.add(lp);
-		// lp.setLayout(null);
+		lp.setLayout(null);
 
-		JButton btnRegi = new JButton("\uD68C\uC6D0\uAC00\uC785");
-		// btnRegi.setBounds(165, 188, 81, 23);
+		JButton btnRegi = new JButton("\uD68C\uC6D0\uAC00\uC785", new ImageIcon("images/메인버튼.jpg"));
+		btnRegi.setFont(new Font("HY견고딕", Font.PLAIN, 20));
+		btnRegi.setVerticalTextPosition(SwingConstants.CENTER);
+		btnRegi.setHorizontalTextPosition(SwingConstants.CENTER);
+		btnRegi.setBounds(126, 361, 171, 61);
 		lp.add(btnRegi);
 
-		JButton btnLogin = new JButton("\uB85C\uADF8\uC778");
-		// btnLogin.setBounds(258, 188, 69, 23);
+		JButton btnLogin = new JButton("\uB85C\uADF8\uC778", new ImageIcon("images/메인버튼.jpg"));
+		btnLogin.setFont(new Font("HY견고딕", Font.PLAIN, 20));
+		btnLogin.setVerticalTextPosition(SwingConstants.CENTER);
+		btnLogin.setHorizontalTextPosition(SwingConstants.CENTER);
+		btnLogin.setBounds(126, 272, 171, 61);
 		lp.add(btnLogin);
 
-		JButton btnQuit = new JButton("Quit");
-		// btnQuit.setBounds(339, 188, 55, 23);
+		JButton btnQuit = new JButton("나가기", new ImageIcon("images/메인버튼.jpg"));
+		btnQuit.setFont(new Font("HY견고딕", Font.PLAIN, 20));
+		btnQuit.setVerticalTextPosition(SwingConstants.CENTER);
+		btnQuit.setHorizontalTextPosition(SwingConstants.CENTER);
+		btnQuit.setBounds(126, 450, 171, 61);
 		lp.add(btnQuit);
+		
+		JLabel misaeLogo = new JLabel(new ImageIcon("images/돈미새로고_수정.png"));
+		misaeLogo.setBounds(96, 24, 224, 221);
+		lp.add(misaeLogo);
 
 		setVisible(true);
 
@@ -92,11 +112,10 @@ public class Main_Frame extends JFrame {
 				new Login_Frame(this.frame);
 				break;
 
-			case "Quit":
+			case "나가기":
 				frame.dispose();
 			}
 		}
 
 	}
-
 }
