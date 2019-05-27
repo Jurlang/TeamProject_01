@@ -23,8 +23,8 @@ public class DBConn {
 	private Connection getConnection() {
 		Connection conn = null;
 		String url = "jdbc:oracle:thin:@localhost:1521:xe";
-		String user = "jmh";
-		String passwd = "1111";
+		String user = "qwer";
+		String passwd = "1234";
 		String driver = "oracle.jdbc.driver.OracleDriver";
 
 		try {

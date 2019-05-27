@@ -46,18 +46,19 @@ public class Statistics_Frame extends JFrame {
 		tongPa.setBackground(Color.WHITE);
 		tongPa.setBounds(0, 0, 436, 763);
 		contentPane.add(tongPa);
+		tongPa.setLayout(null);
 
 
 		JLabel titleLa = new JLabel("\uD1B5         \uACC4");
 		titleLa.setBackground(Color.WHITE);
 		titleLa.setHorizontalAlignment(SwingConstants.CENTER);
 		titleLa.setFont(new Font("궁서", Font.PLAIN, 49));
-		titleLa.setBounds(0, 0, 436, 70);
+		titleLa.setBounds(97, 5, 242, 58);
 		tongPa.add(titleLa);
 
 		JPanel dataPa = new JPanel();
 		dataPa.setBackground(Color.WHITE);
-		dataPa.setBounds(0, 70, 436, 628);
+		dataPa.setBounds(57, 68, 321, 598);
 		tongPa.add(dataPa);
 		dataPa.setLayout(new GridLayout(10, 2, 15, 15));
 
@@ -177,7 +178,7 @@ public class Statistics_Frame extends JFrame {
 		JButton commitBtn = new JButton("\uC644\uB8CC", new ImageIcon("images/메인버튼.jpg"));
 		commitBtn.setHorizontalTextPosition(SwingConstants.CENTER);
 		commitBtn.setVerticalTextPosition(SwingConstants.CENTER);
-		commitBtn.setBounds(137, 708, 143, 51);
+		commitBtn.setBounds(131, 694, 160, 47);
 		commitBtn.addActionListener(new CommitBtnAL(this));
 		tongPa.add(commitBtn);
 

@@ -148,11 +148,12 @@ class TabMoney extends Thread {
 		tabPanel.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
+				System.out.println(main.myitem);
 				if (main.myitem == 1) {
 					f = main.no_c[1];
 				} else if (main.myitem == 2) {
 					f = main.no_c[2];
-				} else if (main.myitem > 3) {
+				} else if (main.myitem >= 3) {
 					f = main.no_c[3];
 				}
 				tm = tabMoneyLa.getText();
@@ -167,7 +168,7 @@ class TabMoney extends Thread {
 					s = main.yes_c[1];
 				} else if (main.myitem == 2) {
 					s = main.yes_c[2];
-				} else if (main.myitem > 3) {
+				} else if (main.myitem >= 3) {
 					s = main.yes_c[3];
 				}
 				mainch.setIcon(s);
