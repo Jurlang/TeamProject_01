@@ -26,6 +26,7 @@ public class Game_Shop extends JFrame {
 	Game_Main main;
 
 	public Game_Shop(String store, Game_Main main) {
+		setBackground(Color.WHITE);
 		this.main = main;
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 438, 516);
@@ -36,6 +37,7 @@ public class Game_Shop extends JFrame {
 		setContentPane(contentPane);
 
 		JPanel inShopPanel = new JPanel();
+		inShopPanel.setBackground(Color.WHITE);
 		inShopPanel.setBounds(55, 180, 400, 419);
 		inShopPanel.setLayout(null);
 
@@ -48,6 +50,7 @@ public class Game_Shop extends JFrame {
 		inShopPanel.add(showNameLa);
 
 		itemListPanel = new JPanel();
+		itemListPanel.setBackground(Color.WHITE);
 		itemListPanel.setBounds(12, 50, 400, 359);
 		inShopPanel.add(itemListPanel);
 		item = new ItemPanel[4];
@@ -90,6 +93,7 @@ class ItemPanel extends JPanel {
 	ItemPanel(JPanel p, ImageIcon img, String name, String func) {
 		this.setBounds(0, 0, 329, 65);
 		p.add(this);
+		this.setBackground(Color.white);
 		this.setLayout(null);
 
 		JLabel itemImg = new JLabel(img);

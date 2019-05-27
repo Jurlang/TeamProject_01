@@ -46,7 +46,7 @@ public class Statistics_Frame extends JFrame {
 		tongPa.setBackground(Color.WHITE);
 		tongPa.setBounds(0, 0, 436, 763);
 		contentPane.add(tongPa);
-		tongPa.setLayout(null);
+
 
 		JLabel titleLa = new JLabel("\uD1B5         \uACC4");
 		titleLa.setBackground(Color.WHITE);

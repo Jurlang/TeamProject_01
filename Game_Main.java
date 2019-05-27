@@ -237,7 +237,7 @@ public class Game_Main extends JFrame {
 			mainch.setIcon(no_c[1]);
 		else if (myitem == 2)
 			mainch.setIcon(no_c[2]);
-		else if (myitem == 3)
+		else if (myitem > 3)
 			mainch.setIcon(no_c[3]);
 		mainpanel.add(mainch);
 
@@ -426,7 +426,7 @@ class statisticsBtnAL implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		new Statistics_Frame(main, name, main.allmoney, main.curmoney, main.level, main.tabmoney, main.automoney,
+		new Statistics_Frame(main, name, main.allmoney, main.curmoney, main.level, Integer.parseInt(main.tabMoney.getText().substring(0, main.tabMoney.getText().indexOf("¿ø"))), main.automoney,
 				main.flevel, main.myitem);
 	}
 
