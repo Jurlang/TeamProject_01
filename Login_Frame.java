@@ -62,7 +62,7 @@ public class Login_Frame extends JFrame {
 		panel1.setLayout(null);
 
 		JLabel lblNewLabel = new JLabel("\uC544\uC774\uB514");
-		lblNewLabel.setFont(new Font("HY°ß°íµñ", Font.PLAIN, 14));
+		lblNewLabel.setFont(new Font("HYê²¬ê³ ë”•", Font.PLAIN, 14));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setBounds(12, 10, 60, 15);
 		panel1.add(lblNewLabel);
@@ -79,7 +79,7 @@ public class Login_Frame extends JFrame {
 		panel2.setLayout(null);
 
 		JLabel lblNewLabel_1 = new JLabel("\uBE44\uBC00\uBC88\uD638");
-		lblNewLabel_1.setFont(new Font("HY°ß°íµñ", Font.PLAIN, 14));
+		lblNewLabel_1.setFont(new Font("HYê²¬ê³ ë”•", Font.PLAIN, 14));
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_1.setBackground(Color.WHITE);
 		lblNewLabel_1.setBounds(12, 10, 60, 15);
@@ -96,21 +96,21 @@ public class Login_Frame extends JFrame {
 		contentPane.add(panel3);
 		panel3.setLayout(null);
 
-		JButton btnLogin = new JButton("\uB85C\uADF8\uC778", new ImageIcon("images/¸ŞÀÎ¹öÆ°.jpg"));
-		btnLogin.setFont(new Font("HY°ß°íµñ", Font.PLAIN, 14));
+		JButton btnLogin = new JButton("\uB85C\uADF8\uC778", new ImageIcon("images/ë©”ì¸ë²„íŠ¼.jpg"));
+		btnLogin.setFont(new Font("HYê²¬ê³ ë”•", Font.PLAIN, 14));
 		btnLogin.setVerticalTextPosition(SwingConstants.CENTER);
 		btnLogin.setHorizontalTextPosition(SwingConstants.CENTER);
 		btnLogin.setBounds(38, 0, 88, 33);
 		panel3.add(btnLogin);
 
-		JButton btnCancel = new JButton("\uB098\uAC00\uAE30", new ImageIcon("images/¸ŞÀÎ¹öÆ°.jpg"));
-		btnCancel.setFont(new Font("HY°ß°íµñ", Font.PLAIN, 14));
+		JButton btnCancel = new JButton("\uB098\uAC00\uAE30", new ImageIcon("images/ë©”ì¸ë²„íŠ¼.jpg"));
+		btnCancel.setFont(new Font("HYê²¬ê³ ë”•", Font.PLAIN, 14));
 		btnCancel.setVerticalTextPosition(SwingConstants.CENTER);
 		btnCancel.setHorizontalTextPosition(SwingConstants.CENTER);
 		btnCancel.setBounds(157, 0, 88, 33);
 		panel3.add(btnCancel);
 		
-		JLabel misaeFontLogo = new JLabel(new ImageIcon("images/µ·¹Ì»õ±Û¾¾_¼öÁ¤.png"));
+		JLabel misaeFontLogo = new JLabel(new ImageIcon("images/ëˆë¯¸ìƒˆê¸€ì”¨_ìˆ˜ì •.png"));
 		misaeFontLogo.setBounds(32, 24, 374, 94);
 		contentPane.add(misaeFontLogo);
 
@@ -134,7 +134,7 @@ public class Login_Frame extends JFrame {
 			// TODO Auto-generated method stub
 			String log = e.getActionCommand();
 
-			if (log.trim().equals("·Î±×ÀÎ")) {
+			if (log.trim().equals("ë¡œê·¸ì¸")) {
 				String id = tfId.getText();
 				@SuppressWarnings("deprecation")
 				String pw = tfPw.getText();
@@ -144,12 +144,12 @@ public class Login_Frame extends JFrame {
 				String msg = "";
 
 				if (login == -2) {
-					msg = id + "´Â ¾ø´Â È¸¿øÀÔ´Ï´Ù.";
+					msg = id + "ëŠ” ì—†ëŠ” íšŒì›ì…ë‹ˆë‹¤.";
 				} else if (login == -1) {
-					msg = "ºñ¹Ğ¹øÈ£°¡ Æ²¸²";
+					msg = "ë¹„ë°€ë²ˆí˜¸ê°€ í‹€ë¦¼";
 				} else {
 					Member_Class m = dbConn.selectOne(id);
-					msg = "È¯¿µÇÕ´Ï´Ù" + id + "(" + m.getName() + ")´Ô";
+					msg = "í™˜ì˜í•©ë‹ˆë‹¤" + id + "(" + m.getName() + ")ë‹˜";
 					frame.dispose();
 					Login_info_Class l = dbConn.info_load(login);
 					new Game_Main(login, l, m.getName());

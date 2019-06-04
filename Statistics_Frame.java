@@ -52,7 +52,7 @@ public class Statistics_Frame extends JFrame {
 		JLabel titleLa = new JLabel("\uD1B5         \uACC4");
 		titleLa.setBackground(Color.WHITE);
 		titleLa.setHorizontalAlignment(SwingConstants.CENTER);
-		titleLa.setFont(new Font("±√º≠", Font.PLAIN, 49));
+		titleLa.setFont(new Font("Í∂ÅÏÑú", Font.PLAIN, 49));
 		titleLa.setBounds(97, 5, 242, 58);
 		tongPa.add(titleLa);
 
@@ -63,97 +63,97 @@ public class Statistics_Frame extends JFrame {
 		dataPa.setLayout(new GridLayout(10, 2, 15, 15));
 
 		JLabel untl = new JLabel("\uB2C8 \uC774\uB984");
-		untl.setFont(new Font("HY∞ﬂ∞ÌµÒ", Font.PLAIN, 16));
+		untl.setFont(new Font("HYÍ≤¨Í≥†Îîï", Font.PLAIN, 16));
 		untl.setHorizontalAlignment(SwingConstants.CENTER);
 		dataPa.add(untl);
 
 		unl = new JLabel("");
-		unl.setFont(new Font("HY∞ﬂ∞ÌµÒ", Font.PLAIN, 16));
+		unl.setFont(new Font("HYÍ≤¨Í≥†Îîï", Font.PLAIN, 16));
 		unl.setText(name);
 		dataPa.add(unl);
 
 		JLabel amtl = new JLabel("\uB2C8 \uCD1D \uB3C8");
-		amtl.setFont(new Font("HY∞ﬂ∞ÌµÒ", Font.PLAIN, 16));
+		amtl.setFont(new Font("HYÍ≤¨Í≥†Îîï", Font.PLAIN, 16));
 		amtl.setHorizontalAlignment(SwingConstants.CENTER);
 		dataPa.add(amtl);
 
 		aml = new JLabel("");
-		aml.setFont(new Font("HY∞ﬂ∞ÌµÒ", Font.PLAIN, 16));
-		aml.setText(allmoney + "ø¯");
+		aml.setFont(new Font("HYÍ≤¨Í≥†Îîï", Font.PLAIN, 16));
+		aml.setText(allmoney + "Ïõê");
 		dataPa.add(aml);
 
 		JLabel ucmtl = new JLabel("\uB2C8 \uD604\uC7AC \uB3C8");
-		ucmtl.setFont(new Font("HY∞ﬂ∞ÌµÒ", Font.PLAIN, 16));
+		ucmtl.setFont(new Font("HYÍ≤¨Í≥†Îîï", Font.PLAIN, 16));
 		ucmtl.setHorizontalAlignment(SwingConstants.CENTER);
 		dataPa.add(ucmtl);
 
 		ucml = new JLabel("");
-		ucml.setFont(new Font("HY∞ﬂ∞ÌµÒ", Font.PLAIN, 16));
-		ucml.setText(curmoney + "ø¯");
+		ucml.setFont(new Font("HYÍ≤¨Í≥†Îîï", Font.PLAIN, 16));
+		ucml.setText(curmoney + "Ïõê");
 		dataPa.add(ucml);
 
 		JLabel ultl = new JLabel("\uB2C8 \uB808\uBCA8");
-		ultl.setFont(new Font("HY∞ﬂ∞ÌµÒ", Font.PLAIN, 16));
+		ultl.setFont(new Font("HYÍ≤¨Í≥†Îîï", Font.PLAIN, 16));
 		ultl.setHorizontalAlignment(SwingConstants.CENTER);
 		dataPa.add(ultl);
 
 		ull = new JLabel("");
-		ull.setFont(new Font("HY∞ﬂ∞ÌµÒ", Font.PLAIN, 16));
+		ull.setFont(new Font("HYÍ≤¨Í≥†Îîï", Font.PLAIN, 16));
 		ull.setText("Lv ." + lv);
 		dataPa.add(ull);
 
 		JLabel utmtl = new JLabel("\uB2C8 \uD0ED\uB2F9 \uB3C8");
-		utmtl.setFont(new Font("HY∞ﬂ∞ÌµÒ", Font.PLAIN, 16));
+		utmtl.setFont(new Font("HYÍ≤¨Í≥†Îîï", Font.PLAIN, 16));
 		utmtl.setHorizontalAlignment(SwingConstants.CENTER);
 		dataPa.add(utmtl);
 
 		utml = new JLabel("");
-		utml.setFont(new Font("HY∞ﬂ∞ÌµÒ", Font.PLAIN, 16));
-		utml.setText(tm + "ø¯");
+		utml.setFont(new Font("HYÍ≤¨Í≥†Îîï", Font.PLAIN, 16));
+		utml.setText(tm + "Ïõê");
 		dataPa.add(utml);
 
 		JLabel usmtl = new JLabel("\uB2C8 \uCD08\uB2F9 \uB3C8");
-		usmtl.setFont(new Font("HY∞ﬂ∞ÌµÒ", Font.PLAIN, 16));
+		usmtl.setFont(new Font("HYÍ≤¨Í≥†Îîï", Font.PLAIN, 16));
 		usmtl.setHorizontalAlignment(SwingConstants.CENTER);
 		dataPa.add(usmtl);
 
 		usml = new JLabel("");
-		usml.setFont(new Font("HY∞ﬂ∞ÌµÒ", Font.PLAIN, 16));
-		usml.setText(am + "ø¯");
+		usml.setFont(new Font("HYÍ≤¨Í≥†Îîï", Font.PLAIN, 16));
+		usml.setText(am + "Ïõê");
 		dataPa.add(usml);
 
 		JLabel gltl = new JLabel("\uAC1C\uC0C8 \uB808\uBCA8");
-		gltl.setFont(new Font("HY∞ﬂ∞ÌµÒ", Font.PLAIN, 16));
+		gltl.setFont(new Font("HYÍ≤¨Í≥†Îîï", Font.PLAIN, 16));
 		gltl.setHorizontalAlignment(SwingConstants.CENTER);
 		dataPa.add(gltl);
 
 		gll = new JLabel("");
-		gll.setFont(new Font("HY∞ﬂ∞ÌµÒ", Font.PLAIN, 16));
+		gll.setFont(new Font("HYÍ≤¨Í≥†Îîï", Font.PLAIN, 16));
 		gll.setText("Lv ." + flv[0]);
 		dataPa.add(gll);
 
 		JLabel sltl = new JLabel("10\uC0C8 \uB808\uBCA8");
-		sltl.setFont(new Font("HY∞ﬂ∞ÌµÒ", Font.PLAIN, 16));
+		sltl.setFont(new Font("HYÍ≤¨Í≥†Îîï", Font.PLAIN, 16));
 		sltl.setHorizontalAlignment(SwingConstants.CENTER);
 		dataPa.add(sltl);
 
 		sll = new JLabel("");
-		sll.setFont(new Font("HY∞ﬂ∞ÌµÒ", Font.PLAIN, 16));
+		sll.setFont(new Font("HYÍ≤¨Í≥†Îîï", Font.PLAIN, 16));
 		sll.setText("Lv ." + flv[1]);
 		dataPa.add(sll);
 
 		JLabel jltl = new JLabel("\uC9ED\uC0C8 \uB808\uBCA8");
-		jltl.setFont(new Font("HY∞ﬂ∞ÌµÒ", Font.PLAIN, 16));
+		jltl.setFont(new Font("HYÍ≤¨Í≥†Îîï", Font.PLAIN, 16));
 		jltl.setHorizontalAlignment(SwingConstants.CENTER);
 		dataPa.add(jltl);
 
 		jll = new JLabel("");
-		jll.setFont(new Font("HY∞ﬂ∞ÌµÒ", Font.PLAIN, 16));
+		jll.setFont(new Font("HYÍ≤¨Í≥†Îîï", Font.PLAIN, 16));
 		jll.setText("Lv ." + flv[2]);
 		dataPa.add(jll);
 
 		JLabel uitl = new JLabel("\uB2C8\uAC00 \uAC00\uC9C4 \uC544\uC774\uD15C");
-		uitl.setFont(new Font("HY∞ﬂ∞ÌµÒ", Font.PLAIN, 16));
+		uitl.setFont(new Font("HYÍ≤¨Í≥†Îîï", Font.PLAIN, 16));
 		uitl.setHorizontalAlignment(SwingConstants.CENTER);
 		dataPa.add(uitl);
 
@@ -161,7 +161,7 @@ public class Statistics_Frame extends JFrame {
 		//uil.setEnabled(false);
 		uil.setEditable(false);
 		uil.setOpaque(false);
-		uil.setFont(new Font("HY∞ﬂ∞ÌµÒ", Font.PLAIN, 12));
+		uil.setFont(new Font("HYÍ≤¨Í≥†Îîï", Font.PLAIN, 12));
 		uil.setForeground(Color.black);
 		String itemlist = "";
 		for (int i = 0; i < item; i++) {
@@ -175,7 +175,7 @@ public class Statistics_Frame extends JFrame {
 		uil.setText(itemlist);
 		dataPa.add(uil);
 
-		JButton commitBtn = new JButton("\uC644\uB8CC", new ImageIcon("images/∏ﬁ¿Œπˆ∆∞.jpg"));
+		JButton commitBtn = new JButton("\uC644\uB8CC", new ImageIcon("images/Î©îÏù∏Î≤ÑÌäº.jpg"));
 		commitBtn.setHorizontalTextPosition(SwingConstants.CENTER);
 		commitBtn.setVerticalTextPosition(SwingConstants.CENTER);
 		commitBtn.setBounds(131, 694, 160, 47);

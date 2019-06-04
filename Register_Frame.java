@@ -46,9 +46,9 @@ public class Register_Frame extends JFrame {
 		});
 	}
 
-	// ¾ÆÀÌµğ,ºñ¹ø,ÀÌ¸§,»ı³â¿ùÀÏ,ÀÌ¸á ±ÛÀÚ¼ö¸¦ 10°³·Î ÇØ³õÀ½
+	// ì•„ì´ë””,ë¹„ë²ˆ,ì´ë¦„,ìƒë…„ì›”ì¼,ì´ë©œ ê¸€ììˆ˜ë¥¼ 10ê°œë¡œ í•´ë†“ìŒ
 	/**
-	 * Ä­ÀÌ ³Ê¹« ±æ¾îº¸¿©¼­ ÀÏ´Ü 10°³·Î.... Create the frame.
+	 * ì¹¸ì´ ë„ˆë¬´ ê¸¸ì–´ë³´ì—¬ì„œ ì¼ë‹¨ 10ê°œë¡œ.... Create the frame.
 	 */
 	public Register_Frame(Main_Frame frame) {
 		this.frame = frame;
@@ -65,10 +65,10 @@ public class Register_Frame extends JFrame {
 		pn.setBackground(Color.WHITE);
 		pn.setBounds(23, 156, 237, 198);
 		contentPane.add(pn);
-		pn.setLayout(new GridLayout(5, 2, 5, 15)); // (Çà,¿­, Çà³Êºñ, ¿­³ôÀÌ)
+		pn.setLayout(new GridLayout(5, 2, 5, 15)); // (í–‰,ì—´, í–‰ë„ˆë¹„, ì—´ë†’ì´)
 
 		JLabel lblNewLabel = new JLabel("\uC544  \uC774  \uB514");
-		lblNewLabel.setFont(new Font("HY°ß°íµñ", Font.PLAIN, 14));
+		lblNewLabel.setFont(new Font("HYê²¬ê³ ë”•", Font.PLAIN, 14));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		pn.add(lblNewLabel);
 
@@ -77,7 +77,7 @@ public class Register_Frame extends JFrame {
 		tfId.setColumns(10);
 
 		JLabel lblNewLabel_1 = new JLabel("\uBE44\uBC00\uBC88\uD638");
-		lblNewLabel_1.setFont(new Font("HY°ß°íµñ", Font.PLAIN, 14));
+		lblNewLabel_1.setFont(new Font("HYê²¬ê³ ë”•", Font.PLAIN, 14));
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 		pn.add(lblNewLabel_1);
 
@@ -86,7 +86,7 @@ public class Register_Frame extends JFrame {
 		tfPw.setColumns(10);
 
 		JLabel lblNewLabel_2 = new JLabel("\uC774       \uB984");
-		lblNewLabel_2.setFont(new Font("HY°ß°íµñ", Font.PLAIN, 14));
+		lblNewLabel_2.setFont(new Font("HYê²¬ê³ ë”•", Font.PLAIN, 14));
 		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
 		pn.add(lblNewLabel_2);
 
@@ -94,8 +94,8 @@ public class Register_Frame extends JFrame {
 		pn.add(tfName);
 		tfName.setColumns(10);
 
-		JLabel lblNewLabel_3 = new JLabel("»ı³â¿ùÀÏ");
-		lblNewLabel_3.setFont(new Font("HY°ß°íµñ", Font.PLAIN, 14));
+		JLabel lblNewLabel_3 = new JLabel("ìƒë…„ì›”ì¼");
+		lblNewLabel_3.setFont(new Font("HYê²¬ê³ ë”•", Font.PLAIN, 14));
 		lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
 		pn.add(lblNewLabel_3);
 
@@ -103,8 +103,8 @@ public class Register_Frame extends JFrame {
 		pn.add(tfBir);
 		tfBir.setColumns(10);
 
-		JLabel lblNewLabel_4 = new JLabel("ÀÌ  ¸Ş  ÀÏ");
-		lblNewLabel_4.setFont(new Font("HY°ß°íµñ", Font.PLAIN, 14));
+		JLabel lblNewLabel_4 = new JLabel("ì´  ë©”  ì¼");
+		lblNewLabel_4.setFont(new Font("HYê²¬ê³ ë”•", Font.PLAIN, 14));
 		lblNewLabel_4.setHorizontalAlignment(SwingConstants.CENTER);
 		pn.add(lblNewLabel_4);
 
@@ -118,28 +118,28 @@ public class Register_Frame extends JFrame {
 		contentPane.add(ps);
 		ps.setLayout(null);
 
-		JButton btnAdd = new JButton("\uD68C\uC6D0\uAC00\uC785", new ImageIcon("images/¸ŞÀÎ¹öÆ°.jpg"));
+		JButton btnAdd = new JButton("\uD68C\uC6D0\uAC00\uC785", new ImageIcon("images/ë©”ì¸ë²„íŠ¼.jpg"));
 		btnAdd.setBounds(12, 5, 100, 25);
-		btnAdd.setFont(new Font("HY°ß°íµñ", Font.PLAIN, 14));
+		btnAdd.setFont(new Font("HYê²¬ê³ ë”•", Font.PLAIN, 14));
 		btnAdd.setVerticalTextPosition(SwingConstants.CENTER);
 		btnAdd.setHorizontalTextPosition(SwingConstants.CENTER);
 		ps.add(btnAdd);
 
-		JButton btnCancel = new JButton("\uCDE8\uC18C", new ImageIcon("images/¸ŞÀÎ¹öÆ°.jpg"));
+		JButton btnCancel = new JButton("\uCDE8\uC18C", new ImageIcon("images/ë©”ì¸ë²„íŠ¼.jpg"));
 		btnCancel.setBounds(114, 5, 70, 25);
-		btnCancel.setFont(new Font("HY°ß°íµñ", Font.PLAIN, 14));
+		btnCancel.setFont(new Font("HYê²¬ê³ ë”•", Font.PLAIN, 14));
 		btnCancel.setVerticalTextPosition(SwingConstants.CENTER);
 		btnCancel.setHorizontalTextPosition(SwingConstants.CENTER);
 		ps.add(btnCancel);
 
-		JButton btnClose = new JButton("\uB2EB\uAE30", new ImageIcon("images/¸ŞÀÎ¹öÆ°.jpg"));
+		JButton btnClose = new JButton("\uB2EB\uAE30", new ImageIcon("images/ë©”ì¸ë²„íŠ¼.jpg"));
 		btnClose.setBounds(187, 5, 70, 25);
-		btnClose.setFont(new Font("HY°ß°íµñ", Font.PLAIN, 14));
+		btnClose.setFont(new Font("HYê²¬ê³ ë”•", Font.PLAIN, 14));
 		btnClose.setHorizontalTextPosition(SwingConstants.CENTER);
 		btnClose.setVerticalTextPosition(SwingConstants.CENTER);
 		ps.add(btnClose);
 		
-		JLabel misaeLogo = new JLabel(new ImageIcon("images/µ·¹Ì»õ·Î°í.png"));
+		JLabel misaeLogo = new JLabel(new ImageIcon("images/ëˆë¯¸ìƒˆë¡œê³ .png"));
 		misaeLogo.setBounds(74, 10, 132, 136);
 		contentPane.add(misaeLogo);
 
@@ -164,7 +164,7 @@ public class Register_Frame extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
 			String cmd = e.getActionCommand();
-			if (cmd.trim().equals("È¸¿ø°¡ÀÔ")) {
+			if (cmd.trim().equals("íšŒì›ê°€ì…")) {
 				String id = tfId.getText();
 				@SuppressWarnings("deprecation")
 				String pw = tfPw.getText();
@@ -177,9 +177,9 @@ public class Register_Frame extends JFrame {
 				dbConn.insert(m);
 				tframe.dispose();
 				frame.setVisible(true);
-			} else if (cmd.trim().equals("Ãë¼Ò")) {
+			} else if (cmd.trim().equals("ì·¨ì†Œ")) {
 				init();
-			} else if (cmd.trim().equals("´İ±â")) {
+			} else if (cmd.trim().equals("ë‹«ê¸°")) {
 				tframe.dispose();
 				frame.setVisible(true);
 			}

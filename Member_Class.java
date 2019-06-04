@@ -1,8 +1,5 @@
 package TeamProject_01;
 
-//아이디(20자리), 비번(20자리), 이름(20자리), 생년월일(6자리), 이메일(50자리)
-// 이것도 안바꿨지롱 >_<
-//프로젝트 회원가입 !
 public class Member_Class {
 	private String id;
 	private String pw;

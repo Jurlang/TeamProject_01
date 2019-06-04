@@ -3,12 +3,12 @@ package TeamProject_01;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet; // ÀÏ´Ü ·Î±×ÀÎÀÌ µÇ°í, È¸¿ø°¡ÀÔÀÌ µÇ´Â °Í ±îÁö¸¸!!
+import java.sql.ResultSet; // ì¼ë‹¨ ë¡œê·¸ì¸ì´ ë˜ê³ , íšŒì›ê°€ì…ì´ ë˜ëŠ” ê²ƒ ê¹Œì§€ë§Œ!!
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-//°´Ã¼¸¦ ½Ì±ÛÅæÀ¸·Î ¸¸µé¾îÁà¾ß µÈ´ÙÀ×?!
+//ê°ì²´ë¥¼ ì‹±ê¸€í†¤ìœ¼ë¡œ ë§Œë“¤ì–´ì¤˜ì•¼ ëœë‹¤ì‰?!
 public class DBConn {
 	private DBConn() {
 	}
@@ -19,7 +19,7 @@ public class DBConn {
 		return dbConn;
 	}
 
-	// DBConnectionÇÏ´Â°É ¸¸µé±á~
+	// DBConnectioní•˜ëŠ”ê±¸ ë§Œë“¤ê¸”~
 	private Connection getConnection() {
 		Connection conn = null;
 		String url = "jdbc:oracle:thin:@localhost:1521:xe";
@@ -36,7 +36,7 @@ public class DBConn {
 		return conn;
 	}
 
-	// select ¸¸µé±á
+	// select ë§Œë“¤ê¸”
 	public ArrayList<Member_Class> selectAll() {
 		ArrayList<Member_Class> list = new ArrayList<Member_Class>();
 		Connection conn = null;
@@ -64,10 +64,10 @@ public class DBConn {
 		}
 		return list;
 	}
-	// select´Â °ü¸®ÀÚ°¡ º¸´Â ¿ëµµÀÌ±â ¶§¹®¿¡ °ÔÀÓ À¯Àú°¡ ¾²Áø ¾ÊÀ¸¹Ç·Î select´Â »«µÂ!
-	// °í·Î insert¸¦ ³Ö¾îÁÖ¸é µÊ!
+	// selectëŠ” ê´€ë¦¬ìê°€ ë³´ëŠ” ìš©ë„ì´ê¸° ë•Œë¬¸ì— ê²Œì„ ìœ ì €ê°€ ì“°ì§„ ì•Šìœ¼ë¯€ë¡œ selectëŠ” ëº€ë !
+	// ê³ ë¡œ insertë¥¼ ë„£ì–´ì£¼ë©´ ë¨!
 
-	// ¾ÆÀÌµğ¸¦ °Ë»öÇØ¼­ È¸¿øÁ¤º¸¸¦ º¼ ¼ö ÀÖ´Â ¼Ò½ºÄÚµå!
+	// ì•„ì´ë””ë¥¼ ê²€ìƒ‰í•´ì„œ íšŒì›ì •ë³´ë¥¼ ë³¼ ìˆ˜ ìˆëŠ” ì†ŒìŠ¤ì½”ë“œ!
 	public Member_Class selectOne(String id) {
 		Member_Class m = null;
 		Connection conn = null;
@@ -98,7 +98,7 @@ public class DBConn {
 		return m;
 	}
 
-	public void insert(Member_Class m) { // È¸¿ø°¡ÀÔ
+	public void insert(Member_Class m) { // íšŒì›ê°€ì…
 		Connection conn = null;
 		Statement stmt = null;
 		PreparedStatement ps = null;
@@ -127,9 +127,9 @@ public class DBConn {
 			ps.setString(6, m.getEml());
 			int n = ps.executeUpdate();
 			if (n == 1)
-				System.out.println("ÀÔ·Â¼º°ø");// ÀÌ°Å ¹®±¸´Â ¹Ù²Ü°Å¸é ¹Ù²ÙÀÚ
+				System.out.println("ì…ë ¥ì„±ê³µ");// ì´ê±° ë¬¸êµ¬ëŠ” ë°”ê¿€ê±°ë©´ ë°”ê¾¸ì
 			else
-				System.out.println("ÀÔ·Â½ÇÆĞ");
+				System.out.println("ì…ë ¥ì‹¤íŒ¨");
 			dbClose(ps);
 			ps = conn.prepareStatement(usercharinfo_init_sql);
 			ps.setInt(1, resultcount);
@@ -159,7 +159,7 @@ public class DBConn {
 		}
 	}
 
-	public int confirm(String id, String pw) { // ·Î±×ÀÎ ¼Ò½º(?) confirm=È®ÀÎÇÏ´Ù
+	public int confirm(String id, String pw) { // ë¡œê·¸ì¸ ì†ŒìŠ¤(?) confirm=í™•ì¸í•˜ë‹¤
 		int n = -2;
 		Connection conn = null;
 		PreparedStatement ps = null;
@@ -320,9 +320,9 @@ public class DBConn {
 			n = ps.executeUpdate();
 
 			if (n == 1)
-				System.out.println("¼öÁ¤¼º°ø");
+				System.out.println("ìˆ˜ì •ì„±ê³µ");
 			else
-				System.out.println("¼öÁ¤½ÇÆĞ");
+				System.out.println("ìˆ˜ì •ì‹¤íŒ¨");
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

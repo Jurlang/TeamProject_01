@@ -28,10 +28,10 @@ public class Game_Main extends JFrame {
 	ImageIcon[] yes_c = {new ImageIcon("images/1-2.png"), new ImageIcon("images/2-2.png"), new ImageIcon("images/3-2.png"), new ImageIcon("images/4-2.png")};
 	private SharedMoney m = null;
 
-	ImageIcon[] fimg = { new ImageIcon("images/»óÁ¡°³»õ¹ÎÁõ.png"), new ImageIcon("images/»óÁ¡½Ê»õ¹ÎÁõ.png"),
-			new ImageIcon("images/»óÁ¡Â¬»õ¹ÎÁõ.png") };
-	ImageIcon[] iimg = { new ImageIcon("images/»óÁ¡½º³À.png"), new ImageIcon("images/»óÁ¡½ã±Û.png"),
-			new ImageIcon("images/»óÁ¡´ÙÀÌ¾Æ.png"), new ImageIcon("images/»óÁ¡Áî±İÅë.png") };
+	ImageIcon[] fimg = { new ImageIcon("images/ìƒì ê°œìƒˆë¯¼ì¦.png"), new ImageIcon("images/ìƒì ì‹­ìƒˆë¯¼ì¦.png"),
+			new ImageIcon("images/ìƒì ì§­ìƒˆë¯¼ì¦.png") };
+	ImageIcon[] iimg = { new ImageIcon("images/ìƒì ìŠ¤ëƒ….png"), new ImageIcon("images/ìƒì ì¬ê¸€.png"),
+			new ImageIcon("images/ìƒì ë‹¤ì´ì•„.png"), new ImageIcon("images/ìƒì ì¦ˆê¸ˆí†µ.png") };
 
 	String[] fname = new String[3];
 	String[] ffunc = new String[3];
@@ -40,7 +40,7 @@ public class Game_Main extends JFrame {
 
 	String[] iname = new String[4];
 	String[] ifunc = new String[4];
-	String[] iprice = { "10000¿ø", "20000¿ø", "30000¿ø", "40000¿ø" };
+	String[] iprice = { "10000ì›", "20000ì›", "30000ì›", "40000ì›" };
 
 	int automoney;
 	int curmoney;
@@ -72,9 +72,9 @@ public class Game_Main extends JFrame {
 			if (flevel[i] != 0)
 				chk[i] = true;
 		}
-		ffunc[0] = "ÃÊ´ç " + (1 * (flevel[0] + 1)) + "¿ø";
-		ffunc[1] = "ÃÊ´ç " + (10 * (flevel[1] + 1)) + "¿ø";
-		ffunc[2] = "ÃÊ´ç " + (100 * (flevel[2] + 1)) + "¿ø";
+		ffunc[0] = "ì´ˆë‹¹ " + (1 * (flevel[0] + 1)) + "ì›";
+		ffunc[1] = "ì´ˆë‹¹ " + (10 * (flevel[1] + 1)) + "ì›";
+		ffunc[2] = "ì´ˆë‹¹ " + (100 * (flevel[2] + 1)) + "ì›";
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < flevel[i]; j++) {
 				fprice[i] *= 1.5;
@@ -111,7 +111,7 @@ public class Game_Main extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		EtchedBorder eborder=new EtchedBorder(EtchedBorder.RAISED);//Æò¸é¿¡ ²ø·Î ÆÇµíÀÌ ¿Ü°û¼± È¿°ú¸¦ ³»´Â °ÍÀÌ°í ¾ç°¢ÀÇ È¿°ú¸¦ ÁØ´Ù.
+		EtchedBorder eborder=new EtchedBorder(EtchedBorder.RAISED);//í‰ë©´ì— ëŒë¡œ íŒë“¯ì´ ì™¸ê³½ì„  íš¨ê³¼ë¥¼ ë‚´ëŠ” ê²ƒì´ê³  ì–‘ê°ì˜ íš¨ê³¼ë¥¼ ì¤€ë‹¤.
 		JPanel bgImgPanel = new JPanel();
 		bgImgPanel.setBackground(Color.WHITE);
 		bgImgPanel.setBounds(0, 0, 485, 748);
@@ -129,38 +129,38 @@ public class Game_Main extends JFrame {
 		menuPanel.add(shopPanel);
 		shopPanel.setLayout(null);
 
-		JButton itemshopBtn = new JButton("¾ÆÀÌÅÛ");
-		itemshopBtn.setFont(new Font("HY°ß°íµñ", Font.PLAIN, 16));
+		JButton itemshopBtn = new JButton("ì•„ì´í…œ");
+		itemshopBtn.setFont(new Font("HYê²¬ê³ ë”•", Font.PLAIN, 16));
 		itemshopBtn.setBounds(1, 0, 151, 64);
-		itemshopBtn.setIcon(new ImageIcon("images/»óÁ¡°úÅë°è¹öÆ°.jpg"));
+		itemshopBtn.setIcon(new ImageIcon("images/ìƒì ê³¼í†µê³„ë²„íŠ¼.jpg"));
 		itemshopBtn.setHorizontalTextPosition(SwingConstants.CENTER);
 		itemshopBtn.setVerticalTextPosition(SwingConstants.CENTER);
 		shopPanel.add(itemshopBtn);
 
 		JButton frishopBtn = new JButton("\uB3D9\uB8CC");
-		frishopBtn.setFont(new Font("HY°ß°íµñ", Font.PLAIN, 16));
+		frishopBtn.setFont(new Font("HYê²¬ê³ ë”•", Font.PLAIN, 16));
 		frishopBtn.setBounds(167, 0, 151, 64);
-		frishopBtn.setIcon(new ImageIcon("images/»óÁ¡°úÅë°è¹öÆ°.jpg"));
+		frishopBtn.setIcon(new ImageIcon("images/ìƒì ê³¼í†µê³„ë²„íŠ¼.jpg"));
 		frishopBtn.setHorizontalTextPosition(SwingConstants.CENTER);
 		frishopBtn.setVerticalTextPosition(SwingConstants.CENTER);
 		shopPanel.add(frishopBtn);
 
 		JButton statisticsBtn = new JButton("\uD1B5\uACC4");
-		statisticsBtn.setFont(new Font("HY°ß°íµñ", Font.PLAIN, 16));
+		statisticsBtn.setFont(new Font("HYê²¬ê³ ë”•", Font.PLAIN, 16));
 		statisticsBtn.setBounds(333, 0, 151, 64);
-		statisticsBtn.setIcon(new ImageIcon("images/»óÁ¡°úÅë°è¹öÆ°.jpg"));
+		statisticsBtn.setIcon(new ImageIcon("images/ìƒì ê³¼í†µê³„ë²„íŠ¼.jpg"));
 		statisticsBtn.setHorizontalTextPosition(SwingConstants.CENTER);
 		statisticsBtn.setVerticalTextPosition(SwingConstants.CENTER);
 		shopPanel.add(statisticsBtn);
 
-		levelupBtn = new JButton(new ImageIcon("images/·¹º§¾÷¹öÆ°.jpg"));
-		levelupBtn.setFont(new Font("HY°ß°íµñ", Font.PLAIN, 16));
+		levelupBtn = new JButton(new ImageIcon("images/ë ˆë²¨ì—…ë²„íŠ¼.jpg"));
+		levelupBtn.setFont(new Font("HYê²¬ê³ ë”•", Font.PLAIN, 16));
 		levelupBtn.setVerticalTextPosition(SwingConstants.CENTER);
 		levelupBtn.setHorizontalTextPosition(SwingConstants.CENTER);
 		levelupBtn.setBounds(0, 62, 485, 39);
 
-		// levelupBtn.setIcon(new ImageIcon("images/·¹º§¾÷.jpg"));
-		levelupBtn.setText((level * 150) + "¿ø");
+		// levelupBtn.setIcon(new ImageIcon("images/ë ˆë²¨ì—….jpg"));
+		levelupBtn.setText((level * 150) + "ì›");
 		levelupBtn.setEnabled(false);
 		menuPanel.add(levelupBtn);
 
@@ -171,25 +171,25 @@ public class Game_Main extends JFrame {
 		menuPanel.add(mainchImg);
 
 		JLabel autoLa = new JLabel("\uCD08\uB2F9");
-		autoLa.setFont(new Font("HY°ß°íµñ", Font.PLAIN, 12));
+		autoLa.setFont(new Font("HYê²¬ê³ ë”•", Font.PLAIN, 12));
 		autoLa.setHorizontalAlignment(SwingConstants.CENTER);
 		autoLa.setBounds(386, 10, 87, 15);
 		menuPanel.add(autoLa);
 
 		JLabel tabLa = new JLabel("\uD0ED\uB2F9");
-		tabLa.setFont(new Font("HY°ß°íµñ", Font.PLAIN, 12));
+		tabLa.setFont(new Font("HYê²¬ê³ ë”•", Font.PLAIN, 12));
 		tabLa.setHorizontalAlignment(SwingConstants.CENTER);
 		tabLa.setBounds(287, 10, 87, 15);
 		menuPanel.add(tabLa);
 
 		tabMoney = new JLabel(tabmoney + "\uC6D0");
-		tabMoney.setFont(new Font("HY°ß°íµñ", Font.PLAIN, 12));
+		tabMoney.setFont(new Font("HYê²¬ê³ ë”•", Font.PLAIN, 12));
 		tabMoney.setHorizontalAlignment(SwingConstants.CENTER);
 		tabMoney.setBounds(287, 27, 87, 22);
 		menuPanel.add(tabMoney);
 
 		autoMoney = new JLabel(automoney + "\uC6D0");
-		autoMoney.setFont(new Font("HY°ß°íµñ", Font.PLAIN, 12));
+		autoMoney.setFont(new Font("HYê²¬ê³ ë”•", Font.PLAIN, 12));
 		autoMoney.setHorizontalAlignment(SwingConstants.CENTER);
 		autoMoney.setBounds(386, 27, 87, 22);
 		menuPanel.add(autoMoney);
@@ -202,21 +202,21 @@ public class Game_Main extends JFrame {
 		bgImgPanel.add(infopanel);
 		infopanel.setLayout(null);
 
-		JLabel FriendImg1 = new JLabel(new ImageIcon("images/¸ŞÀÎ°³»õ¹ÎÁõ.png"));
+		JLabel FriendImg1 = new JLabel(new ImageIcon("images/ë©”ì¸ê°œìƒˆë¯¼ì¦.png"));
 		FriendImg1.setBorder(new LineBorder(Color.black));
 		FriendImg1.setBounds(1, 1, 161, 79);
 		FriendImg1.setHorizontalAlignment(SwingConstants.CENTER);
 		FriendImg1.setBackground(Color.GRAY);
 		infopanel.add(FriendImg1);
 
-		JLabel FriendImg2 = new JLabel(new ImageIcon("images/¸ŞÀÎ½Ê»õ¹ÎÁõ.png"));
+		JLabel FriendImg2 = new JLabel(new ImageIcon("images/ë©”ì¸ì‹­ìƒˆë¯¼ì¦.png"));
 		FriendImg2.setBorder(new LineBorder(Color.black));
 		FriendImg2.setBounds(162, 1, 161, 79);
 		FriendImg2.setHorizontalAlignment(SwingConstants.CENTER);
 		FriendImg2.setBackground(Color.GRAY);
 		infopanel.add(FriendImg2);
 
-		JLabel FriendImg3 = new JLabel(new ImageIcon("images/¸ŞÀÎÂ¬»õ¹ÎÁõ.png"));
+		JLabel FriendImg3 = new JLabel(new ImageIcon("images/ë©”ì¸ì§­ìƒˆë¯¼ì¦.png"));
 		FriendImg3.setBorder(new LineBorder(Color.black));
 		FriendImg3.setBounds(323, 1, 161, 79);
 		FriendImg3.setHorizontalAlignment(SwingConstants.CENTER);
@@ -270,8 +270,8 @@ public class Game_Main extends JFrame {
 		mainpanel.add(sangdanBar);
 		sangdanBar.setLayout(null);
 
-		JButton btnNewButton = new JButton("\uC800\uC7A5", new ImageIcon("images/¸ŞÀÎ¹öÆ°.jpg"));
-		btnNewButton.setFont(new Font("HY°ß°íµñ", Font.PLAIN, 16));
+		JButton btnNewButton = new JButton("\uC800\uC7A5", new ImageIcon("images/ë©”ì¸ë²„íŠ¼.jpg"));
+		btnNewButton.setFont(new Font("HYê²¬ê³ ë”•", Font.PLAIN, 16));
 		btnNewButton.setVerticalTextPosition(SwingConstants.CENTER);
 		btnNewButton.setHorizontalTextPosition(SwingConstants.CENTER);
 		btnNewButton.setBounds(0, 0, 91, 43);
@@ -280,7 +280,7 @@ public class Game_Main extends JFrame {
 		moneyLa = new JLabel("0\uC6D0");
 		moneyLa.setBounds(92, 0, 392, 43);
 		sangdanBar.add(moneyLa);
-		moneyLa.setFont(new Font("±¼¸²", Font.BOLD, 19));
+		moneyLa.setFont(new Font("êµ´ë¦¼", Font.BOLD, 19));
 		moneyLa.setHorizontalAlignment(SwingConstants.RIGHT);
 		// ------------------------------------------------------------------------------------------
 		m = new SharedMoney(moneyLa, this);
@@ -292,14 +292,14 @@ public class Game_Main extends JFrame {
 		mainpanel.add(itemimg);
 
 		lvLa = new JLabel("Lv ." + level);
-		lvLa.setFont(new Font("HY°ß°íµñ", Font.PLAIN, 12));
+		lvLa.setFont(new Font("HYê²¬ê³ ë”•", Font.PLAIN, 12));
 		lvLa.setHorizontalAlignment(SwingConstants.CENTER);
 		lvLa.setBounds(156, 21, 87, 22);
 		menuPanel.add(lvLa);
 
-		AL l = new AL(this, "¿ëº´ ½ºÅä¾î", m);
+		AL l = new AL(this, "ìš©ë³‘ ìŠ¤í† ì–´", m);
 		frishopBtn.addActionListener(l);
-		itemshopBtn.addActionListener(new ItemShopBtnAL(this, "¾ÆÀÌÅÛ½ºÅä¾î", m));
+		itemshopBtn.addActionListener(new ItemShopBtnAL(this, "ì•„ì´í…œìŠ¤í† ì–´", m));
 
 		LevelUpBtnAL ll = new LevelUpBtnAL(this, m);
 		levelupBtn.addActionListener(ll);
@@ -335,7 +335,7 @@ class AL implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		new FriendShop("¿ëº´ ½ºÅä¾î", main, m);
+		new FriendShop("ìš©ë³‘ ìŠ¤í† ì–´", main, m);
 	}
 }
 
@@ -352,7 +352,7 @@ class ItemShopBtnAL implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		new ItemShop("¾ÆÀÌÅÛ ½ºÅä¾î", main, m);
+		new ItemShop("ì•„ì´í…œ ìŠ¤í† ì–´", main, m);
 	}
 
 }
@@ -369,10 +369,10 @@ class LevelUpBtnAL implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String levelupMoney = main.levelupBtn.getText();
-		int o = Integer.parseInt(levelupMoney.substring(0, levelupMoney.indexOf("¿ø")));
+		int o = Integer.parseInt(levelupMoney.substring(0, levelupMoney.indexOf("ì›")));
 		m.minus(o);
 		o = (int) (o + 150);
-		main.levelupBtn.setText(o + "¿ø");
+		main.levelupBtn.setText(o + "ì›");
 
 		main.level++;
 		String s = main.lvLa.getText();
@@ -381,9 +381,9 @@ class LevelUpBtnAL implements ActionListener {
 		main.tabmoney = n;
 		main.lvLa.setText("Lv ." + n);
 		String w = main.tabMoney.getText();
-		int x = Integer.parseInt(w.substring(0, w.indexOf("¿ø")));
+		int x = Integer.parseInt(w.substring(0, w.indexOf("ì›")));
 		x = x + main.uppertabmoney;
-		main.tabMoney.setText(x + "¿ø");
+		main.tabMoney.setText(x + "ì›");
 	}
 }
 
@@ -426,7 +426,7 @@ class statisticsBtnAL implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		new Statistics_Frame(main, name, main.allmoney, main.curmoney, main.level, Integer.parseInt(main.tabMoney.getText().substring(0, main.tabMoney.getText().indexOf("¿ø"))), main.automoney,
+		new Statistics_Frame(main, name, main.allmoney, main.curmoney, main.level, Integer.parseInt(main.tabMoney.getText().substring(0, main.tabMoney.getText().indexOf("ì›"))), main.automoney,
 				main.flevel, main.myitem);
 	}
 
@@ -445,7 +445,7 @@ class CloseBtnWL implements WindowListener {
 
 	@Override
 	public void windowClosing(WindowEvent e) {
-		if (JOptionPane.showConfirmDialog(main, "ÁøÂ¥ ´İÀ¸½Ã°Ú½À´Ï±î? ´İÀ¸¸é ÀúÀåÀÌ ¾ÈµÇ°í ¸ğµç Ã¢ÀÌ ´Ù ²¨Áı´Ï´Ù.", "ÁøÂ¥ ²¨¿ä  ????",
+		if (JOptionPane.showConfirmDialog(main, "ì§„ì§œ ë‹«ìœ¼ì‹œê² ìŠµë‹ˆê¹Œ? ë‹«ìœ¼ë©´ ì €ì¥ì´ ì•ˆë˜ê³  ëª¨ë“  ì°½ì´ ë‹¤ êº¼ì§‘ë‹ˆë‹¤.", "ì§„ì§œ êº¼ìš”  ????",
 				JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
 			System.exit(0);
 		} else {

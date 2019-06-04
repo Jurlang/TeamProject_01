@@ -42,7 +42,7 @@ public class Game_Shop extends JFrame {
 		inShopPanel.setLayout(null);
 
 		showNameLa = new JLabel(store);
-		showNameLa.setFont(new Font("HY°ß°íµñ", Font.PLAIN, 20));
+		showNameLa.setFont(new Font("HYê²¬ê³ ë”•", Font.PLAIN, 20));
 		showNameLa.setBackground(new Color(255, 204, 0));
 		showNameLa.setHorizontalAlignment(SwingConstants.CENTER);
 		showNameLa.setBounds(12, 10, 400, 41);
@@ -57,7 +57,7 @@ public class Game_Shop extends JFrame {
 		itemListPanel.setLayout(new GridLayout(item.length, 1, 0, 0));
 		getContentPane().add(inShopPanel);
 
-		JButton inShopBtn = new JButton("\uC644\uB8CC", new ImageIcon("images/¸ŞÀÎ¹öÆ°.jpg"));
+		JButton inShopBtn = new JButton("\uC644\uB8CC", new ImageIcon("images/ë©”ì¸ë²„íŠ¼.jpg"));
 		inShopBtn.setVerticalTextPosition(SwingConstants.CENTER);
 		inShopBtn.setHorizontalTextPosition(SwingConstants.CENTER);
 		inShopBtn.setBounds(154, 419, 91, 40);
@@ -100,18 +100,18 @@ class ItemPanel extends JPanel {
 		itemImg.setBounds(12, 9, 57, 46);
 		this.add(itemImg);
 
-		JLabel itemName = new JLabel("   ÀÌ¸§ : " + name);
-		itemName.setFont(new Font("HY°ß°íµñ", Font.PLAIN, 14));
+		JLabel itemName = new JLabel("   ì´ë¦„ : " + name);
+		itemName.setFont(new Font("HYê²¬ê³ ë”•", Font.PLAIN, 14));
 		itemName.setBounds(81, 11, 155, 20);
 		this.add(itemName);
 
-		itemFunc = new JLabel("   ¼º´É : " + func);
-		itemFunc.setFont(new Font("HY°ß°íµñ", Font.PLAIN, 14));
+		itemFunc = new JLabel("   ì„±ëŠ¥ : " + func);
+		itemFunc.setFont(new Font("HYê²¬ê³ ë”•", Font.PLAIN, 14));
 		itemFunc.setBounds(81, 35, 155, 20);
 		this.add(itemFunc);
 
-		buyBtn = new JButton("\uAD6C\uC785", new ImageIcon("images/¸ŞÀÎ¹öÆ°.jpg"));
-		buyBtn.setFont(new Font("HY°ß°íµñ", Font.PLAIN, 14));
+		buyBtn = new JButton("\uAD6C\uC785", new ImageIcon("images/ë©”ì¸ë²„íŠ¼.jpg"));
+		buyBtn.setFont(new Font("HYê²¬ê³ ë”•", Font.PLAIN, 14));
 		buyBtn.setVerticalTextPosition(SwingConstants.CENTER);
 		buyBtn.setHorizontalTextPosition(SwingConstants.CENTER);
 		buyBtn.setBounds(240, 9, 100, 48);
@@ -137,12 +137,12 @@ class FriendShop extends Game_Shop {
 			item[i] = new ItemPanel(super.itemListPanel, main.fimg[i], main.fname[i], main.ffunc[i]);
 		}
 		for (int i = 0; i < 3; i++) {
-			super.item[i].buyBtn.setText(main.fprice[i] + "¿ø");
+			super.item[i].buyBtn.setText(main.fprice[i] + "ì›");
 		}
 
 		for (int i = 0; i < 3; i++) {
 			super.item[i].buyBtn.addActionListener(new FBuyBtnListener(fs, i, main, m));
-			// ¸®½º³Ê µî·Ï -> ±¸ÀÔ
+			// ë¦¬ìŠ¤ë„ˆ ë“±ë¡ -> êµ¬ì…
 		}
 		FriendBuyBtn th = new FriendBuyBtn(main, this);
 		th.start();
@@ -150,7 +150,7 @@ class FriendShop extends Game_Shop {
 
 }
 
-// ¸®½º³Ê Å¬·¡½º
+// ë¦¬ìŠ¤ë„ˆ í´ë˜ìŠ¤
 class FBuyBtnListener implements ActionListener {
 	int btnNum;
 	Game_Main main;
@@ -170,48 +170,48 @@ class FBuyBtnListener implements ActionListener {
 		main.flevel[btnNum] += 1;
 
 		String bm = fs.item[btnNum].buyBtn.getText();
-		int bch = Integer.parseInt(bm.substring(0, bm.indexOf("¿ø")));
-		// ¹öÆ°¿¡ ÀûÇôÀÖ´Â µ·À» ¹Ş¾Æ¿È.
+		int bch = Integer.parseInt(bm.substring(0, bm.indexOf("ì›")));
+		// ë²„íŠ¼ì— ì í˜€ìˆëŠ” ëˆì„ ë°›ì•„ì˜´.
 		m.minus(bch);
-		// ¹öÆ°¿¡ ÀÖ´Â µ·¸¸Å­ ³»°¡ °¡Áøµ·¿¡¼­ »«´Ù.
+		// ë²„íŠ¼ì— ìˆëŠ” ëˆë§Œí¼ ë‚´ê°€ ê°€ì§„ëˆì—ì„œ ëº€ë‹¤.
 		bch = (int) (bch * 1.5);
-		// ¹öÆ° ±¸¸Å¿¡ ÇÊ¿äÇÑ µ·À» ´õ ³ôÀÎ´Ù.
+		// ë²„íŠ¼ êµ¬ë§¤ì— í•„ìš”í•œ ëˆì„ ë” ë†’ì¸ë‹¤.
 		main.fprice[btnNum] = bch;
-		// ¹öÆ° ±¸¸Å ÇÊ¿äÇÑ µ· ¹è¿­¿¡ °ªÀ» ÀúÀå
-		fs.item[btnNum].buyBtn.setText(bch + "¿ø");
-		// ¹öÆ°¿¡ °ªÀ» »õ·Î ¹Ù²ãÁØ´Ù.
+		// ë²„íŠ¼ êµ¬ë§¤ í•„ìš”í•œ ëˆ ë°°ì—´ì— ê°’ì„ ì €ì¥
+		fs.item[btnNum].buyBtn.setText(bch + "ì›");
+		// ë²„íŠ¼ì— ê°’ì„ ìƒˆë¡œ ë°”ê¿”ì¤€ë‹¤.
 
 //		String am = main.autoMoney.getText();
-//		int ach = Integer.parseInt(am.substring(0, am.indexOf("¿ø")));
-		// ³»°¡ ¿ÀÅä´ç ¹ö´Â µ·À» ¾ò¾î¿Â´Ù.
+//		int ach = Integer.parseInt(am.substring(0, am.indexOf("ì›")));
+		// ë‚´ê°€ ì˜¤í† ë‹¹ ë²„ëŠ” ëˆì„ ì–»ì–´ì˜¨ë‹¤.
 		String plus_am = fs.item[btnNum].itemFunc.getText();
-		int pam = Integer.parseInt(plus_am.substring(plus_am.indexOf("´ç") + 2, plus_am.indexOf("¿ø")));
-		// ¾ÆÀÌÅÛÀÇ ¼º´É¿¡ ÀûÇôÀÖ´Â +ÇÏ´Â µ·
-		// ¿ÀÅä´ç µ·ÀÇ ¼º´É ¾÷±×·¹ÀÌµå
+		int pam = Integer.parseInt(plus_am.substring(plus_am.indexOf("ë‹¹") + 2, plus_am.indexOf("ì›")));
+		// ì•„ì´í…œì˜ ì„±ëŠ¥ì— ì í˜€ìˆëŠ” +í•˜ëŠ” ëˆ
+		// ì˜¤í† ë‹¹ ëˆì˜ ì„±ëŠ¥ ì—…ê·¸ë ˆì´ë“œ
 
 		if (btnNum == 0) {
 			String am = main.autoMoney.getText();
-			int ach = Integer.parseInt(am.substring(0, am.indexOf("¿ø")));
+			int ach = Integer.parseInt(am.substring(0, am.indexOf("ì›")));
 			main.automoney = ach + 1;
-			main.autoMoney.setText((ach + 1) + "¿ø");
-			main.ffunc[btnNum] = "ÃÊ´ç " + (pam + 1) + "¿ø";
+			main.autoMoney.setText((ach + 1) + "ì›");
+			main.ffunc[btnNum] = "ì´ˆë‹¹ " + (pam + 1) + "ì›";
 		} else if (btnNum == 1) {
 			String am = main.autoMoney.getText();
-			int ach = Integer.parseInt(am.substring(0, am.indexOf("¿ø")));
+			int ach = Integer.parseInt(am.substring(0, am.indexOf("ì›")));
 			main.automoney = ach + 10;
-			main.autoMoney.setText((ach + 10) + "¿ø");
-			main.ffunc[btnNum] = "ÃÊ´ç " + (pam + 10) + "¿ø";
+			main.autoMoney.setText((ach + 10) + "ì›");
+			main.ffunc[btnNum] = "ì´ˆë‹¹ " + (pam + 10) + "ì›";
 		} else if (btnNum == 2) {
 			String am = main.autoMoney.getText();
-			int ach = Integer.parseInt(am.substring(0, am.indexOf("¿ø")));
+			int ach = Integer.parseInt(am.substring(0, am.indexOf("ì›")));
 			main.automoney = ach + 100;
-			main.autoMoney.setText((ach + 100) + "¿ø");
-			main.ffunc[btnNum] = "ÃÊ´ç " + (pam + 100) + "¿ø";
+			main.autoMoney.setText((ach + 100) + "ì›");
+			main.ffunc[btnNum] = "ì´ˆë‹¹ " + (pam + 100) + "ì›";
 		}
-		// »ç±âÀü Ä£±¸µé °¡°Ô¿¡ ÀÖ´Â ¿ëº´ Ä£±¸µé ¾÷±×·¹ÀÌµå ¼º´É ³ô¿©ÁÜ
+		// ì‚¬ê¸°ì „ ì¹œêµ¬ë“¤ ê°€ê²Œì— ìˆëŠ” ìš©ë³‘ ì¹œêµ¬ë“¤ ì—…ê·¸ë ˆì´ë“œ ì„±ëŠ¥ ë†’ì—¬ì¤Œ
 
-		fs.item[btnNum].itemFunc.setText("¼º´É : " + main.ffunc[btnNum]);
-		// ³ô¿©ÁØ ¼º´É Àû¾îÁÖ±â.
+		fs.item[btnNum].itemFunc.setText("ì„±ëŠ¥ : " + main.ffunc[btnNum]);
+		// ë†’ì—¬ì¤€ ì„±ëŠ¥ ì ì–´ì£¼ê¸°.
 
 	}
 
@@ -231,12 +231,12 @@ class FriendBuyBtn extends Thread {
 	public void run() {
 		while (true) {
 			String mymoney = main.moneyLa.getText();
-			int m = Integer.parseInt(mymoney.substring(0, mymoney.indexOf("¿ø")));
+			int m = Integer.parseInt(mymoney.substring(0, mymoney.indexOf("ì›")));
 			String[] bm = new String[3];
 			int[] btnmoney = new int[3];
 			for (int i = 0; i < 3; i++) {
 				bm[i] = fs.item[i].buyBtn.getText();
-				btnmoney[i] = Integer.parseInt(bm[i].substring(0, bm[i].indexOf("¿ø")));
+				btnmoney[i] = Integer.parseInt(bm[i].substring(0, bm[i].indexOf("ì›")));
 			}
 			for (int i = 0; i < 3; i++) {
 				if (m >= btnmoney[i])
@@ -259,10 +259,10 @@ class LevelBuyBtn extends Thread {
 	public void run() {
 		while (true) {
 			String mymoney = main.moneyLa.getText();
-			int n = Integer.parseInt(mymoney.substring(0, mymoney.indexOf("¿ø")));
+			int n = Integer.parseInt(mymoney.substring(0, mymoney.indexOf("ì›")));
 
 			String levelupMoney = main.levelupBtn.getText();
-			int o = Integer.parseInt(levelupMoney.substring(0, levelupMoney.indexOf("¿ø")));
+			int o = Integer.parseInt(levelupMoney.substring(0, levelupMoney.indexOf("ì›")));
 
 			if (n >= o)
 				main.levelupBtn.setEnabled(true);
@@ -290,7 +290,7 @@ class ItemShop extends Game_Shop {
 
 		for (int i = 0; i < item.length; i++) {
 			if (i <= main.myitem - 1) {
-				super.item[i].buyBtn.setText("±¸ÀÔ¿Ï·á");
+				super.item[i].buyBtn.setText("êµ¬ì…ì™„ë£Œ");
 			} else {
 				super.item[i].buyBtn.setText(main.iprice[i]);
 			}
@@ -322,18 +322,18 @@ class IBuyBtnListener implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		String bm = is.item[btnNum].buyBtn.getText();
 
-		int bch = Integer.parseInt(bm.substring(0, bm.indexOf("¿ø")));
+		int bch = Integer.parseInt(bm.substring(0, bm.indexOf("ì›")));
 		m.minus(bch);
-		bm = "±¸ÀÔ¿Ï·á";
+		bm = "êµ¬ì…ì™„ë£Œ";
 		main.iprice[btnNum] = bm;
 		is.item[btnNum].buyBtn.setText(bm);
 
 		String am = main.tabMoney.getText();
-		int ach = Integer.parseInt(am.substring(0, am.indexOf("¿ø")));
+		int ach = Integer.parseInt(am.substring(0, am.indexOf("ì›")));
 		String plus_am = is.item[btnNum].itemFunc.getText();
 		int pam = Integer.parseInt(plus_am.substring(plus_am.indexOf("x") + 1));
 		main.uppertabmoney *= pam;
-		main.tabMoney.setText((ach * pam) + "¿ø");
+		main.tabMoney.setText((ach * pam) + "ì›");
 		main.myitem++;
 	}
 
@@ -353,14 +353,14 @@ class ItemBuyBtn extends Thread {
 	public void run() {
 		while (true) {
 			String mymoney = main.moneyLa.getText();
-			int m = Integer.parseInt(mymoney.substring(0, mymoney.indexOf("¿ø")));
+			int m = Integer.parseInt(mymoney.substring(0, mymoney.indexOf("ì›")));
 			String[] bm = new String[4];
 			int[] btnmoney = new int[4];
 
 			for (int i = 0; i < is.item.length; i++) {
 				if (main.myitem == i) {
 					for (int j = i + 1; j < 4; j++) {
-						is.item[j].buyBtn.setText("±¸ÀÔºÒ°¡");
+						is.item[j].buyBtn.setText("êµ¬ì…ë¶ˆê°€");
 					}
 					break;
 				}
@@ -369,13 +369,13 @@ class ItemBuyBtn extends Thread {
 				is.item[main.myitem].buyBtn.setText(main.iprice[main.myitem]);
 			for (int i = 0; i < is.item.length; i++) {
 				bm[i] = is.item[i].buyBtn.getText();
-				if (!(bm[i].equals("±¸ÀÔ¿Ï·á")) && !(bm[i].equals("±¸ÀÔºÒ°¡"))) {
-					btnmoney[i] = Integer.parseInt(bm[i].substring(0, bm[i].indexOf("¿ø")));
+				if (!(bm[i].equals("êµ¬ì…ì™„ë£Œ")) && !(bm[i].equals("êµ¬ì…ë¶ˆê°€"))) {
+					btnmoney[i] = Integer.parseInt(bm[i].substring(0, bm[i].indexOf("ì›")));
 				}
 			}
 
 			for (int i = 0; i < is.item.length; i++) {
-				if (!(bm[i].equals("±¸ÀÔ¿Ï·á")) && !(bm[i].equals("±¸ÀÔºÒ°¡"))) {
+				if (!(bm[i].equals("êµ¬ì…ì™„ë£Œ")) && !(bm[i].equals("êµ¬ì…ë¶ˆê°€"))) {
 					if (m >= btnmoney[i])
 						is.item[i].buyBtn.setEnabled(true);
 					else

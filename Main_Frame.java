@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-//¾È¹Ù²åÁö·Õ >_<
+//ì•ˆë°”ê¿¨ì§€ë¡± >_<
 @SuppressWarnings("serial")
 public class Main_Frame extends JFrame {
 
@@ -41,7 +41,7 @@ public class Main_Frame extends JFrame {
 	 */
 	public Main_Frame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 600); // xÁÂÇ¥, yÁÂÇ¥, ³Êºñ, ³ôÀÌ
+		setBounds(100, 100, 450, 600); // xì¢Œí‘œ, yì¢Œí‘œ, ë„ˆë¹„, ë†’ì´
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -53,28 +53,28 @@ public class Main_Frame extends JFrame {
 		contentPane.add(lp);
 		lp.setLayout(null);
 
-		JButton btnRegi = new JButton("\uD68C\uC6D0\uAC00\uC785", new ImageIcon("images/¸ÞÀÎ¹öÆ°.jpg"));
-		btnRegi.setFont(new Font("HY°ß°íµñ", Font.PLAIN, 20));
+		JButton btnRegi = new JButton("\uD68C\uC6D0\uAC00\uC785", new ImageIcon("images/ë©”ì¸ë²„íŠ¼.jpg"));
+		btnRegi.setFont(new Font("HYê²¬ê³ ë”•", Font.PLAIN, 20));
 		btnRegi.setVerticalTextPosition(SwingConstants.CENTER);
 		btnRegi.setHorizontalTextPosition(SwingConstants.CENTER);
 		btnRegi.setBounds(126, 361, 171, 61);
 		lp.add(btnRegi);
 
-		JButton btnLogin = new JButton("\uB85C\uADF8\uC778", new ImageIcon("images/¸ÞÀÎ¹öÆ°.jpg"));
-		btnLogin.setFont(new Font("HY°ß°íµñ", Font.PLAIN, 20));
+		JButton btnLogin = new JButton("\uB85C\uADF8\uC778", new ImageIcon("images/ë©”ì¸ë²„íŠ¼.jpg"));
+		btnLogin.setFont(new Font("HYê²¬ê³ ë”•", Font.PLAIN, 20));
 		btnLogin.setVerticalTextPosition(SwingConstants.CENTER);
 		btnLogin.setHorizontalTextPosition(SwingConstants.CENTER);
 		btnLogin.setBounds(126, 272, 171, 61);
 		lp.add(btnLogin);
 
-		JButton btnQuit = new JButton("³ª°¡±â", new ImageIcon("images/¸ÞÀÎ¹öÆ°.jpg"));
-		btnQuit.setFont(new Font("HY°ß°íµñ", Font.PLAIN, 20));
+		JButton btnQuit = new JButton("ë‚˜ê°€ê¸°", new ImageIcon("images/ë©”ì¸ë²„íŠ¼.jpg"));
+		btnQuit.setFont(new Font("HYê²¬ê³ ë”•", Font.PLAIN, 20));
 		btnQuit.setVerticalTextPosition(SwingConstants.CENTER);
 		btnQuit.setHorizontalTextPosition(SwingConstants.CENTER);
 		btnQuit.setBounds(126, 450, 171, 61);
 		lp.add(btnQuit);
 		
-		JLabel misaeLogo = new JLabel(new ImageIcon("images/µ·¹Ì»õ·Î°í_¼öÁ¤.png"));
+		JLabel misaeLogo = new JLabel(new ImageIcon("images/ëˆë¯¸ìƒˆë¡œê³ _ìˆ˜ì •.png"));
 		misaeLogo.setBounds(96, 24, 224, 221);
 		lp.add(misaeLogo);
 
@@ -101,17 +101,17 @@ public class Main_Frame extends JFrame {
 			String cmd = arg0.getActionCommand();
 
 			switch (cmd) {
-			case "È¸¿ø°¡ÀÔ":
+			case "íšŒì›ê°€ìž…":
 				frame.setVisible(false);
 				new Register_Frame(this.frame);
 				break;
 
-			case "·Î±×ÀÎ":
+			case "ë¡œê·¸ì¸":
 				frame.setVisible(false);
 				new Login_Frame(this.frame);
 				break;
 
-			case "³ª°¡±â":
+			case "ë‚˜ê°€ê¸°":
 				frame.dispose();
 			}
 		}

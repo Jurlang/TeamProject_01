@@ -66,13 +66,13 @@ class SharedMoney {
 		main.allmoney += money;
 		sum += money;
 		main.curmoney = sum;
-		this.money.setText(sum + "¿ø");
+		this.money.setText(sum + "Â¿Ã¸");
 	}
 
 	synchronized public void minus(int money) {
 		sum -= money;
 		main.curmoney = sum;
-		this.money.setText(sum + "¿ø");
+		this.money.setText(sum + "Â¿Ã¸");
 	}
 
 	public int getSum() {
@@ -107,7 +107,7 @@ class AutoMoney extends Thread {
 	public void run() {
 		while (true) {
 			am = autoMoneyLa.getText();
-			amoney = Integer.parseInt(am.substring(0, am.indexOf("¿ø")));
+			amoney = Integer.parseInt(am.substring(0, am.indexOf("Â¿Ã¸")));
 			cur_m.add(amoney);
 			try {
 				sleep(1000);
@@ -135,7 +135,7 @@ class TabMoney extends Thread {
 		this.tabPanel = tabPanel;
 		this.tabMoneyLa = tabMoneyLa;
 		this.tm = tabMoneyLa.getText();
-		this.tmoney = Integer.parseInt(tm.substring(0, tm.indexOf("¿ø")));
+		this.tmoney = Integer.parseInt(tm.substring(0, tm.indexOf("Â¿Ã¸")));
 		this.cur_m = cur_m;
 		this.mainch = mainch;
 		this.f = f;
@@ -157,7 +157,7 @@ class TabMoney extends Thread {
 					f = main.no_c[3];
 				}
 				tm = tabMoneyLa.getText();
-				tmoney = Integer.parseInt(tm.substring(0, tm.indexOf("¿ø")));
+				tmoney = Integer.parseInt(tm.substring(0, tm.indexOf("Â¿Ã¸")));
 				mainch.setIcon(f);
 				cur_m.add(tmoney);
 			}
@@ -202,7 +202,7 @@ class MainChChange extends Thread {
 				else if (y.itemnum(main.myitem) == 3)
 					main.mainch.setIcon(main.no_c[3]);
 				else if (y.itemnum(main.myitem)==4)
-					main.itemimg.setIcon(new ImageIcon("images/Áî±İÅë.png"));
+					main.itemimg.setIcon(new ImageIcon("images/ÃÃ®Â±ÃÃ…Ã«.png"));
 				x = y.itemnum(main.myitem);
 			}
 		}
