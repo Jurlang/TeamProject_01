@@ -7,6 +7,12 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+/*
+ * Thread 페이지는 딱 보면 안다.
+ * 변수명에 대해 궁금하다면 따로 연락을 ^^
+ * 불친절하여 정말정말 미안하다..
+ */
+
 class Moving extends Thread {
 	boolean mov = true;
 	JLabel la = null;
@@ -66,13 +72,13 @@ class SharedMoney {
 		main.allmoney += money;
 		sum += money;
 		main.curmoney = sum;
-		this.money.setText(sum + "¿ø");
+		this.money.setText(sum + "원");
 	}
 
 	synchronized public void minus(int money) {
 		sum -= money;
 		main.curmoney = sum;
-		this.money.setText(sum + "¿ø");
+		this.money.setText(sum + "원");
 	}
 
 	public int getSum() {

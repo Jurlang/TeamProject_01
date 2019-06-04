@@ -3,12 +3,16 @@ package TeamProject_01;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet; // 일단 로그인이 되고, 회원가입이 되는 것 까지만!!
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-//객체를 싱글톤으로 만들어줘야 된다잉?!
+/*
+ * 	데이터베이스 부분은 따로 주석 안달겠습니다.
+ * 	모르는 부분이 있다면 따로 연락주면 됩니다.
+ */
+
 public class DBConn {
 	private DBConn() {
 	}
@@ -19,7 +23,6 @@ public class DBConn {
 		return dbConn;
 	}
 
-	// DBConnection하는걸 만들긔~
 	private Connection getConnection() {
 		Connection conn = null;
 		String url = "jdbc:oracle:thin:@localhost:1521:xe";
@@ -36,7 +39,6 @@ public class DBConn {
 		return conn;
 	}
 
-	// select 만들긔
 	public ArrayList<Member_Class> selectAll() {
 		ArrayList<Member_Class> list = new ArrayList<Member_Class>();
 		Connection conn = null;
@@ -64,10 +66,7 @@ public class DBConn {
 		}
 		return list;
 	}
-	// select는 관리자가 보는 용도이기 때문에 게임 유저가 쓰진 않으므로 select는 뺀돠!
-	// 고로 insert를 넣어주면 됨!
 
-	// 아이디를 검색해서 회원정보를 볼 수 있는 소스코드!
 	public Member_Class selectOne(String id) {
 		Member_Class m = null;
 		Connection conn = null;
@@ -98,7 +97,7 @@ public class DBConn {
 		return m;
 	}
 
-	public void insert(Member_Class m) { // 회원가입
+	public void insert(Member_Class m) {
 		Connection conn = null;
 		Statement stmt = null;
 		PreparedStatement ps = null;
@@ -127,7 +126,7 @@ public class DBConn {
 			ps.setString(6, m.getEml());
 			int n = ps.executeUpdate();
 			if (n == 1)
-				System.out.println("입력성공");// 이거 문구는 바꿀거면 바꾸자
+				System.out.println("입력성공");
 			else
 				System.out.println("입력실패");
 			dbClose(ps);
@@ -159,7 +158,7 @@ public class DBConn {
 		}
 	}
 
-	public int confirm(String id, String pw) { // 로그인 소스(?) confirm=확인하다
+	public int confirm(String id, String pw) {
 		int n = -2;
 		Connection conn = null;
 		PreparedStatement ps = null;
@@ -265,7 +264,6 @@ public class DBConn {
 			return a;
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			dbClose(conn, ps, rs);

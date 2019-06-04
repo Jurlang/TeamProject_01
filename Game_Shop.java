@@ -15,6 +15,13 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import java.awt.Font;
 
+
+/*
+ * 상점은 2개가 있다.
+ * 용병, 아이템
+ * 하지만 용병과 아이템 상점의 UI가 비슷하며,
+ * 이뤄지는 기능도 비슷하기 때문에 상속받을 클래스를 하나 만들어서 양쪽으로 나눈다.
+ */
 @SuppressWarnings("serial")
 public class Game_Shop extends JFrame {
 
@@ -83,6 +90,12 @@ class BtnActionListener implements ActionListener {
 
 }
 
+/*
+ * ItemPanel
+ * 용병 및 아이템의 갯수에 따라 표현되어지는 수가 다르다
+ * 그러므로 패널을 하나 만들어 그에 따라서 반복문을 이용해
+ * List를 하나씩 만들어 주는 방식이다.
+ */
 @SuppressWarnings("serial")
 class ItemPanel extends JPanel {
 	ImageIcon img;

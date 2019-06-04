@@ -20,37 +20,52 @@ import javax.swing.border.LineBorder;
 
 @SuppressWarnings("serial")
 public class Game_Main extends JFrame {
+	
 	boolean[] chk = { false, false, false };
+	
 	private JPanel contentPane;
+	
 	ImageIcon f[] = {new ImageIcon("images/f1-1.png"),new ImageIcon("images/f2-1.png"),new ImageIcon("images/f3-1.png")};
 	ImageIcon s[] = {new ImageIcon("images/f1-2.png"),new ImageIcon("images/f2-2.png"),new ImageIcon("images/f3-2.png")};
+	//first, second ( 처음 모션, 다음 모션 ) 용병의 음직임
+	
 	ImageIcon[] no_c = {new ImageIcon("images/1-1.png"), new ImageIcon("images/2-1.png"), new ImageIcon("images/3-1.png"), new ImageIcon("images/4-1.png")};
 	ImageIcon[] yes_c = {new ImageIcon("images/1-2.png"), new ImageIcon("images/2-2.png"), new ImageIcon("images/3-2.png"), new ImageIcon("images/4-2.png")};
+	// click no, yes ( 클릭을 안했을 때, 했을 때 )
+	
 	private SharedMoney m = null;
+	//돈을 모을 때 용병, 탭 두가지가 있으니 shared 공유한다는 의미
 
 	ImageIcon[] fimg = { new ImageIcon("images/상점개새민증.png"), new ImageIcon("images/상점십새민증.png"),
 			new ImageIcon("images/상점짭새민증.png") };
+	// 용병 상점의 사진
+	
 	ImageIcon[] iimg = { new ImageIcon("images/상점스냅.png"), new ImageIcon("images/상점썬글.png"),
 			new ImageIcon("images/상점다이아.png"), new ImageIcon("images/상점즈금통.png") };
-
+	// 아이템 상점 사진
+	
 	String[] fname = new String[3];
 	String[] ffunc = new String[3];
 	int[] fprice = { 1000, 2000, 3000 };
 	int[] flevel = new int[3];
+	// 용병 정보들
 
 	String[] iname = new String[4];
 	String[] ifunc = new String[4];
 	String[] iprice = { "10000원", "20000원", "30000원", "40000원" };
+	// 아이템 정보들
 
 	int automoney;
 	int curmoney;
 	int allmoney;
 	int tabmoney;
 	int uppertabmoney = 1;
+	// 돈 관련 변수
 
 	int level;
 	int myitem;
-
+	// 사용자 레벨 및 아이템 변수
+	
 	JLabel autoMoney;
 	JLabel tabMoney;
 	JLabel moneyLa;
@@ -58,6 +73,7 @@ public class Game_Main extends JFrame {
 	JLabel itemimg;
 	JButton levelupBtn;
 	JLabel mainch;
+	
 	String user_name;
 	int userNum;
 
@@ -103,7 +119,10 @@ public class Game_Main extends JFrame {
 
 		tabmoney = level * uppertabmoney;
 		automoney = (1 * flevel[0]) + (10 * flevel[1]) + (100 * flevel[2]);
-
+		//-----------------------------------------------------------------------------
+		// 여기까지 이제 데이터베이스에서 불러올 때 저장한 데이터들을 초기화 해주는 부분
+		// Login_info_Class user_info ( 생성자의 매개변수 )에서 불러와서 저장.
+		
 		this.addWindowListener(new CloseBtnWL(this));
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 501, 787);
@@ -111,7 +130,7 @@ public class Game_Main extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		EtchedBorder eborder=new EtchedBorder(EtchedBorder.RAISED);//평면에 끌로 판듯이 외곽선 효과를 내는 것이고 양각의 효과를 준다.
+		EtchedBorder eborder=new EtchedBorder(EtchedBorder.RAISED); //평면에 끌로 판듯이 외곽선 효과를 내는 것이고 양각의 효과를 준다.
 		JPanel bgImgPanel = new JPanel();
 		bgImgPanel.setBackground(Color.WHITE);
 		bgImgPanel.setBounds(0, 0, 485, 748);
@@ -240,12 +259,14 @@ public class Game_Main extends JFrame {
 		else if (myitem > 3)
 			mainch.setIcon(no_c[3]);
 		mainpanel.add(mainch);
-
+		// 게임을 시작했을 때 초기에 나의 아이템에 맞춰서 메인 캐릭터의 사진을 출력
+		
 //------------------------------------------------------------------------------------------
 		FriendTrueOrFalse ftf0 = new FriendTrueOrFalse(this, 0);
 		FriendTrueOrFalse ftf1 = new FriendTrueOrFalse(this, 1);
 		FriendTrueOrFalse ftf2 = new FriendTrueOrFalse(this, 2);
-
+		// synchronized 를 사용하려고 객체를 선언
+		
 		JLabel fr3 = new JLabel();
 		fr3.setBounds(335, 56, 103, 123);
 		Moving th3 = new Moving(fr3, f[2], s[2], this, ftf2, 2);
@@ -263,7 +284,9 @@ public class Game_Main extends JFrame {
 		th1.start();
 		fr1.setBounds(52, 51, 103, 123);
 		mainpanel.add(fr1);
-
+		
+		// 충돌 없는 thread를 실행시켜주기 위해 synchronized를 매개변수로 넣어 같이 실행시킨다.
+		
 		JPanel sangdanBar = new JPanel();
 		sangdanBar.setBackground(Color.WHITE);
 		sangdanBar.setBounds(0, 0, 485, 43);
@@ -321,6 +344,7 @@ public class Game_Main extends JFrame {
 		this.setVisible(true);
 	}
 }
+
 
 class AL implements ActionListener {
 	Game_Main main;
